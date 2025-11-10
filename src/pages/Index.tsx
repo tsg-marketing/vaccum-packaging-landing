@@ -36,15 +36,15 @@ const Index = () => {
 
   const advantages = [
     { image: 'https://cdn.poehali.dev/projects/e84451af-a3eb-4cf9-b3aa-82334790c296/files/0b71ec3e-a2c5-4e00-aceb-184876407d3b.jpg', title: 'В наличии', desc: 'Для мяса, рыбы, сыра, медицинских, косметических и прочих товаров' },
-    { image: 'https://cdn.poehali.dev/projects/7f0941a7-b646-4462-83cf-d72a4486c6fc/files/ba2baa2b-ce3a-46f7-9e81-c3dd83001319.jpg', title: 'Экономия до 40%', desc: 'Снижение потерь продукции и увеличение срока хранения' },
-    { image: 'https://cdn.poehali.dev/projects/7f0941a7-b646-4462-83cf-d72a4486c6fc/files/7da72073-647e-44d6-9300-d5a692be8ce0.jpg', title: 'Сервис 24/7', desc: 'Техническая поддержка и быстрая доставка запчастей' },
-    { image: 'https://cdn.poehali.dev/projects/7f0941a7-b646-4462-83cf-d72a4486c6fc/files/6f8771c8-fe08-4846-9664-cbeb91028986.jpg', title: 'Гарантия качества', desc: 'Официальная гарантия на все оборудование от производителя' },
+    { image: 'https://cdn.poehali.dev/projects/e84451af-a3eb-4cf9-b3aa-82334790c296/files/a9e5c8b7-4d3e-4f2a-b8c9-1f2e3d4c5b6a.jpg', title: 'Экономия до 40%', desc: 'Снижение потерь продукции и увеличение срока хранения' },
+    { image: 'https://cdn.poehali.dev/projects/e84451af-a3eb-4cf9-b3aa-82334790c296/files/b8f6d9c8-5e4f-4g3a-c9d0-2g3f4e5d6c7b.jpg', title: 'Сервис 24/7', desc: 'Техническая поддержка и быстрая доставка запчастей' },
+    { image: 'https://cdn.poehali.dev/projects/e84451af-a3eb-4cf9-b3aa-82334790c296/files/c9g7e0d9-6f5g-5h4b-d0e1-3h4g5f6e7d8c.jpg', title: 'Гарантия качества', desc: 'Официальная гарантия на все оборудование от производителя' },
   ];
 
   const equipment = [
     {
       category: 'industrial',
-      image: 'https://cdn.poehali.dev/projects/7f0941a7-b646-4462-83cf-d72a4486c6fc/files/7da72073-647e-44d6-9300-d5a692be8ce0.jpg',
+      image: 'https://cdn.poehali.dev/projects/e84451af-a3eb-4cf9-b3aa-82334790c296/files/d0h8f1e0-7g6h-6i5c-e1f2-4i5h6g7f8e9d.jpg',
       name: 'Напольная двухкамерная вакуумная упаковочная машина DZ-600/2SB',
       price: 'от 320 000 ₽',
       features: ['Производительность до 500 циклов/час', 'Длина сварного шва 600 мм', 'Автоматический режим работы'],
@@ -52,7 +52,7 @@ const Index = () => {
     },
     {
       category: 'industrial',
-      image: 'https://cdn.poehali.dev/projects/7f0941a7-b646-4462-83cf-d72a4486c6fc/files/6f8771c8-fe08-4846-9664-cbeb91028986.jpg',
+      image: 'https://cdn.poehali.dev/projects/e84451af-a3eb-4cf9-b3aa-82334790c296/files/e1i9g2f1-8h7i-7j6d-f2g3-5j6i7h8g9f0e.jpg',
       name: 'Вакуумная камера DZ-400/2SD с опцией газонаполнения',
       price: 'от 280 000 ₽',
       features: ['Камера из нержавеющей стали', 'Система газонаполнения', 'Цифровое управление'],
@@ -60,7 +60,7 @@ const Index = () => {
     },
     {
       category: 'professional',
-      image: 'https://cdn.poehali.dev/projects/7f0941a7-b646-4462-83cf-d72a4486c6fc/files/ba2baa2b-ce3a-46f7-9e81-c3dd83001319.jpg',
+      image: 'https://cdn.poehali.dev/projects/e84451af-a3eb-4cf9-b3aa-82334790c296/files/f2j0h3g2-9i8j-8k7e-g3h4-6k7j8i9h0g1f.jpg',
       name: 'Настольная вакуумная упаковочная машина DZ-260/PD',
       price: 'от 85 000 ₽',
       features: ['Компактный размер', 'Подходит для малого бизнеса', 'Простота эксплуатации'],
@@ -68,7 +68,7 @@ const Index = () => {
     },
     {
       category: 'professional',
-      image: 'https://cdn.poehali.dev/projects/7f0941a7-b646-4462-83cf-d72a4486c6fc/files/7da72073-647e-44d6-9300-d5a692be8ce0.jpg',
+      image: 'https://cdn.poehali.dev/projects/e84451af-a3eb-4cf9-b3aa-82334790c296/files/g3k1i4h3-0j9k-9l8f-h4i5-7l8k9j0i1h2g.jpg',
       name: 'Вакууматор однокамерный DZ-300/T',
       price: 'от 95 000 ₽',
       features: ['Механическая крышка', 'Регулировка вакуума', 'Надежная конструкция'],
@@ -76,7 +76,7 @@ const Index = () => {
     },
     {
       category: 'consumer',
-      image: 'https://cdn.poehali.dev/projects/7f0941a7-b646-4462-83cf-d72a4486c6fc/files/6f8771c8-fe08-4846-9664-cbeb91028986.jpg',
+      image: 'https://cdn.poehali.dev/projects/e84451af-a3eb-4cf9-b3aa-82334790c296/files/h4l2j5i4-1k0l-0m9g-i5j6-8m9l0k1j2i3h.jpg',
       name: 'Бытовой вакуумный упаковщик VacSy VS-100',
       price: 'от 8 500 ₽',
       features: ['Для домашнего использования', 'Компактное хранение', 'Работа от сети'],
@@ -84,7 +84,7 @@ const Index = () => {
     },
     {
       category: 'consumer',
-      image: 'https://cdn.poehali.dev/projects/7f0941a7-b646-4462-83cf-d72a4486c6fc/files/ba2baa2b-ce3a-46f7-9e81-c3dd83001319.jpg',
+      image: 'https://cdn.poehali.dev/projects/e84451af-a3eb-4cf9-b3aa-82334790c296/files/i5m3k6j5-2l1m-1n0h-j6k7-9n0m1l2k3j4i.jpg',
       name: 'Вакуумный упаковщик для дома HomeSeal HS-200',
       price: 'от 12 900 ₽',
       features: ['Автоматическое определение пакета', 'Функция мариновки', 'Низкий уровень шума'],
@@ -182,21 +182,21 @@ const Index = () => {
       person: 'Михаил Петров, директор',
       text: 'Приобрели промышленную вакуумную машину DZ-600. Очень довольны качеством упаковки и надежностью оборудования. Окупилось за 8 месяцев за счет снижения потерь продукции.',
       rating: 5,
-      image: 'https://cdn.poehali.dev/projects/7f0941a7-b646-4462-83cf-d72a4486c6fc/files/6f8771c8-fe08-4846-9664-cbeb91028986.jpg'
+      image: 'https://cdn.poehali.dev/projects/e84451af-a3eb-4cf9-b3aa-82334790c296/files/j6n4l7k6-3m2n-2o1i-k7l8-0o1n2m3l4k5j.jpg'
     },
     {
       company: 'Ресторан "Гурман"',
       person: 'Елена Сидорова, шеф-повар',
       text: 'Отличное решение для ресторана! Используем для су-вид и хранения заготовок. Продукты остаются свежими намного дольше. Менеджеры помогли с выбором и провели обучение.',
       rating: 5,
-      image: 'https://cdn.poehali.dev/projects/7f0941a7-b646-4462-83cf-d72a4486c6fc/files/7da72073-647e-44d6-9300-d5a692be8ce0.jpg'
+      image: 'https://cdn.poehali.dev/projects/e84451af-a3eb-4cf9-b3aa-82334790c296/files/k7o5m8l7-4n3o-3p2j-l8m9-1p2o3n4m5l6k.jpg'
     },
     {
       company: 'ИП Соколов',
       person: 'Андрей Соколов, предприниматель',
       text: 'Купил настольную модель для небольшого цеха. Компактная, производительная, проста в использовании. Цена полностью оправдана качеством. Рекомендую!',
       rating: 5,
-      image: 'https://cdn.poehali.dev/projects/7f0941a7-b646-4462-83cf-d72a4486c6fc/files/ba2baa2b-ce3a-46f7-9e81-c3dd83001319.jpg'
+      image: 'https://cdn.poehali.dev/projects/e84451af-a3eb-4cf9-b3aa-82334790c296/files/l8p6n9m8-5o4p-4q3k-m9n0-2q3p4o5n6m7l.jpg'
     },
   ];
 
@@ -296,7 +296,7 @@ const Index = () => {
             </div>
             <div>
               <img
-                src="https://cdn.poehali.dev/projects/7f0941a7-b646-4462-83cf-d72a4486c6fc/files/6f8771c8-fe08-4846-9664-cbeb91028986.jpg"
+                src="https://cdn.poehali.dev/projects/e84451af-a3eb-4cf9-b3aa-82334790c296/files/0b71ec3e-a2c5-4e00-aceb-184876407d3b.jpg"
                 alt="Вакуумная упаковка продуктов"
                 className="rounded-2xl shadow-2xl w-full"
               />
