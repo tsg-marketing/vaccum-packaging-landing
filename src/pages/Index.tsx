@@ -13,6 +13,7 @@ import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
 import { ContactModal } from '@/components/ContactModal';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import ProductCatalog from '@/components/ProductCatalog';
 
 const Index = () => {
   const { toast } = useToast();
@@ -572,6 +573,18 @@ const Index = () => {
               Заказать расходники со склада
             </Button>
           </div>
+        </div>
+      </section>
+
+      <section id="catalog" className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-4">Каталог оборудования</h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Выберите подходящее вакуумно-упаковочное оборудование для вашего производства
+          </p>
+          <ProductCatalog onInquiry={(productName) => {
+            setModalOpen(true);
+          }} />
         </div>
       </section>
 
