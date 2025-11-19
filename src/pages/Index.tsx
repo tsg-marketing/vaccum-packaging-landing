@@ -409,7 +409,7 @@ const Index = () => {
 
       <section id="catalog" ref={equipmentAnim.ref as React.RefObject<HTMLElement>} className="py-16 bg-gradient-to-b from-background to-muted/20">
         <div className="container mx-auto px-4">
-          <h2 className={`text-3xl font-bold text-center mb-4 ${equipmentAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Каталог оборудования</h2>
+          <h2 className="text-3xl font-bold text-center mb-4 animate-fade-in-up">Каталог оборудования</h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             Выберите подходящее вакуумно-упаковочное оборудование для вашего производства
           </p>
@@ -763,6 +763,7 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-4">Каталог</h4>
               <ul className="space-y-2 text-sm">
+                <li><a href="#catalog" className="text-white/70 hover:text-white transition-colors">Каталог оборудования</a></li>
                 <li><a href="https://t-sib.ru/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">Смотреть весь каталог</a></li>
               </ul>
             </div>
