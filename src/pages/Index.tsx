@@ -496,12 +496,17 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-12 bg-muted/30">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-base sm:text-lg mb-6">У нас более 30 моделей вакуумного оборудования. Оставьте заявку и выберете свою модель</p>
-          <Button size="lg" className="bg-accent hover:bg-accent/90 w-full sm:w-auto" onClick={() => setModalOpen(true)}>
-            Оставить заявку
-          </Button>
+
+
+      <section id="catalog" className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-4">Каталог оборудования</h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Выберите подходящее вакуумно-упаковочное оборудование для вашего производства
+          </p>
+          <ProductCatalog onInquiry={(productName) => {
+            setModalOpen(true);
+          }} />
         </div>
       </section>
 
@@ -573,18 +578,6 @@ const Index = () => {
               Заказать расходники со склада
             </Button>
           </div>
-        </div>
-      </section>
-
-      <section id="catalog" className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-4">Каталог оборудования</h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Выберите подходящее вакуумно-упаковочное оборудование для вашего производства
-          </p>
-          <ProductCatalog onInquiry={(productName) => {
-            setModalOpen(true);
-          }} />
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardFooter, CardHeader } from './ui/card';
 import { Button } from './ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import Icon from './ui/icon';
 
 interface Product {
@@ -20,10 +21,18 @@ const formatPrice = (price: number): string => {
   return price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' руб';
 };
 
+const CATEGORIES = [
+  { id: 290, name: 'Вакуум-упаковочное' },
+  { id: 291, name: 'Бескамерные' },
+  { id: 292, name: 'Однокамерные' },
+  { id: 294, name: 'Двухкамерные' }
+];
+
 export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<number>(290);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -99,9 +108,30 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
     );
   }
 
+  const filteredProducts = products
+    .filter(p => p.category_id === activeCategory)
+    .sort((a, b) => a.price - b.price);
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {products.map((product) => (
+    <Tabs value={activeCategory.toString()} onValueChange={(val) => setActiveCategory(Number(val))} className="w-full">
+      <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8">
+        {CATEGORIES.map(cat => (
+          <TabsTrigger key={cat.id} value={cat.id.toString()} className="text-xs sm:text-sm">
+            {cat.name}
+          </TabsTrigger>
+        ))}
+      </TabsList>
+      
+      {CATEGORIES.map(cat => (
+        <TabsContent key={cat.id} value={cat.id.toString()}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProducts.length === 0 ? (
+              <div className="col-span-full text-center py-12">
+                <Icon name="Package" size={48} className="mx-auto text-muted-foreground" />
+                <p className="mt-4 text-muted-foreground">Товары в этой категории не найдены</p>
+              </div>
+            ) : (
+              filteredProducts.map((product) => (
         <Card key={product.id} className="flex flex-col hover:shadow-lg transition-shadow">
           <CardHeader className="p-0">
             {product.image_url ? (
@@ -130,7 +160,11 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
             </Button>
           </CardFooter>
         </Card>
+              ))
+            )}
+          </div>
+        </TabsContent>
       ))}
-    </div>
+    </Tabs>
   );
 }
