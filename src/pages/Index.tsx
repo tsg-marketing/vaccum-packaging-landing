@@ -293,8 +293,8 @@ const Index = () => {
             <a href="#contact" className="text-sm hover:text-primary transition-colors">Контакты</a>
           </nav>
           <div className="flex items-center gap-2">
-            <Button className="bg-accent hover:bg-accent/90 text-sm sm:text-base" onClick={() => setModalOpen(true)}>
-              <Icon name="Phone" size={16} className="mr-1 sm:mr-2" />
+            <Button className="bg-accent hover:bg-accent/90 text-base sm:text-lg font-bold px-5 py-5 sm:px-6 sm:py-6 shadow-lg transform hover:scale-105 transition-all" onClick={() => setModalOpen(true)}>
+              <Icon name="Phone" size={20} className="mr-1 sm:mr-2" />
               <span className="hidden sm:inline">Заказать звонок</span>
               <span className="sm:hidden">Звонок</span>
             </Button>
@@ -338,12 +338,12 @@ const Index = () => {
                 Бесплатное тестирование в демозале
               </p>
               <div className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4 mb-6 md:mb-8">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-white w-full sm:w-auto text-sm sm:text-base" onClick={() => setModalOpen(true)}>
-                  <Icon name="FileText" size={18} className="mr-2" />
+                <Button size="lg" className="bg-accent hover:bg-accent/90 text-white w-full sm:w-auto text-base sm:text-xl font-bold px-8 py-6 shadow-2xl transform hover:scale-105 transition-all" onClick={() => setModalOpen(true)}>
+                  <Icon name="FileText" size={24} className="mr-3" />
                   <span className="truncate">Получить КП</span>
                 </Button>
-                <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur border-white/30 text-white hover:bg-white/20 w-full sm:w-auto text-sm sm:text-base" onClick={() => setModalOpen(true)}>
-                  <Icon name="Calendar" size={18} className="mr-2" />
+                <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur border-white/30 border-2 text-white hover:bg-white/20 w-full sm:w-auto text-base sm:text-xl font-bold px-8 py-6 transform hover:scale-105 transition-all" onClick={() => setModalOpen(true)}>
+                  <Icon name="Calendar" size={24} className="mr-3" />
                   Записаться в демозал
                 </Button>
               </div>
@@ -445,8 +445,8 @@ const Index = () => {
             ))}
           </div>
           <div className="text-center">
-            <Button variant="outline" size="lg" className="w-full sm:w-auto text-sm sm:text-base" onClick={() => setModalOpen(true)}>
-              <Icon name="MessageCircle" size={18} className="mr-2" />
+            <Button variant="outline" size="lg" className="w-full sm:w-auto text-base sm:text-xl font-bold px-8 py-6 border-4 border-accent text-accent hover:bg-accent hover:text-white transform hover:scale-105 transition-all shadow-xl" onClick={() => setModalOpen(true)}>
+              <Icon name="MessageCircle" size={24} className="mr-3" />
               <span className="hidden sm:inline">Получить рекомендации по упаковке вашего продукта</span>
               <span className="sm:hidden">Получить рекомендации</span>
             </Button>

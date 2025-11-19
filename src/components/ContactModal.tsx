@@ -68,8 +68,8 @@ export const ContactModal = ({ open, onOpenChange, title = 'Получить к�
               rows={4}
             />
           </div>
-          <Button type="submit" className="w-full bg-accent hover:bg-accent/90">
-            <Icon name="Send" size={16} className="mr-2" />
+          <Button type="submit" className="w-full bg-accent hover:bg-accent/90 py-6 text-lg font-bold shadow-lg transform hover:scale-105 transition-all">
+            <Icon name="Send" size={20} className="mr-2" />
             Отправить
           </Button>
         </form>
