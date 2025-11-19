@@ -35,6 +35,8 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
   const [error, setError] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<number>(290);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [showAll, setShowAll] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const categoryCounts = useMemo(() => {
     return CATEGORIES.reduce((acc, cat) => {
@@ -53,6 +55,26 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
       })
       .sort((a, b) => a.price - b.price);
   }, [products, activeCategory, searchQuery]);
+
+  const displayProducts = useMemo(() => {
+    if (!isMobile || showAll || filteredProducts.length <= 10) {
+      return filteredProducts;
+    }
+    return filteredProducts.slice(0, 10);
+  }, [filteredProducts, isMobile, showAll]);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    setShowAll(false);
+  }, [activeCategory]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -161,7 +183,7 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
                 <p className="mt-4 text-muted-foreground">Товары в этой категории не найдены</p>
               </div>
             ) : (
-              filteredProducts.map((product) => (
+              displayProducts.map((product) => (
         <Card key={product.id} className="flex flex-col hover:shadow-lg transition-shadow">
           <CardHeader className="p-0">
             {product.image_url ? (
@@ -194,6 +216,19 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
               ))
             )}
           </div>
+          {isMobile && filteredProducts.length > 10 && !showAll && (
+            <div className="text-center mt-6">
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => setShowAll(true)}
+                className="w-full md:w-auto"
+              >
+                <Icon name="ChevronDown" size={20} className="mr-2" />
+                Посмотреть все ({filteredProducts.length})
+              </Button>
+            </div>
+          )}
         </TabsContent>
       ))}
       </Tabs>

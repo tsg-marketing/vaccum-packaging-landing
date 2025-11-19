@@ -285,6 +285,7 @@ const Index = () => {
           <nav className="hidden md:flex items-center gap-6">
             <a href="#equipment" className="text-sm hover:text-primary transition-colors">Оборудование</a>
             <a href="#advantages" className="text-sm hover:text-primary transition-colors">Преимущества</a>
+            <a href="#catalog" className="text-sm hover:text-primary transition-colors">Каталог</a>
             <a href="#application" className="text-sm hover:text-primary transition-colors">Применение</a>
             <a href="#options" className="text-sm hover:text-primary transition-colors">Опции</a>
             <a href="#how-it-works" className="text-sm hover:text-primary transition-colors">Как работает</a>
