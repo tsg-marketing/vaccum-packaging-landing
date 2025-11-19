@@ -183,10 +183,11 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
           </CardContent>
           <CardFooter className="p-4 pt-0">
             <Button 
-              className="w-full" 
+              className="w-full bg-accent hover:bg-accent/90 text-base font-bold py-6 shadow-lg transform hover:scale-105 transition-all" 
               onClick={() => onInquiry(product.name)}
             >
-              Узнать подробнее
+              <Icon name="Eye" size={20} className="mr-2" />
+              💎 Узнать подробнее
             </Button>
           </CardFooter>
         </Card>
