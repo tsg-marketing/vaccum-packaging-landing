@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Card, CardContent, CardFooter, CardHeader } from './ui/card';
 import { Button } from './ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { Input } from './ui/input';
 import Icon from './ui/icon';
 
 interface Product {
@@ -33,6 +34,7 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<number>(290);
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -108,19 +110,47 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
     );
   }
 
-  const filteredProducts = products
-    .filter(p => p.category_id === activeCategory)
-    .sort((a, b) => a.price - b.price);
+  const categoryCounts = useMemo(() => {
+    return CATEGORIES.reduce((acc, cat) => {
+      acc[cat.id] = products.filter(p => p.category_id === cat.id).length;
+      return acc;
+    }, {} as Record<number, number>);
+  }, [products]);
+
+  const filteredProducts = useMemo(() => {
+    return products
+      .filter(p => {
+        const matchesCategory = p.category_id === activeCategory;
+        const matchesSearch = searchQuery === '' || 
+          p.name.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCategory && matchesSearch;
+      })
+      .sort((a, b) => a.price - b.price);
+  }, [products, activeCategory, searchQuery]);
 
   return (
-    <Tabs value={activeCategory.toString()} onValueChange={(val) => setActiveCategory(Number(val))} className="w-full">
-      <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8">
-        {CATEGORIES.map(cat => (
-          <TabsTrigger key={cat.id} value={cat.id.toString()} className="text-xs sm:text-sm">
-            {cat.name}
-          </TabsTrigger>
-        ))}
-      </TabsList>
+    <div className="w-full">
+      <div className="mb-6">
+        <div className="relative max-w-md mx-auto">
+          <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            type="text"
+            placeholder="Поиск по названию..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10"
+          />
+        </div>
+      </div>
+      
+      <Tabs value={activeCategory.toString()} onValueChange={(val) => setActiveCategory(Number(val))} className="w-full">
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8">
+          {CATEGORIES.map(cat => (
+            <TabsTrigger key={cat.id} value={cat.id.toString()} className="text-xs sm:text-sm">
+              {cat.name} ({categoryCounts[cat.id] || 0})
+            </TabsTrigger>
+          ))}
+        </TabsList>
       
       {CATEGORIES.map(cat => (
         <TabsContent key={cat.id} value={cat.id.toString()}>
@@ -165,6 +195,7 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
           </div>
         </TabsContent>
       ))}
-    </Tabs>
+      </Tabs>
+    </div>
   );
 }
