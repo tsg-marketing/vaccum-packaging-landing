@@ -36,6 +36,24 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
   const [activeCategory, setActiveCategory] = useState<number>(290);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
+  const categoryCounts = useMemo(() => {
+    return CATEGORIES.reduce((acc, cat) => {
+      acc[cat.id] = products.filter(p => p.category_id === cat.id).length;
+      return acc;
+    }, {} as Record<number, number>);
+  }, [products]);
+
+  const filteredProducts = useMemo(() => {
+    return products
+      .filter(p => {
+        const matchesCategory = p.category_id === activeCategory;
+        const matchesSearch = searchQuery === '' || 
+          p.name.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCategory && matchesSearch;
+      })
+      .sort((a, b) => a.price - b.price);
+  }, [products, activeCategory, searchQuery]);
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -109,24 +127,6 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
       </div>
     );
   }
-
-  const categoryCounts = useMemo(() => {
-    return CATEGORIES.reduce((acc, cat) => {
-      acc[cat.id] = products.filter(p => p.category_id === cat.id).length;
-      return acc;
-    }, {} as Record<number, number>);
-  }, [products]);
-
-  const filteredProducts = useMemo(() => {
-    return products
-      .filter(p => {
-        const matchesCategory = p.category_id === activeCategory;
-        const matchesSearch = searchQuery === '' || 
-          p.name.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchesCategory && matchesSearch;
-      })
-      .sort((a, b) => a.price - b.price);
-  }, [products, activeCategory, searchQuery]);
 
   return (
     <div className="w-full">
