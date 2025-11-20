@@ -22,9 +22,6 @@ jobs:
     - name: Build React app
       run: npm run build
 
-    - name: Show build folder contents (debug)
-      run: ls -la ./build
-
     - name: Setup SSH
       run: |
         mkdir -p ~/.ssh
@@ -34,4 +31,4 @@ jobs:
 
     - name: Deploy files with rsync
       run: |
-        rsync -avz --delete ./build/ bitrix@t-sib.ru:/home/bitrix/ext_www/vacuum.t-sib.ru
+        rsync -avz --delete ./dist/ bitrix@t-sib.ru:/home/bitrix/ext_www/vacuum.t-sib.ru
