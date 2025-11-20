@@ -22,6 +22,9 @@ jobs:
     - name: Build React app
       run: npm run build
 
+    - name: Show build folder contents (debug)
+      run: ls -la ./build
+
     - name: Setup SSH
       run: |
         mkdir -p ~/.ssh
