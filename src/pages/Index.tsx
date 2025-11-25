@@ -17,6 +17,7 @@ import ProductCatalog from '@/components/ProductCatalog';
 
 const Index = () => {
   const { toast } = useToast();
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', company: '', productType: '', modeltype: '', comment: '' });
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [modalOpen, setModalOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -34,6 +35,20 @@ const Index = () => {
       title: "Заявка отправлена!",
       description: "Коммерческое предложение придёт на email, менеджер свяжется в течение 15 минут",
     });
+    setFormData({ name: '', phone: '', email: '', company: '', productType: '', modeltype: '', comment: '' });
+    fetch('/api/b24-send-lead.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        // alert('Заявка отправлена успешно!');
+      } else {
+        // alert('Ошибка при отправке заявки');
+      }
+    })
   };
 
   const advantages = [
@@ -679,28 +694,28 @@ const Index = () => {
             <div className="grid md:grid-cols-2 gap-4 mb-4">
               <div>
                 <Label htmlFor="name">Имя *</Label>
-                <Input id="name" required className="mt-1" />
+                <Input id="name" required className="mt-1" onChange={(e) => setFormData({ ...formData, name: e.target.value })}/>
               </div>
               <div>
                 <Label htmlFor="phone">Телефон *</Label>
-                <Input id="phone" type="tel" required className="mt-1" />
+                <Input id="phone" type="tel" required className="mt-1" onChange={(e) => setFormData({ ...formData, phone: e.target.value })}/>
               </div>
             </div>
             <div className="grid md:grid-cols-2 gap-4 mb-4">
               <div>
                 <Label htmlFor="email">Email *</Label>
-                <Input id="email" type="email" required className="mt-1" />
+                <Input id="email" type="email" required className="mt-1" onChange={(e) => setFormData({ ...formData, email: e.target.value })}/>
               </div>
               <div>
                 <Label htmlFor="company">Компания</Label>
-                <Input id="company" className="mt-1" />
+                <Input id="company" className="mt-1" onChange={(e) => setFormData({ ...formData, company: e.target.value })}/>
               </div>
             </div>
             <div className="grid md:grid-cols-2 gap-4 mb-4">
               <div>
-                <Label htmlFor="product-type">Тип продукта</Label>
-                <Select>
-                  <SelectTrigger id="product-type" className="mt-1">
+                <Label htmlFor="producttype">Тип продукта</Label>
+                <Select onValueChange={(value) => setFormData({ ...formData, productType: value })}>
+                  <SelectTrigger id="producttype" className="mt-1">
                     <SelectValue placeholder="Выберите" />
                   </SelectTrigger>
                   <SelectContent>
@@ -712,10 +727,10 @@ const Index = () => {
                 </Select>
               </div>
               <div>
-                <Label htmlFor="model-type">Тип модели</Label>
-                <Select>
-                  <SelectTrigger id="model-type" className="mt-1">
-                    <SelectValue placeholder="Выберите" />
+                <Label htmlFor="modeltype">Тип модели</Label>
+                <Select onValueChange={(value) => setFormData({ ...formData, modeltype: value })}>
+                  <SelectTrigger id="modeltype" className="mt-1">
+                    <SelectValue placeholder="Выберите"/>
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="tabletop-1">Настольная, 1 камера</SelectItem>
@@ -728,7 +743,7 @@ const Index = () => {
             </div>
             <div className="mb-4">
               <Label htmlFor="comment">Комментарий</Label>
-              <Textarea id="comment" rows={3} className="mt-1" />
+              <Textarea id="comment" rows={3} className="mt-1" onChange={(e) => setFormData({ ...formData, comment: e.target.value })}/>
             </div>
             <div className="flex items-start gap-2 mb-6">
               <input type="checkbox" id="consent" required className="mt-1" />

@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-    - main
+    - dev
 
 jobs:
   deploy:
@@ -29,6 +29,14 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H t-sib.ru >> ~/.ssh/known_hosts
 
+    - name: Backup api folder on server via SSH
+      run: |
+        ssh bitrix@t-sib.ru "cp -r /home/bitrix/ext_www/vacuum.t-sib.ru/api /home/bitrix/ext_www/api_backup"
+
     - name: Deploy files with rsync
       run: |
         rsync -avz --delete ./dist/ bitrix@t-sib.ru:/home/bitrix/ext_www/vacuum.t-sib.ru
+
+    - name: Restore api folder on server via SSH
+      run: |
+        ssh bitrix@t-sib.ru "rm -rf /home/bitrix/ext_www/vacuum.t-sib.ru/api && mv /home/bitrix/ext_www/api_backup /home/bitrix/ext_www/vacuum.t-sib.ru/api"
