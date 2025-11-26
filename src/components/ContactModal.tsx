@@ -24,6 +24,19 @@ export const ContactModal = ({ open, onOpenChange, title = 'Получить к�
       description: "Менеджер свяжется с вами в ближайшее время",
     });
     setFormData({ name: '', phone: '', message: '' });
+    fetch('/api/b24-send-lead.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        // alert('Заявка отправлена успешно!');
+      } else {
+        // alert('Ошибка при отправке заявки');
+      }
+    })
     onOpenChange(false);
   };
 
