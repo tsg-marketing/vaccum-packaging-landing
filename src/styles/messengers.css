@@ -3,23 +3,24 @@
   right: 20px;
   bottom: 20px;
   z-index: 1000;
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
 }
 
 .messengers-toggler {
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   background: white;
-  border: none;
+  border: 2px solid #000;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
-  position: relative;
-  z-index: 2;
 }
 
 .messengers-toggler:hover {
@@ -28,8 +29,6 @@
 }
 
 .messengers-toggler svg {
-  width: 28px;
-  height: 28px;
   stroke: #ff6b35;
   transition: all 0.3s ease;
 }
@@ -39,10 +38,21 @@
 }
 
 .messengers-list-wrapper {
-  height: 60px;
-  overflow: hidden;
-  transition: height 0.3s ease;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .messengers-list {
@@ -51,106 +61,46 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  gap: 12px;
 }
 
 .messengers-item {
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
 }
 
-.messengers-item > *,
-.messengers-item > a,
-.messengers-item > button {
+.messengers-item > a {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #ff6b35;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 50%;
-  display: block;
-  border: none;
+  background: white;
+  border: 2px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
-.messengers-item > *:hover,
-.messengers-item > a:hover,
-.messengers-item > button:hover {
+.messengers-item > a:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
-}
-
-.messengers-item.whatsapp > * {
-  background-image: url("/assets/icons/messenger/whatsapp-orange.svg");
-}
-
-.messengers-item.telegram > * {
-  background-image: url("/assets/icons/messenger/telegram-orange.svg");
-}
-
-.messengers-item.mail > * {
-  background-image: url("/assets/icons/messenger/mail-orange.svg");
-}
-
-.messengers-item.phone > * {
-  background-image: url("/assets/icons/messenger/phone-orange.svg");
-}
-
-.messengers-item.callback > * {
-  background-image: url("/assets/icons/messenger/callback-orange.svg");
-}
-
-.messengers-item.chat > * {
-  background-image: url("/assets/icons/messenger/chat-orange.svg");
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 992px) {
   .messengers {
     right: 10px;
-    bottom: 65px;
-  }
-
-  .messengers-list-wrapper {
-    height: 35px;
+    bottom: 10px;
   }
 
   .messengers-toggler {
-    width: 50px;
-    height: 50px;
-  }
-
-  .messengers-toggler svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .messengers-item > * {
-    width: 50px;
-    height: 50px;
+    width: 56px;
+    height: 56px;
   }
 
   .messengers-item {
-    width: 50px;
-    height: 50px;
-  }
-}
-
-@media (min-width: 768px) {
-  .messengers-item.telegram > * {
-    background-size: 40%;
-  }
-
-  .messengers-item.callback > * {
-    background-size: 47%;
-  }
-
-  .messengers-item.chat > * {
-    background-size: 42%;
+    width: 56px;
+    height: 56px;
   }
 }
