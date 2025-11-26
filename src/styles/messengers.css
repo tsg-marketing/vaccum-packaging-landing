@@ -1,0 +1,158 @@
+.messengers {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.messengers-toggler {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #ff6b35;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.messengers-toggler:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+}
+
+.messengers-toggler span {
+  width: 24px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.messengers-toggler.opened span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.messengers-toggler.opened span:nth-child(2) {
+  opacity: 0;
+}
+
+.messengers-toggler.opened span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.messengers-list-wrapper {
+  height: 60px;
+  overflow: hidden;
+  transition: height 0.3s ease;
+  position: relative;
+}
+
+.messengers-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.messengers-item {
+  width: 60px;
+  height: 60px;
+}
+
+.messengers-item > *,
+.messengers-item > a,
+.messengers-item > button {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #ff6b35;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+  display: block;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+  transition: all 0.3s ease;
+}
+
+.messengers-item > *:hover,
+.messengers-item > a:hover,
+.messengers-item > button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+}
+
+.messengers-item.whatsapp > * {
+  background-image: url("/assets/icons/messenger/whatsapp-orange.svg");
+}
+
+.messengers-item.telegram > * {
+  background-image: url("/assets/icons/messenger/telegram-orange.svg");
+}
+
+.messengers-item.mail > * {
+  background-image: url("/assets/icons/messenger/mail-orange.svg");
+}
+
+.messengers-item.phone > * {
+  background-image: url("/assets/icons/messenger/phone-orange.svg");
+}
+
+.messengers-item.callback > * {
+  background-image: url("/assets/icons/messenger/callback-orange.svg");
+}
+
+.messengers-item.chat > * {
+  background-image: url("/assets/icons/messenger/chat-orange.svg");
+}
+
+@media (max-width: 992px) {
+  .messengers {
+    right: 10px;
+    bottom: 65px;
+  }
+
+  .messengers-list-wrapper {
+    height: 35px;
+  }
+
+  .messengers-toggler,
+  .messengers-item > * {
+    width: 50px;
+    height: 50px;
+  }
+
+  .messengers-item {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (min-width: 768px) {
+  .messengers-item.telegram > * {
+    background-size: 40%;
+  }
+
+  .messengers-item.callback > * {
+    background-size: 47%;
+  }
+
+  .messengers-item.chat > * {
+    background-size: 42%;
+  }
+}
