@@ -10,15 +10,13 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #ff6b35;
+  background: white;
   border: none;
   cursor: pointer;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
   position: relative;
   z-index: 2;
@@ -26,27 +24,18 @@
 
 .messengers-toggler:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
 }
 
-.messengers-toggler span {
-  width: 24px;
-  height: 3px;
-  background: white;
-  border-radius: 2px;
+.messengers-toggler svg {
+  width: 28px;
+  height: 28px;
+  stroke: #ff6b35;
   transition: all 0.3s ease;
 }
 
-.messengers-toggler.opened span:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
-}
-
-.messengers-toggler.opened span:nth-child(2) {
-  opacity: 0;
-}
-
-.messengers-toggler.opened span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
+.messengers-toggler.opened svg {
+  transform: rotate(135deg);
 }
 
 .messengers-list-wrapper {
@@ -131,7 +120,16 @@
     height: 35px;
   }
 
-  .messengers-toggler,
+  .messengers-toggler {
+    width: 50px;
+    height: 50px;
+  }
+
+  .messengers-toggler svg {
+    width: 24px;
+    height: 24px;
+  }
+
   .messengers-item > * {
     width: 50px;
     height: 50px;
