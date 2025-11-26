@@ -15,7 +15,7 @@ interface ContactModalProps {
 
 export const ContactModal = ({ open, onOpenChange, title = 'Получить коммерческое предложение' }: ContactModalProps) => {
   const { toast } = useToast();
-  const [formData, setFormData] = useState({ name: '', phone: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', phone: '', message: '', url: '' });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ export const ContactModal = ({ open, onOpenChange, title = 'Получить к�
       title: "Заявка отправлена!",
       description: "Менеджер свяжется с вами в ближайшее время",
     });
-    setFormData({ name: '', phone: '', message: '' });
+    setFormData({ name: '', phone: '', message: '', url: window.location.href+window.location.pathname });
     fetch('/api/b24-send-lead.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

@@ -17,7 +17,7 @@ import ProductCatalog from '@/components/ProductCatalog';
 
 const Index = () => {
   const { toast } = useToast();
-  const [formData, setFormData] = useState({ name: '', phone: '', email: '', company: '', productType: '', modeltype: '', comment: '' });
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', company: '', productType: '', modeltype: '', comment: '', url: '' });
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [modalOpen, setModalOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -35,7 +35,7 @@ const Index = () => {
       title: "Заявка отправлена!",
       description: "Коммерческое предложение придёт на email, менеджер свяжется в течение 15 минут",
     });
-    setFormData({ name: '', phone: '', email: '', company: '', productType: '', modeltype: '', comment: '' });
+    setFormData({ name: '', phone: '', email: '', company: '', productType: '', modeltype: '', comment: '', url: window.location.href+window.location.pathname });
     fetch('/api/b24-send-lead.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
