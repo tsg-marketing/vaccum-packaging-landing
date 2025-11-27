@@ -14,7 +14,7 @@
   height: 64px;
   border-radius: 50%;
   background: white;
-  border: 2px solid #000;
+  border: 2px solid #e0e0e0;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -74,7 +74,7 @@
   height: 100%;
   border-radius: 50%;
   background: white;
-  border: 2px solid #000;
+  border: 2px solid #e0e0e0;
   display: flex;
   align-items: center;
   justify-content: center;
