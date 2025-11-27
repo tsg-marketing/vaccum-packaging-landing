@@ -30,6 +30,18 @@ const Index = () => {
   const testimonialsAnim = useScrollAnimation();
   const faqAnim = useScrollAnimation();
 
+  const formatPhone = (value: string) => {
+    const digits = value.replace(/\D/g, '');
+    if (digits.length > 11) return formData.phone;
+    
+    if (digits.length === 0) return '';
+    if (digits.length <= 1) return `+${digits}`;
+    if (digits.length <= 4) return `+${digits.slice(0, 1)} (${digits.slice(1)}`;
+    if (digits.length <= 7) return `+${digits.slice(0, 1)} (${digits.slice(1, 4)}) ${digits.slice(4)}`;
+    if (digits.length <= 9) return `+${digits.slice(0, 1)} (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7)}`;
+    return `+${digits.slice(0, 1)} (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7, 9)}-${digits.slice(9, 11)}`;
+  };
+
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
@@ -703,7 +715,7 @@ const Index = () => {
               </div>
               <div>
                 <Label htmlFor="phone">Телефон *</Label>
-                <Input id="phone" type="tel" required className="mt-1" onChange={(e) => setFormData({ ...formData, phone: e.target.value })}/>
+                <Input id="phone" type="tel" required className="mt-1" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: formatPhone(e.target.value) })} placeholder="+7 (999) 999-99-99"/>
               </div>
             </div>
             <div className="grid md:grid-cols-2 gap-4 mb-4">
