@@ -11,10 +11,6 @@ export default function Messengers() {
 
   return (
     <div className="messengers">
-      <button className={`messengers-toggler ${isOpen ? 'opened' : ''}`} onClick={toggle}>
-        <Icon name="Phone" size={28} />
-      </button>
-      
       {isOpen && (
         <div className="messengers-list-wrapper">
           <ul className="messengers-list">
@@ -41,6 +37,10 @@ export default function Messengers() {
           </ul>
         </div>
       )}
+      
+      <button className={`messengers-toggler ${isOpen ? 'opened' : ''}`} onClick={toggle}>
+        <Icon name="Phone" size={28} />
+      </button>
     </div>
   );
 }
