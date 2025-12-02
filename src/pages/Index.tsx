@@ -840,6 +840,24 @@ const Index = () => {
                     +7 (495) 147-13-62
                   </a>
                 </div>
+                <div className="flex items-center gap-2">
+                  <Icon name="Mail" size={16} />
+                  <a 
+                    href="mailto:info@t-sib.ru" 
+                    className="text-white/70 hover:text-white transition-colors"
+                  >
+                    info@t-sib.ru
+                  </a>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Icon name="Mail" size={16} />
+                  <a 
+                    href="mailto:info3@t-sib.ru" 
+                    className="text-white/70 hover:text-white transition-colors"
+                  >
+                    info3@t-sib.ru
+                  </a>
+                </div>
                 <div className="flex items-start gap-2">
                   <Icon name="MapPin" size={16} className="mt-1 flex-shrink-0" />
                   <span className="text-white/70">Москва: ш. Энтузиастов, д. 56, стр. 32, офис 115</span>
