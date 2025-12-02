@@ -40,7 +40,7 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
 
   const categoryCounts = useMemo(() => {
     return CATEGORIES.reduce((acc, cat) => {
-      acc[cat.id] = products.filter(p => p.category_id === cat.id).length;
+      acc[cat.id] = products.filter(p => p.category_id === cat.id && p.price >= 30000).length;
       return acc;
     }, {} as Record<number, number>);
   }, [products]);
@@ -51,7 +51,8 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
         const matchesCategory = p.category_id === activeCategory;
         const matchesSearch = searchQuery === '' || 
           p.name.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchesCategory && matchesSearch;
+        const matchesPrice = p.price >= 30000;
+        return matchesCategory && matchesSearch && matchesPrice;
       })
       .sort((a, b) => a.price - b.price);
   }, [products, activeCategory, searchQuery]);
