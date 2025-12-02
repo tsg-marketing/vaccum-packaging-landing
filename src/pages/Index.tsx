@@ -849,10 +849,10 @@ const Index = () => {
                 <div className="flex items-center gap-2">
                   <Icon name="Mail" size={16} />
                   <a 
-                    href="mailto:info3@t-sib.ru" 
+                    href="mailto:vacuum@t-sib.ru" 
                     className="text-white/70 hover:text-white transition-colors"
                   >
-                    info3@t-sib.ru
+                    vacuum@t-sib.ru
                   </a>
                 </div>
                 <div className="flex items-start gap-2">
