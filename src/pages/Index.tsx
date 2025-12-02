@@ -417,7 +417,7 @@ const Index = () => {
 
       <section id="advantages" ref={advantagesAnim.ref as React.RefObject<HTMLElement>} className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
-          <h2 className={`text-3xl font-bold text-center mb-12 ${advantagesAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Преимущества оборудования</h2>
+          <h2 className={`text-4xl sm:text-5xl font-bold text-center mb-12 ${advantagesAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Преимущества оборудования</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
             {advantages.map((adv, idx) => (
               <Card key={idx} className={`text-center hover:shadow-lg transition-shadow ${advantagesAnim.isVisible ? 'animate-scale-in' : 'opacity-0'}`} style={{ animationDelay: `${idx * 0.05}s` }}>
@@ -768,6 +768,17 @@ const Index = () => {
                 Согласен на обработку персональных данных
               </Label>
             </div>
+            <div className="mb-4">
+              <label className="flex items-start gap-2 text-xs text-muted-foreground">
+                <input type="checkbox" required className="mt-1" />
+                <span>
+                  Отправляя форму, я соглашаюсь с{' '}
+                  <a href="https://t-sib.ru/assets/politika_t-sib16.05.25.pdf" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">политикой обработки персональных данных</a>
+                  {' '}и даю{' '}
+                  <a href="https://t-sib.ru/assets/soglasie_t-sib16.05.25.pdf" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">согласие на обработку персональных данных</a>
+                </span>
+              </label>
+            </div>
             <Button type="submit" size="lg" className="w-full bg-accent hover:bg-accent/90 text-white">
               <Icon name="Send" size={18} className="mr-2" />
               Получить коммерческое предложение
@@ -819,14 +830,17 @@ const Index = () => {
               </div>
             </div>
           </div>
-          <div className="border-t border-white/20 pt-6 text-center text-sm text-white/60">
+          <div className="border-t border-white/20 pt-6 text-center text-sm text-white/60 space-y-2">
             <p>© 2025 Техносиб. Все права защищены.</p>
+            <p className="text-xs">
+              Информация, представленная на сайте, не является публичной офертой. Данный интернет-сайт носит исключительно информационный характер и не является публичной офертой, определяемой положениями ч. 2 ст. 437 Гражданского кодекса РФ.
+            </p>
           </div>
         </div>
       </footer>
 
       <ContactModal open={modalOpen} onOpenChange={setModalOpen} />
-      <Messengers />
+      {/* <Messengers /> */}
     </div>
   );
 };

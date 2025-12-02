@@ -93,6 +93,17 @@ export const ContactModal = ({ open, onOpenChange, title = 'Получить к�
               rows={4}
             />
           </div>
+          <div>
+            <label className="flex items-start gap-2 text-xs text-muted-foreground">
+              <input type="checkbox" required className="mt-1" />
+              <span>
+                Отправляя форму, я соглашаюсь с{' '}
+                <a href="https://t-sib.ru/assets/politika_t-sib16.05.25.pdf" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">политикой обработки персональных данных</a>
+                {' '}и даю{' '}
+                <a href="https://t-sib.ru/assets/soglasie_t-sib16.05.25.pdf" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">согласие на обработку персональных данных</a>
+              </span>
+            </label>
+          </div>
           <Button type="submit" className="w-full bg-accent hover:bg-accent/90 py-6 text-lg font-bold shadow-lg transform hover:scale-105 transition-all">
             <Icon name="Send" size={20} className="mr-2" />
             Отправить

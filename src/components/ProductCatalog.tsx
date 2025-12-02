@@ -168,7 +168,7 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
       <Tabs value={activeCategory.toString()} onValueChange={(val) => setActiveCategory(Number(val))} className="w-full">
         <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8">
           {CATEGORIES.map(cat => (
-            <TabsTrigger key={cat.id} value={cat.id.toString()} className="text-xs sm:text-sm">
+            <TabsTrigger key={cat.id} value={cat.id.toString()} className="text-base sm:text-lg font-semibold">
               {cat.name} ({categoryCounts[cat.id] || 0})
             </TabsTrigger>
           ))}
