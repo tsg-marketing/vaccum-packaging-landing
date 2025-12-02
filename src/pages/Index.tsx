@@ -773,12 +773,6 @@ const Index = () => {
               <Label htmlFor="comment">Комментарий</Label>
               <Textarea id="comment" rows={3} className="mt-1" onChange={(e) => setFormData({ ...formData, comment: e.target.value })}/>
             </div>
-            <div className="flex items-start gap-2 mb-6">
-              <input type="checkbox" id="consent" required className="mt-1" />
-              <Label htmlFor="consent" className="text-sm text-muted-foreground">
-                Согласен на обработку персональных данных
-              </Label>
-            </div>
             <div className="mb-4">
               <label className="flex items-start gap-2 text-xs text-muted-foreground">
                 <input type="checkbox" required className="mt-1" />
@@ -838,15 +832,6 @@ const Index = () => {
                     }}
                   >
                     +7 (495) 147-13-62
-                  </a>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Icon name="Mail" size={16} />
-                  <a 
-                    href="mailto:info@t-sib.ru" 
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    info@t-sib.ru
                   </a>
                 </div>
                 <div className="flex items-center gap-2">
