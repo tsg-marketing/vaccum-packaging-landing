@@ -425,8 +425,8 @@ const Index = () => {
                   <div className="w-16 h-16 mx-auto mb-4 overflow-hidden rounded-lg">
                     <img src={adv.image} alt={adv.title} className="w-full h-full object-cover" />
                   </div>
-                  <h3 className="font-semibold mb-2 text-sm">{adv.title}</h3>
-                  <p className="text-xs text-muted-foreground">{adv.desc}</p>
+                  <h3 className="font-semibold mb-2 text-base sm:text-lg">{adv.title}</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground">{adv.desc}</p>
                 </CardContent>
               </Card>
             ))}
