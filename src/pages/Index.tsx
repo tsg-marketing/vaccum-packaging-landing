@@ -44,6 +44,9 @@ const Index = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (typeof window !== 'undefined' && (window as any).ym) {
+      (window as any).ym(105605669, 'reachGoal', 'fos_sent');
+    }
     toast({
       title: "Заявка отправлена!",
       description: "Коммерческое предложение придёт на email, менеджер свяжется в течение 15 минут",
@@ -311,7 +314,15 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="font-bold text-xl text-primary"><img src="https://cdn.poehali.dev/files/34a7b0b3-ab44-4d30-b123-e01bb56afd38.jpg" alt="Техносиб" className="h-11" /></div>
           <nav className="hidden md:flex items-center gap-6">
-            <a href="tel:+74951471362" className="text-lg font-bold text-primary hover:text-accent transition-colors flex items-center gap-2">
+            <a 
+              href="tel:+74951471362" 
+              className="text-lg font-bold text-primary hover:text-accent transition-colors flex items-center gap-2"
+              onClick={() => {
+                if (typeof window !== 'undefined' && (window as any).ym) {
+                  (window as any).ym(105605669, 'reachGoal', 'сlick_phone');
+                }
+              }}
+            >
               <Icon name="Phone" size={20} />
               +7 (495) 147-13-62
             </a>
@@ -817,7 +828,17 @@ const Index = () => {
               <div className="space-y-3 text-sm">
                 <div className="flex items-center gap-2">
                   <Icon name="Phone" size={16} />
-                  <a href="tel:+74951471362" className="text-white/70 hover:text-white transition-colors">+7 (495) 147-13-62</a>
+                  <a 
+                    href="tel:+74951471362" 
+                    className="text-white/70 hover:text-white transition-colors"
+                    onClick={() => {
+                      if (typeof window !== 'undefined' && (window as any).ym) {
+                        (window as any).ym(105605669, 'reachGoal', 'сlick_phone');
+                      }
+                    }}
+                  >
+                    +7 (495) 147-13-62
+                  </a>
                 </div>
                 <div className="flex items-start gap-2">
                   <Icon name="MapPin" size={16} className="mt-1 flex-shrink-0" />

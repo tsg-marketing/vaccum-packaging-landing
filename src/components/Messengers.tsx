@@ -25,7 +25,15 @@ export default function Messengers() {
               </a>
             </li>
             <li className="messengers-item">
-              <a href="tel:+74951471362" title="Позвонить">
+              <a 
+                href="tel:+74951471362" 
+                title="Позвонить"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).ym) {
+                    (window as any).ym(105605669, 'reachGoal', 'сlick_phone');
+                  }
+                }}
+              >
                 <Icon name="Phone" size={32} className="text-orange-500" />
               </a>
             </li>

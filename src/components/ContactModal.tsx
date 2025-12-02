@@ -31,6 +31,9 @@ export const ContactModal = ({ open, onOpenChange, title = 'Получить к�
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (typeof window !== 'undefined' && (window as any).ym) {
+      (window as any).ym(105605669, 'reachGoal', 'fos_sent');
+    }
     toast({
       title: "Заявка отправлена!",
       description: "Менеджер свяжется с вами в ближайшее время",
