@@ -191,7 +191,7 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
               <img
                 src={product.image_url}
                 alt={product.name}
-                className="w-full h-64 object-cover rounded-t-lg"
+                className="w-full h-64 object-contain rounded-t-lg bg-white"
                 loading="lazy"
               />
             ) : (
