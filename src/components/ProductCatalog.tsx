@@ -79,7 +79,28 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
   }, [activeCategory]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const CACHE_KEY = 'productsCache';
+    const CACHE_TIMESTAMP_KEY = 'productsCacheTimestamp';
+    const CACHE_DURATION = 6 * 60 * 60 * 1000;
+
+    const fetchProducts = async (useCache = true) => {
+      if (useCache) {
+        const cachedData = localStorage.getItem(CACHE_KEY);
+        const cacheTimestamp = localStorage.getItem(CACHE_TIMESTAMP_KEY);
+        const now = Date.now();
+
+        if (cachedData && cacheTimestamp && now - parseInt(cacheTimestamp) < CACHE_DURATION) {
+          try {
+            const parsed = JSON.parse(cachedData);
+            setProducts(parsed);
+            setLoading(false);
+            return;
+          } catch (err) {
+            console.error('Ошибка парсинга кеша:', err);
+          }
+        }
+      }
+
       try {
         const response = await fetch('https://functions.poehali.dev/2d5f9278-9fd7-4ee8-86c0-e8b7c096608c');
         
@@ -89,6 +110,9 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
         
         const data = await response.json();
         setProducts(data.products || []);
+        
+        localStorage.setItem(CACHE_KEY, JSON.stringify(data.products || []));
+        localStorage.setItem(CACHE_TIMESTAMP_KEY, Date.now().toString());
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Ошибка загрузки');
       } finally {
@@ -96,14 +120,14 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
       }
     };
 
-    fetchProducts();
+    fetchProducts(true);
 
     const syncProducts = async () => {
       try {
         await fetch('https://functions.poehali.dev/c616cc5e-d577-4461-8ce7-6f6d5fbfd2f9', {
           method: 'POST'
         });
-        fetchProducts();
+        await fetchProducts(false);
       } catch (err) {
         console.error('Ошибка синхронизации:', err);
       }
