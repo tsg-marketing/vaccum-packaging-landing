@@ -204,9 +204,12 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
           <CardContent className="flex-1 p-4">
             <h3 className="font-semibold text-lg mb-3 line-clamp-2">{product.name}</h3>
             {product.specifications && Object.keys(product.specifications).length > 0 && (
-              <div className="mb-3 space-y-1">
-                {Object.entries(product.specifications).slice(0, 4).map(([key, value]) => (
-                  <div key={key} className="text-xs text-muted-foreground flex items-start gap-1">
+              <div className="mb-3 space-y-1.5">
+                {Object.entries(product.specifications)
+                  .filter(([key]) => !['Бренд', 'Название бренда', 'Видео (ссылка)'].includes(key))
+                  .slice(0, 4)
+                  .map(([key, value]) => (
+                  <div key={key} className="text-sm text-muted-foreground flex items-start gap-1">
                     <Icon name="Dot" size={16} className="flex-shrink-0 mt-0.5" />
                     <span className="line-clamp-1">
                       <span className="font-medium">{key}:</span> {value}
