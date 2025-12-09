@@ -12,6 +12,7 @@ interface Product {
   price: number;
   image_url: string | null;
   category_id: number;
+  specifications: Record<string, string>;
 }
 
 interface ProductCatalogProps {
@@ -201,7 +202,19 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
             )}
           </CardHeader>
           <CardContent className="flex-1 p-4">
-            <h3 className="font-semibold text-lg mb-2 line-clamp-2">{product.name}</h3>
+            <h3 className="font-semibold text-lg mb-3 line-clamp-2">{product.name}</h3>
+            {product.specifications && Object.keys(product.specifications).length > 0 && (
+              <div className="mb-3 space-y-1">
+                {Object.entries(product.specifications).slice(0, 4).map(([key, value]) => (
+                  <div key={key} className="text-xs text-muted-foreground flex items-start gap-1">
+                    <Icon name="Dot" size={16} className="flex-shrink-0 mt-0.5" />
+                    <span className="line-clamp-1">
+                      <span className="font-medium">{key}:</span> {value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
             <p className="text-2xl font-bold text-primary">{formatPrice(product.price)}</p>
           </CardContent>
           <CardFooter className="p-4 pt-0">

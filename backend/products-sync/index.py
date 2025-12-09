@@ -72,13 +72,25 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                             price = float(price_elem.text)
                             image_url = picture_elem.text if picture_elem is not None else None
                             
-                            products_data.append((external_id, name, price, image_url, category_id))
+                            specifications = {}
+                            for param in offer.findall('param'):
+                                param_name = param.get('name')
+                                if param_name and param_name != 'Картинки товара' and param.text:
+                                    unit = param.get('unit')
+                                    if unit:
+                                        specifications[param_name] = f"{param.text} {unit}"
+                                    else:
+                                        specifications[param_name] = param.text
+                            
+                            specs_json = json.dumps(specifications, ensure_ascii=False) if specifications else None
+                            
+                            products_data.append((external_id, name, price, image_url, category_id, specs_json))
             
             if products_data:
                 execute_values(
                     cur,
                     """
-                    INSERT INTO products (external_id, name, price, image_url, category_id, updated_at)
+                    INSERT INTO products (external_id, name, price, image_url, category_id, specifications, updated_at)
                     VALUES %s
                     ON CONFLICT (external_id) 
                     DO UPDATE SET 
@@ -86,10 +98,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                         price = EXCLUDED.price,
                         image_url = EXCLUDED.image_url,
                         category_id = EXCLUDED.category_id,
+                        specifications = EXCLUDED.specifications,
                         updated_at = CURRENT_TIMESTAMP
                     """,
                     products_data,
-                    template="(%s, %s, %s, %s, %s, CURRENT_TIMESTAMP)"
+                    template="(%s, %s, %s, %s, %s, %s::jsonb, CURRENT_TIMESTAMP)"
                 )
             
             cur.execute(
