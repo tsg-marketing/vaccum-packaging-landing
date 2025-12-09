@@ -425,8 +425,8 @@ const Index = () => {
             </div>
             <div className="relative animate-scale-in hidden md:block">
               <img
-                src="https://cdn.poehali.dev/files/9c7ca575-7502-41a8-bb53-38a599d3d21b.png"
-                alt="Вакуумный упаковщик HVC-400/2T"
+                src="https://cdn.poehali.dev/files/dvuhkamerniy_vakuumniy_upakovshik_DZ-410_2SB..jpg"
+                alt="Двухкамерный вакуумный упаковщик DZ-410/2SB"
                 className="rounded-lg shadow-2xl w-full bg-white p-8"
               />
               <div className="absolute -bottom-6 -right-6 bg-accent text-white p-4 md:p-6 rounded-lg shadow-xl">
