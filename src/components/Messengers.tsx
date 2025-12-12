@@ -38,7 +38,15 @@ export default function Messengers() {
               </a>
             </li>
             <li className="messengers-item">
-              <a href="mailto:info@example.com" title="Email">
+              <a 
+                href="mailto:vacuum@t-sib.ru" 
+                title="Email"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).ym) {
+                    (window as any).ym(105605669, 'reachGoal', 'click_email');
+                  }
+                }}
+              >
                 <Icon name="Mail" size={32} className="text-red-500" />
               </a>
             </li>

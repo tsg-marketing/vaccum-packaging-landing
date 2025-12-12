@@ -851,6 +851,11 @@ const Index = () => {
                   <a 
                     href="mailto:vacuum@t-sib.ru" 
                     className="text-white/70 hover:text-white transition-colors"
+                    onClick={() => {
+                      if (typeof window !== 'undefined' && (window as any).ym) {
+                        (window as any).ym(105605669, 'reachGoal', 'click_email');
+                      }
+                    }}
                   >
                     vacuum@t-sib.ru
                   </a>
