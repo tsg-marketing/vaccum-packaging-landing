@@ -428,6 +428,9 @@ const Index = () => {
                 src="https://cdn.poehali.dev/files/dvuhkamerniy_vakuumniy_upakovshik_DZ-410_2SB..jpg"
                 alt="Двухкамерный вакуумный упаковщик DZ-410/2SB"
                 className="rounded-lg shadow-2xl w-full bg-white p-8"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
               />
               <div className="absolute -bottom-6 -right-6 bg-accent text-white p-4 md:p-6 rounded-lg shadow-xl">
                 <div className="text-xl md:text-2xl font-bold whitespace-nowrap">До 3-х лет</div>
@@ -446,7 +449,7 @@ const Index = () => {
               <Card key={idx} className={`text-center hover:shadow-lg transition-shadow ${advantagesAnim.isVisible ? 'animate-scale-in' : 'opacity-0'}`} style={{ animationDelay: `${idx * 0.05}s` }}>
                 <CardContent className="pt-6">
                   <div className="w-16 h-16 mx-auto mb-4 overflow-hidden rounded-lg">
-                    <img src={adv.image} alt={adv.title} className="w-full h-full object-cover" />
+                    <img src={adv.image} alt={adv.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                   </div>
                   <h3 className="font-semibold mb-2 text-base sm:text-lg">{adv.title}</h3>
                   <p className="text-sm sm:text-base text-muted-foreground">{adv.desc}</p>

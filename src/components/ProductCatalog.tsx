@@ -66,6 +66,25 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
   }, [filteredProducts, isMobile, showAll]);
 
   useEffect(() => {
+    const preloadImages = () => {
+      const imagesToPreload = displayProducts.slice(0, 6);
+      imagesToPreload.forEach(product => {
+        if (product.image_url) {
+          const link = document.createElement('link');
+          link.rel = 'preload';
+          link.as = 'image';
+          link.href = product.image_url;
+          document.head.appendChild(link);
+        }
+      });
+    };
+    
+    if (displayProducts.length > 0) {
+      preloadImages();
+    }
+  }, [displayProducts]);
+
+  useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
@@ -218,6 +237,8 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
                 alt={product.name}
                 className="w-full h-64 object-contain rounded-t-lg bg-white"
                 loading="lazy"
+                decoding="async"
+                fetchPriority="low"
               />
             ) : (
               <div className="w-full h-64 bg-muted flex items-center justify-center rounded-t-lg">
