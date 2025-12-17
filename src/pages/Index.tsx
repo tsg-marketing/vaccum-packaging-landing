@@ -885,18 +885,7 @@ const Index = () => {
       </footer>
 
       <ContactModal open={modalOpen} onOpenChange={setModalOpen} />
-      <PopupOffer onSubmit={(phone) => {
-        const popupFormData = { 
-          ...formData, 
-          phone, 
-          comment: 'Заявка из всплывающего окна: подбор вакуумного оборудования' 
-        };
-        handleSubmit(new Event('submit') as any, popupFormData);
-        toast({
-          title: "Заявка отправлена!",
-          description: "Мы свяжемся с вами в ближайшее время",
-        });
-      }} />
+      <PopupOffer />
       {/* <Messengers /> */}
     </div>
   );
