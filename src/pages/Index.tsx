@@ -23,6 +23,7 @@ const Index = () => {
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [modalOpen, setModalOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [popupOpen, setPopupOpen] = useState(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -829,8 +830,14 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-4">Каталог</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#catalog" className="text-white/70 hover:text-white transition-colors">Каталог оборудования</a></li>
-                <li><a href="https://t-sib.ru/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">Смотреть весь каталог</a></li>
+                <li>
+                  <button 
+                    onClick={() => setPopupOpen(true)}
+                    className="text-white/70 hover:text-white transition-colors text-left"
+                  >
+                    Подобрать оборудование
+                  </button>
+                </li>
               </ul>
             </div>
             <div>
@@ -880,21 +887,13 @@ const Index = () => {
             <p className="text-xs">
               Информация, представленная на сайте, не является публичной офертой. Данный интернет-сайт носит исключительно информационный характер и не является публичной офертой, определяемой положениями ч. 2 ст. 437 Гражданского кодекса РФ.
             </p>
-            <button
-              onClick={() => {
-                localStorage.removeItem('hasSeenPopup');
-                window.location.reload();
-              }}
-              className="text-xs text-white/40 hover:text-white/60 transition-colors underline mt-2"
-            >
-              Тест: Показать попап снова
-            </button>
+
           </div>
         </div>
       </footer>
 
       <ContactModal open={modalOpen} onOpenChange={setModalOpen} />
-      <PopupOffer />
+      <PopupOffer isOpen={popupOpen} onOpenChange={setPopupOpen} />
       {/* <Messengers /> */}
     </div>
   );

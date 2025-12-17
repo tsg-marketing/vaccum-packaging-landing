@@ -7,23 +7,33 @@ import { Textarea } from './ui/textarea';
 import Icon from './ui/icon';
 import { useToast } from '@/hooks/use-toast';
 
-export default function PopupOffer() {
+interface PopupOfferProps {
+  isOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+
+export default function PopupOffer({ isOpen: controlledIsOpen, onOpenChange }: PopupOfferProps = {}) {
   const { toast } = useToast();
-  const [isOpen, setIsOpen] = useState(false);
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', phone: '', message: 'Подбор вакуумного оборудования', url: '' });
 
+  const isOpen = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
+  const setIsOpen = onOpenChange || setInternalIsOpen;
+
   useEffect(() => {
+    if (controlledIsOpen !== undefined) return;
+    
     const hasSeenPopup = localStorage.getItem('hasSeenPopup');
     
     if (!hasSeenPopup) {
       const timer = setTimeout(() => {
-        setIsOpen(true);
+        setInternalIsOpen(true);
         localStorage.setItem('hasSeenPopup', 'true');
       }, 30000);
 
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [controlledIsOpen]);
 
   const formatPhone = (value: string) => {
     const digits = value.replace(/\D/g, '');
