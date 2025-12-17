@@ -3,7 +3,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
-import { Textarea } from './ui/textarea';
 import Icon from './ui/icon';
 import { useToast } from '@/hooks/use-toast';
 
@@ -129,17 +128,6 @@ export default function PopupOffer({ isOpen: controlledIsOpen, onOpenChange }: P
                   onChange={(e) => setFormData({ ...formData, phone: formatPhone(e.target.value) })}
                   placeholder="+7 (999) 999-99-99"
                   required
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="popup-message">Сообщение</Label>
-                <Textarea
-                  id="popup-message"
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Опишите вашу задачу"
-                  rows={2}
                 />
               </div>
 
