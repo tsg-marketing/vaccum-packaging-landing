@@ -880,6 +880,15 @@ const Index = () => {
             <p className="text-xs">
               Информация, представленная на сайте, не является публичной офертой. Данный интернет-сайт носит исключительно информационный характер и не является публичной офертой, определяемой положениями ч. 2 ст. 437 Гражданского кодекса РФ.
             </p>
+            <button
+              onClick={() => {
+                localStorage.removeItem('hasSeenPopup');
+                window.location.reload();
+              }}
+              className="text-xs text-white/40 hover:text-white/60 transition-colors underline mt-2"
+            >
+              Тест: Показать попап снова
+            </button>
           </div>
         </div>
       </footer>
