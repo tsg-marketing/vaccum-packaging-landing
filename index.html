@@ -54,6 +54,33 @@
 </head>
 
 <body>
+<script>
+// Принудительная очистка кэша при обновлении версии
+(function() {
+  const APP_VERSION = '2025011501';
+  const STORAGE_KEY = 'app_version';
+  const currentVersion = localStorage.getItem(STORAGE_KEY);
+  
+  if (currentVersion !== APP_VERSION) {
+    // Очистка всех кэшей
+    if ('caches' in window) {
+      caches.keys().then(function(names) {
+        names.forEach(function(name) {
+          caches.delete(name);
+        });
+      });
+    }
+    
+    // Сохранение новой версии
+    localStorage.setItem(STORAGE_KEY, APP_VERSION);
+    
+    // Перезагрузка страницы без кэша
+    if (currentVersion !== null) {
+      window.location.reload(true);
+    }
+  }
+})();
+</script>
 <div id="root"></div>
 <script type="module" src="/src/main.tsx?v=2025011501"></script>
 
