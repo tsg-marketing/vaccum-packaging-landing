@@ -16,6 +16,7 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import ProductCatalog from '@/components/ProductCatalog';
 import Messengers from '@/components/Messengers';
 import PopupOffer from '@/components/PopupOffer';
+import AboutSection from '@/components/AboutSection';
 
 const Index = () => {
   const { toast } = useToast();
@@ -797,6 +798,8 @@ const Index = () => {
 
         </div>
       </section>
+
+      <AboutSection />
 
       <section id="faq" ref={faqAnim.ref as React.RefObject<HTMLElement>} className="py-16 bg-muted/30">
         <div className="container mx-auto px-4 max-w-3xl">
