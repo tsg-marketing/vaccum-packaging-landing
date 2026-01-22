@@ -1,0 +1,16 @@
+{
+  "tests": [
+    {
+      "name": "Load products from YML feed",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "products": "array",
+        "count": "number",
+        "timestamp": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

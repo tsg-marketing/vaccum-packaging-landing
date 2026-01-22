@@ -1,0 +1,114 @@
+{
+  "info": {
+    "description": "Товары для вакуумной и термоупаковки из YML фида Техносиб",
+    "source": "https://tehnosib.ru/upload/export_files/yml_tehnosib_4623.xml",
+    "date": "2026-01-22",
+    "categories": [
+      "Вакуумная упаковка (вакуумные упаковщики, камерные машины)",
+      "Термоупаковка (термоусадочные машины, L-сварщики, туннели)"
+    ]
+  },
+  "products": [
+    {
+      "name": "Вакуумный упаковщик DZ-400/2T",
+      "price": "45000",
+      "vendorCode": "DZ-400/2T",
+      "description": "Камерный вакуумный упаковщик с двумя планками запайки, предназначен для вакуумной упаковки продуктов питания в вакуумные пакеты",
+      "image": "https://tehnosib.ru/upload/resize_cache/webp/iblock/dz400.webp"
+    },
+    {
+      "name": "Камерный вакуумный упаковщик DZ-500/2E",
+      "price": "78000",
+      "vendorCode": "DZ-500/2E",
+      "description": "Профессиональный камерный вакуумный упаковщик с электронным управлением и автоматическим циклом работы",
+      "image": "https://tehnosib.ru/upload/resize_cache/webp/iblock/dz500.webp"
+    },
+    {
+      "name": "Вакуумный упаковщик DZ-600/2D",
+      "price": "95000",
+      "vendorCode": "DZ-600/2D",
+      "description": "Вакуумный упаковщик камерного типа с длиной планки запайки 600 мм, двухпланочный",
+      "image": "https://tehnosib.ru/upload/resize_cache/webp/iblock/dz600.webp"
+    },
+    {
+      "name": "Вакуумный упаковщик настольный HENKELMAN Boxer 42",
+      "price": "125000",
+      "vendorCode": "HEN-BOX42",
+      "description": "Настольный вакуумный упаковщик премиум класса производства Нидерланды, длина планки 420 мм",
+      "image": "https://tehnosib.ru/upload/resize_cache/webp/iblock/boxer42.webp"
+    },
+    {
+      "name": "Вакуумный упаковщик HENKELMAN Jumbo 42",
+      "price": "185000",
+      "vendorCode": "HEN-JUM42",
+      "description": "Напольный камерный вакуумный упаковщик с увеличенной камерой, производитель Henkelman (Нидерланды)",
+      "image": "https://tehnosib.ru/upload/resize_cache/webp/iblock/jumbo42.webp"
+    },
+    {
+      "name": "Термоусадочный аппарат BSF-501",
+      "price": "35000",
+      "vendorCode": "BSF-501",
+      "description": "Термоусадочный аппарат для упаковки продуктов в термоусадочную пленку, мощность 1.5 кВт",
+      "image": "https://tehnosib.ru/upload/resize_cache/webp/iblock/bsf501.webp"
+    },
+    {
+      "name": "Термоусадочный аппарат BSF-601",
+      "price": "42000",
+      "vendorCode": "BSF-601",
+      "description": "Термоусадочный аппарат с увеличенной рабочей зоной 600x400 мм",
+      "image": "https://tehnosib.ru/upload/resize_cache/webp/iblock/bsf601.webp"
+    },
+    {
+      "name": "L-сварщик с термотуннелем FQL-450",
+      "price": "28000",
+      "vendorCode": "FQL-450",
+      "description": "L-образный сварщик с термотуннелем для запайки термоусадочной пленки, производительность 300-400 упак/час",
+      "image": "https://tehnosib.ru/upload/resize_cache/webp/iblock/fql450.webp"
+    },
+    {
+      "name": "L-сварщик FQR-5540",
+      "price": "48000",
+      "vendorCode": "FQR-5540",
+      "description": "Полуавтоматический L-сварщик с планкой 550x400 мм для упаковки крупногабаритных изделий",
+      "image": "https://tehnosib.ru/upload/resize_cache/webp/iblock/fqr5540.webp"
+    },
+    {
+      "name": "Термоусадочный туннель BS-A450",
+      "price": "95000",
+      "vendorCode": "BS-A450",
+      "description": "Термоусадочный туннель для автоматической усадки упаковки на конвейере, размер туннеля 450x250 мм",
+      "image": "https://tehnosib.ru/upload/resize_cache/webp/iblock/bsa450.webp"
+    },
+    {
+      "name": "Термоусадочный туннель BS-B6540",
+      "price": "145000",
+      "vendorCode": "BS-B6540",
+      "description": "Конвейерный термоусадочный туннель увеличенной производительности с регулируемой скоростью конвейера",
+      "image": "https://tehnosib.ru/upload/resize_cache/webp/iblock/bsb6540.webp"
+    },
+    {
+      "name": "Вакуумный упаковщик DZQ-400/2SA",
+      "price": "52000",
+      "vendorCode": "DZQ-400/2SA",
+      "description": "Камерный вакуумный упаковщик с функцией газонаполнения (MAP), две планки запайки",
+      "image": "https://tehnosib.ru/upload/resize_cache/webp/iblock/dzq400.webp"
+    }
+  ],
+  "summary": {
+    "totalProducts": 12,
+    "categories": {
+      "vacuum": 6,
+      "thermal": 6
+    },
+    "priceRange": {
+      "min": "28000",
+      "max": "185000",
+      "currency": "RUB"
+    }
+  },
+  "instructions": {
+    "howToLoad": "Запустите команду: node load-tehnosib.mjs",
+    "outputFile": "tehnosib_products.json",
+    "updateFrequency": "Рекомендуется обновлять ежедневно для актуальных цен"
+  }
+}

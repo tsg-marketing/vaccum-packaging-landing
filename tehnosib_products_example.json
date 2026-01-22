@@ -1,0 +1,113 @@
+[
+  {
+    "name": "Вакуумный упаковщик DZ-400/2T",
+    "price": "45000",
+    "vendorCode": "DZ-400/2T",
+    "description": "Камерный вакуумный упаковщик с двумя планками запайки, предназначен для вакуумной упаковки продуктов питания",
+    "image": "https://tehnosib.ru/upload/images/dz400.jpg",
+    "images": [
+      "https://tehnosib.ru/upload/images/dz400.jpg",
+      "https://tehnosib.ru/upload/images/dz400_2.jpg"
+    ],
+    "categoryId": "42",
+    "categoryName": "Вакуумные упаковщики",
+    "params": {
+      "Мощность": "0.8 кВт",
+      "Производительность": "4-6 циклов/мин",
+      "Длина планки": "400 мм",
+      "Размер камеры": "460x410x110 мм"
+    }
+  },
+  {
+    "name": "Камерный вакуумный упаковщик DZ-500/2E",
+    "price": "78000",
+    "vendorCode": "DZ-500/2E",
+    "description": "Профессиональный камерный вакуумный упаковщик с электронным управлением",
+    "image": "https://tehnosib.ru/upload/images/dz500.jpg",
+    "images": [
+      "https://tehnosib.ru/upload/images/dz500.jpg"
+    ],
+    "categoryId": "42",
+    "categoryName": "Вакуумные упаковщики",
+    "params": {
+      "Мощность": "1.2 кВт",
+      "Производительность": "6-8 циклов/мин",
+      "Длина планки": "500 мм",
+      "Тип управления": "Электронное"
+    }
+  },
+  {
+    "name": "Термоусадочный аппарат BSF-501",
+    "price": "35000",
+    "vendorCode": "BSF-501",
+    "description": "Термоусадочный аппарат для упаковки продуктов в термоусадочную пленку",
+    "image": "https://tehnosib.ru/upload/images/bsf501.jpg",
+    "images": [
+      "https://tehnosib.ru/upload/images/bsf501.jpg",
+      "https://tehnosib.ru/upload/images/bsf501_2.jpg"
+    ],
+    "categoryId": "45",
+    "categoryName": "Термоупаковочное оборудование",
+    "params": {
+      "Мощность": "1.5 кВт",
+      "Размер рабочей зоны": "500x350 мм",
+      "Температура": "0-300°C"
+    }
+  },
+  {
+    "name": "L-сварщик FQL-450",
+    "price": "28000",
+    "vendorCode": "FQL-450",
+    "description": "L-образный сварщик с термотуннелем для запайки термоусадочной пленки",
+    "image": "https://tehnosib.ru/upload/images/fql450.jpg",
+    "images": [
+      "https://tehnosib.ru/upload/images/fql450.jpg"
+    ],
+    "categoryId": "45",
+    "categoryName": "Термоупаковочное оборудование",
+    "params": {
+      "Размер планки": "450x450 мм",
+      "Толщина пленки": "до 0.06 мм",
+      "Производительность": "300-400 упак/час"
+    }
+  },
+  {
+    "name": "Вакуумный настольный упаковщик HENKELMAN Boxer 42",
+    "price": "125000",
+    "vendorCode": "HEN-BOX42",
+    "description": "Настольный вакуумный упаковщик премиум класса от голландского производителя Henkelman",
+    "image": "https://tehnosib.ru/upload/images/boxer42.jpg",
+    "images": [
+      "https://tehnosib.ru/upload/images/boxer42.jpg",
+      "https://tehnosib.ru/upload/images/boxer42_2.jpg",
+      "https://tehnosib.ru/upload/images/boxer42_3.jpg"
+    ],
+    "categoryId": "42",
+    "categoryName": "Вакуумные упаковщики",
+    "params": {
+      "Производитель": "Henkelman",
+      "Страна": "Нидерланды",
+      "Длина планки": "420 мм",
+      "Насос": "20 м³/ч",
+      "Мощность": "0.9 кВт"
+    }
+  },
+  {
+    "name": "Термоусадочный туннель BS-A450",
+    "price": "95000",
+    "vendorCode": "BS-A450",
+    "description": "Термоусадочный туннель для автоматической усадки упаковки на конвейере",
+    "image": "https://tehnosib.ru/upload/images/bsa450.jpg",
+    "images": [
+      "https://tehnosib.ru/upload/images/bsa450.jpg"
+    ],
+    "categoryId": "45",
+    "categoryName": "Термоупаковочное оборудование",
+    "params": {
+      "Размер туннеля": "450x250 мм",
+      "Скорость конвейера": "0-12 м/мин",
+      "Мощность": "3.5 кВт",
+      "Тип": "Конвейерный"
+    }
+  }
+]

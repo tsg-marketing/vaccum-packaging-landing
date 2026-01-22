@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Просмотр товаров Техносиб</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #2563eb;
+        }
+        
+        .info {
+            background: #e0f2fe;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2563eb;
+        }
+        
+        .controls {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
+        }
+        
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+        
+        .btn-secondary.active {
+            background: #2563eb;
+            color: white;
+        }
+        
+        #stats {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #f3f4f6;
+        }
+        
+        .product-content {
+            padding: 15px;
+        }
+        
+        .product-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            min-height: 44px;
+        }
+        
+        .product-category {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+        
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .product-code {
+            font-size: 12px;
+            color: #6b7280;
+        }
+        
+        .product-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+        
+        .product-description {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: #6b7280;
+        }
+        
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏭 Каталог Техносиб - Упаковочное оборудование</h1>
+            <p style="color: #6b7280; margin-top: 5px;">
+                Актуальные цены на оборудование для вакуумной и термоупаковки
+            </p>
+        </header>
+        
+        <div class="info">
+            <strong>📋 Инструкция:</strong><br>
+            1. Нажмите "Загрузить товары" для загрузки данных из фида<br>
+            2. Или загрузите файл tehnosib_products.json, если он уже существует<br>
+            3. Используйте фильтры для просмотра нужных категорий
+        </div>
+        
+        <div class="controls">
+            <button class="btn-primary" onclick="loadFromAPI()">🔄 Загрузить товары</button>
+            <input type="file" id="fileInput" accept=".json" style="display: none" onchange="loadFromFile(event)">
+            <button class="btn-primary" onclick="document.getElementById('fileInput').click()">📁 Загрузить из файла</button>
+            
+            <div style="flex-grow: 1"></div>
+            
+            <button class="btn-secondary active" data-filter="all" onclick="filterProducts('all')">Все</button>
+            <button class="btn-secondary" data-filter="vacuum" onclick="filterProducts('vacuum')">Вакуумная</button>
+            <button class="btn-secondary" data-filter="thermal" onclick="filterProducts('thermal')">Термоупаковка</button>
+        </div>
+        
+        <div id="stats" style="display: none;">
+            <strong>Статистика:</strong> <span id="statsText"></span>
+        </div>
+        
+        <div id="error" class="error" style="display: none;"></div>
+        <div id="loading" class="loading" style="display: none;">Загрузка данных...</div>
+        <div id="products" class="products-grid"></div>
+    </div>
+    
+    <script>
+        let allProducts = [];
+        let currentFilter = 'all';
+        
+        async function loadFromAPI() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('error').style.display = 'none';
+            
+            try {
+                const response = await fetch('https://tehnosib.ru/upload/export_files/yml_tehnosib_4623.xml');
+                const xmlText = await response.text();
+                const products = parseXML(xmlText);
+                allProducts = products;
+                displayProducts(products);
+                document.getElementById('loading').style.display = 'none';
+            } catch (error) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error').textContent = 'Ошибка загрузки: ' + error.message + '. Попробуйте загрузить файл tehnosib_products.json вручную.';
+            }
+        }
+        
+        function loadFromFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const products = JSON.parse(e.target.result);
+                    allProducts = products;
+                    displayProducts(products);
+                    document.getElementById('error').style.display = 'none';
+                } catch (error) {
+                    document.getElementById('error').style.display = 'block';
+                    document.getElementById('error').textContent = 'Ошибка чтения файла: ' + error.message;
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        function parseXML(xmlString) {
+            const products = [];
+            const categories = {};
+            
+            // Извлекаем категории
+            const categoryRegex = /<category[^>]*id="([^"]*)"[^>]*>([^<]*)<\/category>/g;
+            let match;
+            while ((match = categoryRegex.exec(xmlString)) !== null) {
+                categories[match[1]] = match[2];
+            }
+            
+            // Ключевые слова
+            const keywords = ['вакуум', 'вакуумный', 'камерн', 'термо', 'усадочн', 'сварщик', 'туннель'];
+            
+            // Извлекаем товары
+            const offerRegex = /<offer[^>]*>([\s\S]*?)<\/offer>/g;
+            while ((match = offerRegex.exec(xmlString)) !== null) {
+                const offerContent = match[1];
+                
+                const nameMatch = offerContent.match(/<name><!\[CDATA\[(.*?)\]\]><\/name>/);
+                const priceMatch = offerContent.match(/<price>(.*?)<\/price>/);
+                const vendorCodeMatch = offerContent.match(/<vendorCode>(.*?)<\/vendorCode>/);
+                const descriptionMatch = offerContent.match(/<description><!\[CDATA\[(.*?)\]\]><\/description>/);
+                const categoryIdMatch = offerContent.match(/<categoryId>(.*?)<\/categoryId>/);
+                const pictureMatch = offerContent.match(/<picture>(.*?)<\/picture>/);
+                
+                if (!nameMatch || !priceMatch) continue;
+                
+                const name = nameMatch[1] || '';
+                const categoryName = categories[categoryIdMatch ? categoryIdMatch[1] : ''] || '';
+                const description = descriptionMatch ? descriptionMatch[1] : '';
+                const searchText = (name + ' ' + description + ' ' + categoryName).toLowerCase();
+                
+                if (keywords.some(kw => searchText.includes(kw))) {
+                    products.push({
+                        name,
+                        price: priceMatch[1],
+                        vendorCode: vendorCodeMatch ? vendorCodeMatch[1] : '',
+                        description,
+                        image: pictureMatch ? pictureMatch[1] : '',
+                        categoryName
+                    });
+                }
+            }
+            
+            return products.sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+        }
+        
+        function filterProducts(filter) {
+            currentFilter = filter;
+            
+            // Обновляем кнопки
+            document.querySelectorAll('[data-filter]').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === filter);
+            });
+            
+            // Фильтруем
+            let filtered = allProducts;
+            if (filter === 'vacuum') {
+                filtered = allProducts.filter(p => {
+                    const text = (p.name + ' ' + p.description + ' ' + p.categoryName).toLowerCase();
+                    return text.includes('вакуум') || text.includes('камерн');
+                });
+            } else if (filter === 'thermal') {
+                filtered = allProducts.filter(p => {
+                    const text = (p.name + ' ' + p.description + ' ' + p.categoryName).toLowerCase();
+                    return text.includes('термо') || text.includes('усадочн') || text.includes('сварщик');
+                });
+            }
+            
+            displayProducts(filtered);
+        }
+        
+        function displayProducts(products) {
+            const container = document.getElementById('products');
+            container.innerHTML = '';
+            
+            document.getElementById('stats').style.display = 'block';
+            document.getElementById('statsText').textContent = `Показано товаров: ${products.length}`;
+            
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                
+                card.innerHTML = `
+                    ${product.image ? `<img src="${product.image}" alt="${product.name}" class="product-image" onerror="this.style.display='none'">` : ''}
+                    <div class="product-content">
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-category">${product.categoryName || ''}</div>
+                        <div class="product-meta">
+                            <span class="product-code">Арт: ${product.vendorCode || 'н/д'}</span>
+                            <span class="product-price">${Number(product.price).toLocaleString('ru-RU')} ₽</span>
+                        </div>
+                        ${product.description ? `<p class="product-description">${product.description}</p>` : ''}
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+        
+        // Попытка автозагрузки из локального файла
+        fetch('./tehnosib_products.json')
+            .then(r => r.json())
+            .then(products => {
+                allProducts = products;
+                displayProducts(products);
+            })
+            .catch(() => {
+                console.log('Локальный файл не найден');
+            });
+    </script>
+</body>
+</html>

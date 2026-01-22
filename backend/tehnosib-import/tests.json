@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Load Tehnosib YML feed",
+    "request": {
+      "method": "GET",
+      "path": "/"
+    },
+    "expected": {
+      "statusCode": 200
+    }
+  }
+]
