@@ -1,0 +1,10 @@
+{
+  "tests": [
+    {
+      "name": "Get feed-306 YML",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200
+    }
+  ]
+}

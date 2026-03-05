@@ -53,7 +53,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             
             root = ET.fromstring(xml_data)
             
-            target_categories = {290, 291, 292, 294}
+            target_categories = {290, 291, 292, 294, 306}
             products_data = []
             
             for offer in root.findall('.//offer'):
@@ -66,11 +66,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                         name_elem = offer.find('name')
                         price_elem = offer.find('price')
                         picture_elem = offer.find('picture')
+                        description_elem = offer.find('description')
                         
                         if name_elem is not None and price_elem is not None:
                             name = name_elem.text
                             price = float(price_elem.text)
                             image_url = picture_elem.text if picture_elem is not None else None
+                            description = description_elem.text if description_elem is not None else None
                             
                             specifications = {}
                             for param in offer.findall('param'):
@@ -84,13 +86,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                             
                             specs_json = json.dumps(specifications, ensure_ascii=False) if specifications else None
                             
-                            products_data.append((external_id, name, price, image_url, category_id, specs_json))
+                            products_data.append((external_id, name, price, image_url, category_id, specs_json, description))
             
             if products_data:
                 execute_values(
                     cur,
                     """
-                    INSERT INTO products (external_id, name, price, image_url, category_id, specifications, updated_at)
+                    INSERT INTO products (external_id, name, price, image_url, category_id, specifications, description, updated_at)
                     VALUES %s
                     ON CONFLICT (external_id) 
                     DO UPDATE SET 
@@ -99,10 +101,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                         image_url = EXCLUDED.image_url,
                         category_id = EXCLUDED.category_id,
                         specifications = EXCLUDED.specifications,
+                        description = EXCLUDED.description,
                         updated_at = CURRENT_TIMESTAMP
                     """,
                     products_data,
-                    template="(%s, %s, %s, %s, %s, %s::jsonb, CURRENT_TIMESTAMP)"
+                    template="(%s, %s, %s, %s, %s, %s::jsonb, %s, CURRENT_TIMESTAMP)"
                 )
             
             cur.execute(
