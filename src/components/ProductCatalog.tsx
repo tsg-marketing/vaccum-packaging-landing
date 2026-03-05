@@ -292,8 +292,7 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
 
                       <CardFooter className="p-4 pt-0 flex flex-col gap-2">
                         <Button
-                          className="w-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 text-base font-semibold py-5"
-                          variant="outline"
+                          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-base font-bold py-5 shadow-md transform hover:scale-105 transition-all"
                           onClick={() => setSelectedProduct(product)}
                         >
                           <Icon name="Eye" size={18} className="mr-2" />
