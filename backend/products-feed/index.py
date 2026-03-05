@@ -69,13 +69,16 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
 
     offers = ET.SubElement(shop, 'offers')
     for p in products:
-        offer = ET.SubElement(offers, 'offer', id=str(p['external_id'] or p['id']), available='true')
-        ET.SubElement(offer, 'url').text = f"https://t-sib.ru/catalog/vakuumno-upakovochnoe-oborudovanie/"
+        offer_id = str(p['external_id'] or p['id'])
+        anchor = f"product-{offer_id}"
+        offer = ET.SubElement(offers, 'offer', id=offer_id, available='true')
+        ET.SubElement(offer, 'url').text = f"https://vacuum.t-sib.ru/#{anchor}"
         ET.SubElement(offer, 'price').text = str(int(float(p['price'])))
         ET.SubElement(offer, 'currencyId').text = 'RUR'
         ET.SubElement(offer, 'categoryId').text = str(p['category_id'])
         if p['image_url']:
-            ET.SubElement(offer, 'picture').text = p['image_url']
+            clean_url = p['image_url'].replace(' ', '%20')
+            ET.SubElement(offer, 'picture').text = clean_url
         ET.SubElement(offer, 'name').text = p['name']
 
         specs = p['specifications']

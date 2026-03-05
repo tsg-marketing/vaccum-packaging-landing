@@ -229,7 +229,7 @@ export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
               </div>
             ) : (
               displayProducts.map((product) => (
-        <Card key={product.id} className="flex flex-col hover:shadow-lg transition-shadow">
+        <Card key={product.id} id={`product-${product.external_id || product.id}`} className="flex flex-col hover:shadow-lg transition-shadow">
           <CardHeader className="p-0">
             {product.image_url ? (
               <img
