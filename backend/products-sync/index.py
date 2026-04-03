@@ -49,11 +49,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             feeds = [
                 {
                     'url': 'https://t-sib.ru/bitrix/catalog_export/export_Vvf.xml',
-                    'categories': {290, 291, 292, 294, 306}
+                    'categories': {290, 291, 292, 294, 306, 341, 342, 343, 344}
                 },
                 {
                     'url': 'https://t-sib.ru/upload/catalog.xml',
-                    'categories': {340, 295, 345, 354, 357, 353, 355}
+                    'categories': {340, 295, 345, 354, 357, 353, 355, 341, 342, 343, 344, 483, 490, 491}
                 }
             ]
             
@@ -97,25 +97,36 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                                 
                                 products_data.append((external_id, name, price, image_url, category_id, specs_json, description))
             
+            seen = set()
+            unique_products = []
+            for p in products_data:
+                if p[0] not in seen:
+                    seen.add(p[0])
+                    unique_products.append(p)
+            products_data = unique_products
+
             if products_data:
-                execute_values(
-                    cur,
-                    """
-                    INSERT INTO products (external_id, name, price, image_url, category_id, specifications, description, updated_at)
-                    VALUES %s
-                    ON CONFLICT (external_id) 
-                    DO UPDATE SET 
-                        name = EXCLUDED.name,
-                        price = EXCLUDED.price,
-                        image_url = EXCLUDED.image_url,
-                        category_id = EXCLUDED.category_id,
-                        specifications = EXCLUDED.specifications,
-                        description = EXCLUDED.description,
-                        updated_at = CURRENT_TIMESTAMP
-                    """,
-                    products_data,
-                    template="(%s, %s, %s, %s, %s, %s::jsonb, %s, CURRENT_TIMESTAMP)"
-                )
+                batch_size = 50
+                for i in range(0, len(products_data), batch_size):
+                    batch = products_data[i:i + batch_size]
+                    execute_values(
+                        cur,
+                        """
+                        INSERT INTO products (external_id, name, price, image_url, category_id, specifications, description, updated_at)
+                        VALUES %s
+                        ON CONFLICT (external_id) 
+                        DO UPDATE SET 
+                            name = EXCLUDED.name,
+                            price = EXCLUDED.price,
+                            image_url = EXCLUDED.image_url,
+                            category_id = EXCLUDED.category_id,
+                            specifications = EXCLUDED.specifications,
+                            description = EXCLUDED.description,
+                            updated_at = CURRENT_TIMESTAMP
+                        """,
+                        batch,
+                        template="(%s, %s, %s, %s, %s, %s::jsonb, %s, CURRENT_TIMESTAMP)"
+                    )
             
             cur.execute(
                 "UPDATE feed_sync_log SET sync_completed_at = CURRENT_TIMESTAMP, products_count = %s, status = 'completed' WHERE id = %s",

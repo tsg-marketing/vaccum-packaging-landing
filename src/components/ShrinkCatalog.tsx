@@ -25,16 +25,20 @@ const formatPrice = (price: number): string => {
 };
 
 const CATEGORIES = [
-  { id: 340, name: 'Термоусадочное оборудование' },
+  { id: 343, name: 'Для штучной упаковки' },
+  { id: 341, name: 'Для групповой упаковки' },
+  { id: 342, name: 'Для длинномерной продукции' },
+  { id: 344, name: 'Sleeve-этикетки' },
+  { id: 340, name: 'Прочее оборудование' },
   { id: 295, name: 'Термоусадочные танки' },
-  { id: 345, name: 'Термоформеры' }
+  { id: 345, name: 'Термоформеры' },
 ];
 
 export default function ShrinkCatalog({ onInquiry }: ShrinkCatalogProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeCategory, setActiveCategory] = useState<number>(340);
+  const [activeCategory, setActiveCategory] = useState<number>(343);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [showAll, setShowAll] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -120,7 +124,7 @@ export default function ShrinkCatalog({ onInquiry }: ShrinkCatalogProps) {
       }
 
       try {
-        const response = await fetch('https://functions.poehali.dev/2d5f9278-9fd7-4ee8-86c0-e8b7c096608c?categories=340,295,345');
+        const response = await fetch('https://functions.poehali.dev/2d5f9278-9fd7-4ee8-86c0-e8b7c096608c?categories=340,341,342,343,344,295,345');
         if (!response.ok) throw new Error('Не удалось загрузить товары');
         const data = await response.json();
         const list: Product[] = data.products || [];
@@ -224,9 +228,9 @@ export default function ShrinkCatalog({ onInquiry }: ShrinkCatalogProps) {
         </div>
 
         <Tabs value={activeCategory.toString()} onValueChange={(val) => setActiveCategory(Number(val))} className="w-full">
-          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 mb-8">
-            {CATEGORIES.map(cat => (
-              <TabsTrigger key={cat.id} value={cat.id.toString()} className="text-sm sm:text-base font-semibold">
+          <TabsList className="flex flex-wrap h-auto gap-1 mb-8">
+            {CATEGORIES.filter(cat => (categoryCounts[cat.id] || 0) > 0).map(cat => (
+              <TabsTrigger key={cat.id} value={cat.id.toString()} className="text-sm font-semibold px-3 py-2">
                 {cat.name} ({categoryCounts[cat.id] || 0})
               </TabsTrigger>
             ))}
