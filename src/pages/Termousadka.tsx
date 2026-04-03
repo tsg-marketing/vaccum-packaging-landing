@@ -10,6 +10,7 @@ import { ContactModal } from '@/components/ContactModal';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import Messengers from '@/components/Messengers';
 import ShrinkCatalog from '@/components/ShrinkCatalog';
+import SimpleCatalog from '@/components/SimpleCatalog';
 
 const Termousadka = () => {
   const { toast } = useToast();
@@ -34,6 +35,7 @@ const Termousadka = () => {
   const applicationAnim = useScrollAnimation();
   const signsAnim = useScrollAnimation();
   const consumablesAnim = useScrollAnimation();
+  const accessoriesAnim = useScrollAnimation();
   const serviceAnim = useScrollAnimation();
   const aboutAnim = useScrollAnimation();
   const faqAnim = useScrollAnimation();
@@ -471,10 +473,38 @@ const Termousadka = () => {
             </h2>
           </div>
           <div className={`transition-all duration-700 ${consumablesAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
-            <div className="border-2 border-dashed border-border rounded-2xl p-12 text-center">
-              <Icon name="Scissors" size={48} className="text-muted-foreground/50 mx-auto mb-4" />
-              <p className="text-lg text-muted-foreground">Информация о расходных материалах скоро появится</p>
-            </div>
+            <SimpleCatalog
+              categories={[
+                { id: 354, name: 'Плёнка ПВХ' },
+                { id: 357, name: 'Плёнка ПОФ' },
+              ]}
+              cacheKey="consumablesProducts"
+              onInquiry={() => setModalOpen(true)}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="accessories"
+        ref={accessoriesAnim.ref as React.RefObject<HTMLElement>}
+        className="py-16 md:py-24"
+      >
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-4">
+              Сопутствующие товары
+            </h2>
+          </div>
+          <div className={`transition-all duration-700 ${accessoriesAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
+            <SimpleCatalog
+              categories={[
+                { id: 353, name: 'Лотки' },
+                { id: 355, name: 'Плёнка ПВД' },
+              ]}
+              cacheKey="accessoriesProducts"
+              onInquiry={() => setModalOpen(true)}
+            />
           </div>
         </div>
       </section>

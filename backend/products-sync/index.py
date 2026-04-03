@@ -53,7 +53,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 },
                 {
                     'url': 'https://t-sib.ru/upload/catalog.xml',
-                    'categories': {340, 295, 345}
+                    'categories': {340, 295, 345, 354, 357, 353, 355}
                 }
             ]
             
