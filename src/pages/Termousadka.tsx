@@ -338,10 +338,10 @@ const Termousadka = () => {
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
                     <Icon name={adv.icon} size={24} className="text-primary" />
                   </div>
-                  <CardTitle className="text-lg font-heading">{adv.title}</CardTitle>
+                  <CardTitle className="text-xl sm:text-2xl font-heading">{adv.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground text-sm">{adv.desc}</p>
+                  <p className="text-muted-foreground text-base sm:text-lg">{adv.desc}</p>
                 </CardContent>
               </Card>
             ))}
@@ -384,12 +384,12 @@ const Termousadka = () => {
               <Card key={index} className="hover:shadow-lg transition-shadow border-border/50">
                 <CardHeader className="pb-3">
                   <div className="text-4xl mb-2">{app.emoji}</div>
-                  <CardTitle className="text-lg font-heading">{app.title}</CardTitle>
+                  <CardTitle className="text-xl sm:text-2xl font-heading">{app.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
                     {app.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <li key={i} className="flex items-start gap-2 text-base sm:text-lg text-muted-foreground">
                         <Icon name="Check" size={16} className="text-primary mt-0.5 shrink-0" />
                         <span>{item}</span>
                       </li>
@@ -416,13 +416,13 @@ const Termousadka = () => {
               Узнали хотя бы 2 пункта? Пора действовать.
             </p>
           </div>
-          <div className={`space-y-4 max-w-3xl mx-auto mt-10 transition-all duration-700 ${signsAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
+          <div className={`grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10 transition-all duration-700 ${signsAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
             {signs.map((sign, index) => (
-              <Card key={index} className={`hover:shadow-lg transition-shadow border-border/50 ${index % 2 === 1 ? 'bg-muted/40' : 'bg-white'}`}>
+              <Card key={index} className="hover:shadow-lg transition-shadow border-border/50">
                 <CardHeader className="pb-3">
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">{sign.emoji}</span>
-                    <CardTitle className="text-lg font-heading">
+                    <CardTitle className="text-xl sm:text-2xl font-heading">
                       <span className="text-primary font-bold mr-2">{index + 1}.</span>
                       {sign.title}
                     </CardTitle>
@@ -431,8 +431,8 @@ const Termousadka = () => {
                 <CardContent>
                   <ul className="space-y-2">
                     {sign.items.map((item, i) => (
-                      <li key={i} className={`flex items-start gap-2 text-sm ${i === sign.items.length - 1 ? 'text-primary font-semibold' : 'text-muted-foreground'}`}>
-                        <Icon name={i === sign.items.length - 1 ? 'CheckCircle' : 'AlertCircle'} size={16} className={`mt-0.5 shrink-0 ${i === sign.items.length - 1 ? 'text-primary' : 'text-accent'}`} />
+                      <li key={i} className={`flex items-start gap-2 text-base sm:text-lg ${i === sign.items.length - 1 ? 'text-primary font-semibold' : 'text-muted-foreground'}`}>
+                        <Icon name={i === sign.items.length - 1 ? 'CheckCircle' : 'AlertCircle'} size={18} className={`mt-0.5 shrink-0 ${i === sign.items.length - 1 ? 'text-primary' : 'text-accent'}`} />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -441,7 +441,7 @@ const Termousadka = () => {
               </Card>
             ))}
           </div>
-          <div className="mt-12 max-w-3xl mx-auto">
+          <div className="mt-12">
             <Card className="bg-gradient-to-r from-primary to-primary/80 text-white border-0 shadow-xl">
               <CardContent className="p-8 text-center">
                 <h3 className="text-2xl font-bold font-heading mb-3">Узнали свою ситуацию?</h3>
