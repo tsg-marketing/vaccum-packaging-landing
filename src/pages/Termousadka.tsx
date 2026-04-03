@@ -11,6 +11,7 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import Messengers from '@/components/Messengers';
 import ShrinkCatalog from '@/components/ShrinkCatalog';
 import SimpleCatalog from '@/components/SimpleCatalog';
+import ShrinkFAQ from '@/components/ShrinkFAQ';
 
 const Termousadka = () => {
   const { toast } = useToast();
@@ -654,10 +655,7 @@ const Termousadka = () => {
             </h2>
           </div>
           <div className={`transition-all duration-700 ${faqAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
-            <div className="border-2 border-dashed border-border rounded-2xl p-12 text-center">
-              <Icon name="HelpCircle" size={48} className="text-muted-foreground/50 mx-auto mb-4" />
-              <p className="text-lg text-muted-foreground">Раздел FAQ скоро будет заполнен</p>
-            </div>
+            <ShrinkFAQ />
           </div>
         </div>
       </section>
