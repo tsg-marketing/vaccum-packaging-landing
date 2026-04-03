@@ -76,7 +76,11 @@ export default function ProductModal({ product, onClose, onInquiry }: ProductMod
 
                 <div className="bg-muted/50 rounded-xl p-4">
                   <p className="text-sm text-muted-foreground mb-1">Цена</p>
-                  <p className="text-3xl font-bold text-primary">{formatPrice(product.price)}</p>
+                  {product.price > 0 ? (
+                    <p className="text-3xl font-bold text-primary">{formatPrice(product.price)}</p>
+                  ) : (
+                    <p className="text-xl font-semibold text-muted-foreground">Цена по запросу</p>
+                  )}
                 </div>
               </div>
 

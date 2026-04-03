@@ -46,47 +46,56 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             log_id = cur.fetchone()[0]
             conn.commit()
             
-            xml_url = 'https://t-sib.ru/bitrix/catalog_export/export_Vvf.xml'
+            feeds = [
+                {
+                    'url': 'https://t-sib.ru/bitrix/catalog_export/export_Vvf.xml',
+                    'categories': {290, 291, 292, 294, 306}
+                },
+                {
+                    'url': 'https://t-sib.ru/upload/catalog.xml',
+                    'categories': {340, 295, 345}
+                }
+            ]
             
-            with urllib.request.urlopen(xml_url, timeout=30) as response:
-                xml_data = response.read()
-            
-            root = ET.fromstring(xml_data)
-            
-            target_categories = {290, 291, 292, 294, 306}
             products_data = []
             
-            for offer in root.findall('.//offer'):
-                category_elem = offer.find('categoryId')
-                if category_elem is not None:
-                    category_id = int(category_elem.text)
-                    
-                    if category_id in target_categories:
-                        external_id = offer.get('id')
-                        name_elem = offer.find('name')
-                        price_elem = offer.find('price')
-                        picture_elem = offer.find('picture')
-                        description_elem = offer.find('description')
+            for feed in feeds:
+                with urllib.request.urlopen(feed['url'], timeout=60) as response:
+                    xml_data = response.read()
+                
+                root = ET.fromstring(xml_data)
+                
+                for offer in root.findall('.//offer'):
+                    category_elem = offer.find('categoryId')
+                    if category_elem is not None and category_elem.text:
+                        category_id = int(category_elem.text)
                         
-                        if name_elem is not None and price_elem is not None:
-                            name = name_elem.text
-                            price = float(price_elem.text)
-                            image_url = picture_elem.text if picture_elem is not None else None
-                            description = description_elem.text if description_elem is not None else None
+                        if category_id in feed['categories']:
+                            external_id = offer.get('id')
+                            name_elem = offer.find('name')
+                            price_elem = offer.find('price')
+                            picture_elem = offer.find('picture')
+                            description_elem = offer.find('description')
                             
-                            specifications = {}
-                            for param in offer.findall('param'):
-                                param_name = param.get('name')
-                                if param_name and param_name != 'Картинки товара' and param.text:
-                                    unit = param.get('unit')
-                                    if unit:
-                                        specifications[param_name] = f"{param.text} {unit}"
-                                    else:
-                                        specifications[param_name] = param.text
-                            
-                            specs_json = json.dumps(specifications, ensure_ascii=False) if specifications else None
-                            
-                            products_data.append((external_id, name, price, image_url, category_id, specs_json, description))
+                            if name_elem is not None:
+                                name = name_elem.text
+                                price = float(price_elem.text) if price_elem is not None and price_elem.text else 0
+                                image_url = picture_elem.text if picture_elem is not None else None
+                                description = description_elem.text if description_elem is not None else None
+                                
+                                specifications = {}
+                                for param in offer.findall('param'):
+                                    param_name = param.get('name')
+                                    if param_name and param_name != 'Картинки товара' and param.text:
+                                        unit = param.get('unit')
+                                        if unit:
+                                            specifications[param_name] = f"{param.text} {unit}"
+                                        else:
+                                            specifications[param_name] = param.text
+                                
+                                specs_json = json.dumps(specifications, ensure_ascii=False) if specifications else None
+                                
+                                products_data.append((external_id, name, price, image_url, category_id, specs_json, description))
             
             if products_data:
                 execute_values(
@@ -120,7 +129,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'body': json.dumps({
                     'status': 'success',
                     'products_synced': len(products_data),
-                    'categories': list(target_categories)
+                    'categories': [c for f in feeds for c in f['categories']]
                 }),
                 'isBase64Encoded': False
             }

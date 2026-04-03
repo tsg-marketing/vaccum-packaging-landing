@@ -9,6 +9,7 @@ import { useToast } from '@/hooks/use-toast';
 import { ContactModal } from '@/components/ContactModal';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import Messengers from '@/components/Messengers';
+import ShrinkCatalog from '@/components/ShrinkCatalog';
 
 const Termousadka = () => {
   const { toast } = useToast();
@@ -355,22 +356,11 @@ const Termousadka = () => {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-4">
               Каталог термоусадочного оборудования
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Раздел наполняется — скоро здесь появятся модели из нашего фида
-            </p>
           </div>
           <div className={`transition-all duration-700 ${catalogAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
-            <div className="border-2 border-dashed border-border rounded-2xl p-12 text-center">
-              <Icon name="Package" size={48} className="text-muted-foreground/50 mx-auto mb-4" />
-              <p className="text-lg text-muted-foreground mb-6">Каталог товаров скоро будет доступен</p>
-              <Button
-                className="bg-accent hover:bg-accent/90 text-lg font-bold px-8 py-6 shadow-lg transform hover:scale-105 transition-all"
-                onClick={() => setModalOpen(true)}
-              >
-                <Icon name="FileText" size={20} className="mr-2" />
-                Запросить каталог
-              </Button>
-            </div>
+            <ShrinkCatalog onInquiry={(productName) => {
+              setModalOpen(true);
+            }} />
           </div>
         </div>
       </section>
