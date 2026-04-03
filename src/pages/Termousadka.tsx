@@ -545,14 +545,100 @@ const Termousadka = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-4">
-              О компании
+              О компании ТЕХНО-СИБ
             </h2>
           </div>
           <div className={`transition-all duration-700 ${aboutAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
-            <div className="border-2 border-dashed border-border rounded-2xl p-12 text-center">
-              <Icon name="Building2" size={48} className="text-muted-foreground/50 mx-auto mb-4" />
-              <p className="text-lg text-muted-foreground">Информация о компании скоро появится</p>
+            <div className="grid sm:grid-cols-3 gap-6 mb-8">
+              <Card className="text-center hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                    <Icon name="Calendar" size={28} className="text-primary" />
+                  </div>
+                  <CardTitle className="text-lg font-heading">25 лет на рынке</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm">Опыт работы с 2001 года</p>
+                </CardContent>
+              </Card>
+              <Card className="text-center hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                    <Icon name="MapPin" size={28} className="text-primary" />
+                  </div>
+                  <CardTitle className="text-lg font-heading">2 города</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm">Офисы в Москве и Новосибирске</p>
+                </CardContent>
+              </Card>
+              <Card className="text-center hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                    <Icon name="Globe" size={28} className="text-primary" />
+                  </div>
+                  <CardTitle className="text-lg font-heading">Проверенные партнёры</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm">Из Европы, России и Китая</p>
+                </CardContent>
+              </Card>
             </div>
+
+            <Card className="shadow-xl">
+              <CardContent className="p-6 sm:p-10">
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  Компания <strong className="text-foreground">«Техно-Сиб»</strong> — надёжный поставщик и партнёр в сфере профессионального пищевого и фасовочно-упаковочного оборудования. Мы работаем с 2001 года и уже 25 лет помогаем предприятиям эффективно оснащать производства и склады, предоставляем сервисное обслуживание, а также реализуем упаковочные и расходные материалы.
+                </p>
+
+                <div className="border-l-4 border-primary bg-primary/5 rounded-r-lg p-4 sm:p-6 my-6">
+                  <p className="text-foreground font-medium">
+                    Мы сотрудничаем с ведущими заводами-производителями Европы, России и Китая, подбирая решения под задачи и бюджет клиента.
+                  </p>
+                </div>
+
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  Собственные офисы продаж, склады, сервисная служба и отлаженная логистика в Москве и Новосибирске позволяют нам оперативно выполнять поставки и поддерживать оборудование на территории России и стран СНГ.
+                </p>
+
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Экспертиза наших специалистов помогает решать задачи любого уровня сложности — от подбора единичной позиции до комплексного оснащения. <strong className="text-foreground">«Техно-Сиб»</strong> всегда предложит оптимальное решение для вашего бизнеса и обеспечит надёжную поддержку на всех этапах работы.
+                </p>
+
+                <div className="border-t border-border mt-8 pt-8">
+                  <div className="grid sm:grid-cols-2 gap-6">
+                    <div className="flex items-start gap-3">
+                      <Icon name="CheckCircle" size={22} className="text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <p className="font-semibold">Комплексные решения</p>
+                        <p className="text-sm text-muted-foreground">От подбора оборудования до сервисного обслуживания</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Icon name="CheckCircle" size={22} className="text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <p className="font-semibold">Быстрая доставка</p>
+                        <p className="text-sm text-muted-foreground">Собственная логистика по всей России и СНГ</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Icon name="CheckCircle" size={22} className="text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <p className="font-semibold">Сервисная поддержка</p>
+                        <p className="text-sm text-muted-foreground">Гарантийное и постгарантийное обслуживание</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Icon name="CheckCircle" size={22} className="text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <p className="font-semibold">Экспертная консультация</p>
+                        <p className="text-sm text-muted-foreground">Помощь в выборе оптимального решения</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
