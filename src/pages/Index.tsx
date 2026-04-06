@@ -933,14 +933,6 @@ const Index = () => {
                     Подобрать оборудование
                   </button>
                 </li>
-                <li>
-                  <a 
-                    href="/termousadka"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    Термоусадочное оборудование
-                  </a>
-                </li>
               </ul>
             </div>
             <div>
