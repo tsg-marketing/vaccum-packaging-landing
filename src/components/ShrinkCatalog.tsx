@@ -240,9 +240,9 @@ export default function ShrinkCatalog({ onInquiry }: ShrinkCatalogProps) {
 
         <Tabs value={activeCategory.toString()} onValueChange={(val) => setActiveCategory(Number(val))} className="w-full">
           <TabsList className="flex flex-wrap h-auto gap-1 mb-8">
-            {CATEGORIES.filter(cat => (categoryCounts[cat.id] || 0) > 0).map(cat => (
+            {CATEGORIES.map(cat => (
               <TabsTrigger key={cat.id} value={cat.id.toString()} className="text-sm font-semibold px-3 py-2">
-                {cat.name} ({categoryCounts[cat.id] || 0})
+                {cat.name} {categoryCounts[cat.id] ? `(${categoryCounts[cat.id]})` : ''}
               </TabsTrigger>
             ))}
           </TabsList>

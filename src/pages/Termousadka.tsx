@@ -360,7 +360,7 @@ const Termousadka = () => {
               Каталог термоусадочного оборудования
             </h2>
           </div>
-          <div className={`transition-all duration-700 ${catalogAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
+          <div>
             <ShrinkCatalog onInquiry={(productName) => {
               setModalOpen(true);
             }} />
