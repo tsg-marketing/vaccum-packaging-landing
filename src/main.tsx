@@ -12,4 +12,10 @@ window.fetch = function(...args) {
   return originalFetch.apply(this, args);
 };
 
+const params = new URLSearchParams(window.location.search);
+const spaRoute = params.get('spa_route');
+if (spaRoute) {
+  window.history.replaceState(null, '', decodeURIComponent(spaRoute));
+}
+
 createRoot(document.getElementById("root")!).render(<App />);
