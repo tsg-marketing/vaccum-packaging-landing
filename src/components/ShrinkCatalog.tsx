@@ -52,6 +52,15 @@ export default function ShrinkCatalog({ onInquiry }: ShrinkCatalogProps) {
     }, {} as Record<number, number>);
   }, [products]);
 
+  useEffect(() => {
+    if (products.length > 0) {
+      const hasProducts = CATEGORIES.find(cat => (categoryCounts[cat.id] || 0) > 0);
+      if (hasProducts && categoryCounts[activeCategory] === 0) {
+        setActiveCategory(hasProducts.id);
+      }
+    }
+  }, [products, categoryCounts]);
+
   const filteredProducts = useMemo(() => {
     return products
       .filter(p => {
@@ -102,9 +111,11 @@ export default function ShrinkCatalog({ onInquiry }: ShrinkCatalogProps) {
   }, [activeCategory]);
 
   useEffect(() => {
-    const CACHE_KEY = 'shrinkProductsCache';
-    const CACHE_TIMESTAMP_KEY = 'shrinkProductsCacheTimestamp';
+    const CACHE_KEY = 'shrinkProductsCache_v2';
+    const CACHE_TIMESTAMP_KEY = 'shrinkProductsCacheTimestamp_v2';
     const CACHE_DURATION = 6 * 60 * 60 * 1000;
+    localStorage.removeItem('shrinkProductsCache');
+    localStorage.removeItem('shrinkProductsCacheTimestamp');
 
     const fetchProducts = async (useCache = true) => {
       if (useCache) {
