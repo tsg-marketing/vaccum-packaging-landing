@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import Icon from '@/components/ui/icon';
+import { getUtmFromCookies } from '@/lib/utm';
 
 interface ContactModalProps {
   open: boolean;
@@ -35,7 +36,7 @@ export const ContactModal = ({ open, onOpenChange, title = 'Получить к�
       (window as any).ym(105605669, 'reachGoal', 'fos_sent');
     }
 
-    const submitData = { ...formData, url: window.location.href };
+    const submitData = { ...formData, url: window.location.href, ...getUtmFromCookies() };
 
     fetch('/api/b24-send-lead.php', {
       method: 'POST',

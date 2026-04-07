@@ -19,6 +19,7 @@ import PopupOffer from '@/components/PopupOffer';
 import AboutSection from '@/components/AboutSection';
 import QuizWidget from '@/components/QuizWidget';
 import QuizSidebar from '@/components/QuizSidebar';
+import { getUtmFromCookies } from '@/lib/utm';
 
 const Index = () => {
   const { toast } = useToast();
@@ -66,7 +67,7 @@ const Index = () => {
       (window as any).ym(105605669, 'reachGoal', 'fos_sent');
     }
 
-    const submitData = { ...formData, url: window.location.href };
+    const submitData = { ...formData, url: window.location.href, ...getUtmFromCookies() };
 
     fetch('/api/b24-send-lead.php', {
       method: 'POST',
@@ -608,6 +609,23 @@ const Index = () => {
               <span className="hidden sm:inline">Получить рекомендации по упаковке вашего продукта</span>
               <span className="sm:hidden">Получить рекомендации</span>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4">Посмотрите как работает наше оборудование</h2>
+          <p className="text-muted-foreground text-center mb-10 max-w-2xl mx-auto">Видео с реальной работой вакуумных упаковщиков на производстве</p>
+          <div className="max-w-3xl mx-auto">
+            <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
+              <iframe
+                src="https://rutube.ru/play/embed/3aa838c3f9ac0f034175ba042f4d88c6/"
+                className="w-full h-full"
+                allowFullScreen
+                allow="clipboard-write; autoplay"
+              />
+            </div>
           </div>
         </div>
       </section>

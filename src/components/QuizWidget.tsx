@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
+import { getUtmFromCookies } from '@/lib/utm';
 
 interface QuizAnswers {
   product: string;
@@ -171,6 +172,7 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
       email: form.email || '',
       comment: buildComment(),
       url: window.location.href,
+      ...getUtmFromCookies(),
     };
 
     fetch('/api/b24-send-lead.php', {
