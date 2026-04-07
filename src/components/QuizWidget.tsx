@@ -200,8 +200,8 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
         <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
           <Icon name="Check" size={32} className="text-green-600" />
         </div>
-        <h3 className="text-xl font-bold mb-2">Спасибо!</h3>
-        <p className="text-muted-foreground">Менеджер подберёт подходящее оборудование и свяжется с вами в ближайшее время</p>
+        <h3 className="text-xl font-bold mb-2">Спасибо за Вашу заявку!</h3>
+        <p className="text-muted-foreground">Менеджер свяжется с Вами в ближайшее время</p>
         {onClose && (
           <Button variant="ghost" className="mt-4" onClick={onClose}>Закрыть</Button>
         )}
