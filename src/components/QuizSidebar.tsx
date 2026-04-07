@@ -36,8 +36,8 @@ export default function QuizSidebar() {
               setAutoOpened(true);
             }
           }}
-          className="fixed right-0 bottom-32 z-50 bg-secondary text-white px-3 py-8 rounded-l-xl shadow-xl hover:bg-secondary/90 transition-all flex flex-col items-center gap-2"
-          style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+          className="fixed right-0 bottom-32 z-50 text-white px-3 py-8 rounded-l-xl shadow-xl hover:opacity-90 transition-all flex flex-col items-center gap-2"
+          style={{ writingMode: 'vertical-rl', textOrientation: 'mixed', backgroundColor: '#1a3a6b' }}
         >
           <Icon name="ClipboardList" size={22} className="rotate-90" />
           <span className="text-base font-bold tracking-wide whitespace-nowrap">Подобрать оборудование</span>
