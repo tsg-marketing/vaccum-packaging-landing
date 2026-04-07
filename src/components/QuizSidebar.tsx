@@ -26,7 +26,7 @@ export default function QuizSidebar() {
   if (dismissed) return null;
 
   return (
-    <div className="fixed right-0 top-1/2 -translate-y-1/2 z-50 flex items-stretch">
+    <>
       {!open && tabVisible && (
         <button
           onClick={() => {
@@ -36,32 +36,32 @@ export default function QuizSidebar() {
               setAutoOpened(true);
             }
           }}
-          className="bg-accent text-white px-3 py-8 rounded-l-xl shadow-xl hover:bg-accent/90 transition-all flex flex-col items-center gap-2"
+          className="fixed right-0 bottom-32 z-50 bg-accent text-white px-3 py-8 rounded-l-xl shadow-xl hover:bg-accent/90 transition-all flex flex-col items-center gap-2"
           style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
         >
-          <Icon name="ClipboardList" size={20} className="rotate-90" />
-          <span className="text-sm font-bold tracking-wide whitespace-nowrap">Подобрать оборудование</span>
+          <Icon name="ClipboardList" size={22} className="rotate-90" />
+          <span className="text-base font-bold tracking-wide whitespace-nowrap">Подобрать оборудование</span>
         </button>
       )}
 
       {open && (
-        <div className="bg-background border border-border shadow-2xl rounded-l-xl w-[360px] max-h-[80vh] overflow-y-auto animate-slide-in-right">
-          <div className="flex items-center justify-between p-4 border-b">
-            <h3 className="font-bold text-base">Подберём оборудование</h3>
-            <div className="flex gap-1">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => setOpen(false)}>
+          <div
+            className="bg-background border border-border shadow-2xl rounded-2xl w-[90vw] max-w-[520px] max-h-[85vh] overflow-y-auto animate-scale-in"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between p-5 border-b">
+              <h3 className="font-bold text-lg">Подберём оборудование</h3>
               <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setOpen(false)}>
-                <Icon name="Minus" size={16} />
-              </Button>
-              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => { setDismissed(true); setTabVisible(false); }}>
-                <Icon name="X" size={16} />
+                <Icon name="X" size={18} />
               </Button>
             </div>
-          </div>
-          <div className="p-4">
-            <QuizWidget variant="sidebar" onClose={() => setDismissed(true)} />
+            <div className="p-5">
+              <QuizWidget variant="modal" onClose={() => { setOpen(false); setDismissed(true); }} />
+            </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
