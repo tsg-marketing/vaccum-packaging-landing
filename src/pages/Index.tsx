@@ -17,6 +17,8 @@ import ProductCatalog from '@/components/ProductCatalog';
 import Messengers from '@/components/Messengers';
 import PopupOffer from '@/components/PopupOffer';
 import AboutSection from '@/components/AboutSection';
+import QuizWidget from '@/components/QuizWidget';
+import QuizSidebar from '@/components/QuizSidebar';
 
 const Index = () => {
   const { toast } = useToast();
@@ -44,6 +46,7 @@ const Index = () => {
   const serviceAnim = useScrollAnimation();
   const testimonialsAnim = useScrollAnimation();
   const faqAnim = useScrollAnimation();
+  const quizAnim = useScrollAnimation();
 
   const formatPhone = (value: string) => {
     const digits = value.replace(/\D/g, '');
@@ -494,6 +497,10 @@ const Index = () => {
                   <Icon name="FileText" size={24} className="mr-3" />
                   <span className="truncate">Получить КП</span>
                 </Button>
+                <Button size="lg" className="bg-white/20 backdrop-blur border-2 border-white/30 text-white hover:bg-white/30 w-full sm:w-auto text-base sm:text-xl font-bold px-8 py-6 transform hover:scale-105 transition-all" onClick={() => document.getElementById('quiz')?.scrollIntoView({ behavior: 'smooth' })}>
+                  <Icon name="ClipboardList" size={24} className="mr-3" />
+                  Подобрать оборудование
+                </Button>
                 <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur border-white/30 border-2 text-white hover:bg-white/20 w-full sm:w-auto text-base sm:text-xl font-bold px-8 py-6 transform hover:scale-105 transition-all" onClick={() => setModalOpen(true)}>
                   <Icon name="Calendar" size={24} className="mr-3" />
                   Записаться в демозал
@@ -770,6 +777,26 @@ const Index = () => {
         </div>
       </section>
 
+      <section
+        id="quiz"
+        ref={quizAnim.ref as React.RefObject<HTMLElement>}
+        className="py-16 md:py-24 bg-gradient-to-br from-primary/5 via-background to-accent/5"
+      >
+        <div className="container mx-auto px-4">
+          <div className={`text-center mb-10 transition-all duration-700 ${quizAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-3">
+              Подберём оборудование
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Ответьте на 6 вопросов, и мы предложим оптимальное решение под ваши задачи
+            </p>
+          </div>
+          <div className={`max-w-3xl mx-auto bg-background rounded-2xl shadow-lg border p-6 md:p-10 transition-all duration-700 ${quizAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
+            <QuizWidget />
+          </div>
+        </div>
+      </section>
+
       <section id="testimonials" ref={testimonialsAnim.ref as React.RefObject<HTMLElement>} className="py-16">
         <div className="container mx-auto px-4">
           <h2 className={`text-3xl font-bold text-center mb-12 ${testimonialsAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Отзывы наших клиентов</h2>
@@ -990,6 +1017,7 @@ const Index = () => {
       <ContactModal open={modalOpen} onOpenChange={setModalOpen} />
       <PopupOffer isOpen={popupOpen} onOpenChange={setPopupOpen} />
       {/* <Messengers /> */}
+      <QuizSidebar />
     </div>
   );
 };

@@ -12,6 +12,8 @@ import Messengers from '@/components/Messengers';
 import ShrinkCatalog from '@/components/ShrinkCatalog';
 import SimpleCatalog from '@/components/SimpleCatalog';
 import ShrinkFAQ from '@/components/ShrinkFAQ';
+import QuizWidget from '@/components/QuizWidget';
+import QuizSidebar from '@/components/QuizSidebar';
 
 const Termousadka = () => {
   const { toast } = useToast();
@@ -41,6 +43,7 @@ const Termousadka = () => {
   const aboutAnim = useScrollAnimation();
   const faqAnim = useScrollAnimation();
   const contactAnim = useScrollAnimation();
+  const quizAnim = useScrollAnimation();
 
   const formatPhone = (value: string) => {
     const digits = value.replace(/\D/g, '');
@@ -284,7 +287,7 @@ const Termousadka = () => {
                   <span>Ровный шов без налипания пленки</span>
                 </li>
               </ul>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-4">
                 <Button
                   size="lg"
                   className="bg-accent hover:bg-accent/90 text-lg font-bold px-8 py-6 shadow-lg transform hover:scale-105 transition-all"
@@ -292,6 +295,16 @@ const Termousadka = () => {
                 >
                   <Icon name="Phone" size={20} className="mr-2" />
                   Получить КП
+                </Button>
+                <Button
+                  size="lg"
+                  className="bg-white/20 backdrop-blur border-2 border-white/30 text-white hover:bg-white/30 text-lg font-bold px-8 py-6"
+                  onClick={() => {
+                    document.getElementById('quiz')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  <Icon name="ClipboardList" size={20} className="mr-2" />
+                  Подобрать оборудование
                 </Button>
                 <Button
                   size="lg"
@@ -538,6 +551,26 @@ const Termousadka = () => {
       </section>
 
       <section
+        id="quiz"
+        ref={quizAnim.ref as React.RefObject<HTMLElement>}
+        className="py-16 md:py-24 bg-gradient-to-br from-primary/5 via-background to-accent/5"
+      >
+        <div className="container mx-auto px-4">
+          <div className={`text-center mb-10 transition-all duration-700 ${quizAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-3">
+              Подберём оборудование
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Ответьте на 6 вопросов, и мы предложим оптимальное решение под ваши задачи
+            </p>
+          </div>
+          <div className={`max-w-3xl mx-auto bg-background rounded-2xl shadow-lg border p-6 md:p-10 transition-all duration-700 ${quizAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
+            <QuizWidget />
+          </div>
+        </div>
+      </section>
+
+      <section
         ref={aboutAnim.ref as React.RefObject<HTMLElement>}
         className="py-16 md:py-24"
       >
@@ -765,6 +798,7 @@ const Termousadka = () => {
 
       <ContactModal open={modalOpen} onOpenChange={setModalOpen} />
       <Messengers />
+      <QuizSidebar />
     </div>
   );
 };
