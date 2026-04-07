@@ -97,7 +97,7 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
     hasEquipment: '',
     budget: '',
   });
-  const [form, setForm] = useState({ name: '', phone: '' });
+  const [form, setForm] = useState({ name: '', phone: '', email: '' });
   const [submitted, setSubmitted] = useState(false);
 
   const progress = ((step + 1) / TOTAL_STEPS) * 100;
@@ -161,12 +161,14 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
 
     const w = window as unknown as Record<string, (...args: unknown[]) => void>;
     if (w.ym) {
+      w.ym(105605669, 'reachGoal', 'fos_sent');
       w.ym(105605669, 'reachGoal', 'quiz_sent');
     }
 
     const payload = {
       name: form.name,
       phone: form.phone,
+      email: form.email || '',
       comment: buildComment(),
       url: window.location.href,
     };
@@ -299,6 +301,16 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
                 onChange={e => setForm(prev => ({ ...prev, phone: formatPhone(e.target.value) }))}
                 placeholder="+7 (999) 999-99-99"
                 required
+              />
+            </div>
+            <div>
+              <Label htmlFor="quiz-email">Email</Label>
+              <Input
+                id="quiz-email"
+                type="email"
+                value={form.email}
+                onChange={e => setForm(prev => ({ ...prev, email: e.target.value }))}
+                placeholder="email@example.com"
               />
             </div>
             <div>
