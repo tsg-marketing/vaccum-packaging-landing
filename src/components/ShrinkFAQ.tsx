@@ -466,39 +466,48 @@ const ShrinkFAQ = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-2 max-w-md mx-auto">
-        {faqData.map((cat, idx) => (
-          <button
-            key={idx}
-            onClick={() => setActiveCategory(idx)}
-            className={`inline-flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all text-left ${
-              activeCategory === idx
-                ? 'bg-primary text-primary-foreground shadow-md'
-                : 'bg-muted hover:bg-muted/80 text-muted-foreground'
-            }`}
-          >
-            <Icon name={cat.icon} size={16} />
-            {cat.title}
-          </button>
-        ))}
-      </div>
-
-      <div className="max-w-3xl mx-auto">
-        <Accordion type="single" collapsible className="w-full">
-          {faqData[activeCategory].items.map((item, idx) => (
-            <AccordionItem key={`${activeCategory}-${idx}`} value={`item-${idx}`} className="border border-border rounded-lg mb-3 px-4 last:mb-0">
-              <AccordionTrigger className="text-left text-base hover:no-underline">
-                {item.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground leading-relaxed">
-                {item.answer}
-              </AccordionContent>
-            </AccordionItem>
+      <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6 max-w-5xl mx-auto">
+        <div className="flex flex-col gap-2 md:sticky md:top-4 md:self-start">
+          {faqData.map((cat, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActiveCategory(idx)}
+              className={`inline-flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-medium transition-all text-left ${
+                activeCategory === idx
+                  ? 'bg-primary text-primary-foreground shadow-md'
+                  : 'bg-muted hover:bg-muted/80 text-muted-foreground'
+              }`}
+            >
+              <Icon name={cat.icon} size={18} />
+              {cat.title}
+            </button>
           ))}
-        </Accordion>
+
+          <div className="hidden md:block mt-4 p-4 border border-border rounded-xl bg-muted/30">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Icon name="MessageCircle" size={14} />
+              <span>Не нашли ответ? Свяжитесь с нами — ответим за 15 минут</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <Accordion type="single" collapsible className="w-full">
+            {faqData[activeCategory].items.map((item, idx) => (
+              <AccordionItem key={`${activeCategory}-${idx}`} value={`item-${idx}`} className="border border-border rounded-lg mb-3 px-4 last:mb-0">
+                <AccordionTrigger className="text-left text-base hover:no-underline">
+                  {item.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  {item.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
       </div>
 
-      <div className="text-center pt-4">
+      <div className="text-center pt-2 md:hidden">
         <Badge variant="outline" className="text-sm px-4 py-2">
           <Icon name="MessageCircle" size={14} className="mr-2" />
           Не нашли ответ? Свяжитесь с нами — ответим за 15 минут

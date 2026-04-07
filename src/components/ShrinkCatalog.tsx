@@ -14,6 +14,7 @@ interface Product {
   image_url: string | null;
   category_id: number;
   specifications: Record<string, string>;
+  description: string;
 }
 
 interface ShrinkCatalogProps {
@@ -26,76 +27,35 @@ const formatPrice = (price: number): string => {
 
 const GUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-const CATEGORY_SPECS: Record<number, string[][]> = {
-  343: [
-    ['производительность', 'упаковок'],
-    ['максимальный размер упаковки'],
-    ['мощность'],
-  ],
-  341: [
-    ['максимальный размер упаковки'],
-    ['производительность', 'упаковок'],
-    ['максимальная ширина упаковочного материала'],
-    ['тип используемого упаковочного материала'],
-  ],
-  342: [
-    ['производительность', 'упаковок'],
-    ['максимальные габариты упаковываемой продукции'],
-    ['размеры рабочей части термоножа'],
-    ['максимальная ширина пленки', 'максимальная ширина плёнки'],
-  ],
-  344: [
-    ['производительность', 'упаковок'],
-    ['размеры проходного окна камеры'],
-    ['максимальные габариты упаковываемой продукции'],
-    ['максимальный размер для упаковки'],
-  ],
-  340: [
-    ['габариты туннеля', 'габариты тоннеля'],
-    ['габариты товара'],
-    ['скорость конвейера', 'скорость транспортера', 'скорость движения конвейера'],
-    ['общая нагрузка на конвейер', 'макс. нагрузка на конвейер', 'макс. загрузка транспортёра'],
-  ],
-  295: [
-    ['ёмкость бака для воды', 'емкость бака'],
-    ['температурный диапазон'],
-    ['мощность нагрева'],
-  ],
-  345: [
-    ['ширина верхней пленки', 'ширина верхней плёнки'],
-    ['ширина нижней пленки', 'ширина нижней плёнки'],
-    ['производительность насоса формирования лотка'],
-    ['производительность насоса вакуумирования лотка'],
-    ['рекомендованная толщина плёнки', 'рекомендованная толщина пленки'],
-  ],
+const CATEGORY_KEYWORDS: Record<number, string[]> = {
+  343: ['производительность', 'размер'],
+  341: ['производительность', 'размер', 'ширина', 'материала'],
+  342: ['производительность', 'габариты', 'термонож', 'ширина пленки', 'ширина плёнки'],
+  344: ['производительность', 'окна камеры', 'габариты упаковываемой продукции', 'размер для упаковки'],
+  340: ['габариты туннеля', 'габариты тоннеля', 'габариты товара', 'скорость конвейера', 'скорость транспортера', 'скорость движения конвейера'],
+  295: ['ёмкость бака', 'емкость бака', 'температурный диапазон', 'мощность нагрева'],
+  345: ['ширина', 'производительность', 'толщина пленки', 'толщина плёнки'],
 };
 
-const matchSpecKey = (key: string, patterns: string[]): boolean => {
-  const lk = key.toLowerCase();
-  return patterns.some(p => lk.includes(p));
-};
+const HIDDEN_KEYS = ['Бренд', 'Название бренда', 'Видео (ссылка)', 'Видео', 'Картинки товара'];
 
 const getSpecsForProduct = (product: Product, categoryId: number) => {
   const allSpecs = Object.entries(product.specifications || {});
   const filtered = allSpecs.filter(([key, value]) => {
-    if (['Бренд', 'Название бренда', 'Видео (ссылка)'].includes(key)) return false;
+    if (HIDDEN_KEYS.some(h => key.includes(h))) return false;
     if (GUID_REGEX.test(key) || GUID_REGEX.test(value)) return false;
     return true;
   });
 
-  const allowedPatterns = CATEGORY_SPECS[categoryId];
-  if (!allowedPatterns) return filtered.slice(0, 4);
+  const keywords = CATEGORY_KEYWORDS[categoryId];
+  if (!keywords) return filtered.slice(0, 4);
 
-  const ordered: [string, string][] = [];
-  const used = new Set<string>();
-  for (const patterns of allowedPatterns) {
-    const found = filtered.find(([key]) => !used.has(key) && matchSpecKey(key, patterns));
-    if (found) {
-      ordered.push(found);
-      used.add(found[0]);
-    }
-  }
-  return ordered.length > 0 ? ordered : filtered.slice(0, 4);
+  const matched = filtered.filter(([key]) => {
+    const lk = key.toLowerCase();
+    return keywords.some(kw => lk.includes(kw));
+  });
+
+  return matched.length > 0 ? matched : filtered.slice(0, 4);
 };
 
 const CATEGORIES = [
@@ -185,11 +145,13 @@ export default function ShrinkCatalog({ onInquiry }: ShrinkCatalogProps) {
   }, [activeCategory]);
 
   useEffect(() => {
-    const CACHE_KEY = 'shrinkProductsCache_v2';
-    const CACHE_TIMESTAMP_KEY = 'shrinkProductsCacheTimestamp_v2';
+    const CACHE_KEY = 'shrinkProductsCache_v3';
+    const CACHE_TIMESTAMP_KEY = 'shrinkProductsCacheTimestamp_v3';
     const CACHE_DURATION = 6 * 60 * 60 * 1000;
     localStorage.removeItem('shrinkProductsCache');
     localStorage.removeItem('shrinkProductsCacheTimestamp');
+    localStorage.removeItem('shrinkProductsCache_v2');
+    localStorage.removeItem('shrinkProductsCacheTimestamp_v2');
 
     const fetchProducts = async (useCache = true) => {
       if (useCache) {
