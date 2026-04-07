@@ -527,7 +527,7 @@ const Index = () => {
             </div>
             <div className="relative animate-scale-in hidden md:block">
               <img
-                src="https://cdn.poehali.dev/files/0933ac05-f3df-4e6d-80d4-f31f115c0a21.png"
+                src="https://cdn.poehali.dev/files/6897a0a0-0550-47aa-8a48-d1799d32a3d7.png"
                 alt="Вакуумное упаковочное оборудование"
                 className="rounded-lg shadow-2xl w-full bg-white p-8"
                 loading="eager"
