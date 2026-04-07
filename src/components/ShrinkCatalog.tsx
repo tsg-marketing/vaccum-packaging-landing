@@ -50,12 +50,10 @@ const getSpecsForProduct = (product: Product, categoryId: number) => {
   const keywords = CATEGORY_KEYWORDS[categoryId];
   if (!keywords) return filtered.slice(0, 4);
 
-  const matched = filtered.filter(([key]) => {
+  return filtered.filter(([key]) => {
     const lk = key.toLowerCase();
     return keywords.some(kw => lk.includes(kw));
   });
-
-  return matched.length > 0 ? matched : filtered.slice(0, 4);
 };
 
 const CATEGORIES = [
@@ -332,7 +330,7 @@ export default function ShrinkCatalog({ onInquiry }: ShrinkCatalogProps) {
                               .map(([key, value]) => (
                                 <div key={key} className="text-sm text-muted-foreground flex items-start gap-1">
                                   <Icon name="Dot" size={16} className="flex-shrink-0 mt-0.5" />
-                                  <span className="line-clamp-1">
+                                  <span>
                                     <span className="font-medium">{key}:</span> {value}
                                   </span>
                                 </div>

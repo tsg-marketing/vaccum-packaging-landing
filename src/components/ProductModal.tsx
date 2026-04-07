@@ -192,7 +192,7 @@ export default function ProductModal({ product, onClose, onInquiry }: ProductMod
                     <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide mb-2">
                       Описание
                     </h3>
-                    <p className="text-sm leading-relaxed line-clamp-6">{descriptionText}</p>
+                    <p className="text-sm leading-relaxed">{descriptionText}</p>
                   </div>
                 )}
 
@@ -203,9 +203,9 @@ export default function ProductModal({ product, onClose, onInquiry }: ProductMod
                     </h3>
                     <div className="space-y-2">
                       {specs.map(([key, value]) => (
-                        <div key={key} className="flex justify-between gap-2 py-1.5 border-b border-muted last:border-0">
-                          <span className="text-sm text-muted-foreground shrink-0 max-w-[50%]">{key}</span>
-                          <span className="text-sm font-medium text-right">{value}</span>
+                        <div key={key} className="py-1.5 border-b border-muted last:border-0">
+                          <span className="text-xs text-muted-foreground">{key}</span>
+                          <div className="text-sm font-medium">{value}</div>
                         </div>
                       ))}
                     </div>
