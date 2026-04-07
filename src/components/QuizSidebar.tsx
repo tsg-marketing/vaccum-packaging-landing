@@ -6,33 +6,41 @@ import QuizWidget from '@/components/QuizWidget';
 const STORAGE_KEY = 'quiz_sidebar_shown';
 
 export default function QuizSidebar() {
-  const [visible, setVisible] = useState(false);
+  const [tabVisible, setTabVisible] = useState(true);
   const [open, setOpen] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  const [autoOpened, setAutoOpened] = useState(false);
 
   useEffect(() => {
     if (sessionStorage.getItem(STORAGE_KEY)) return;
 
     const timer = setTimeout(() => {
-      setVisible(true);
+      setOpen(true);
+      setAutoOpened(true);
       sessionStorage.setItem(STORAGE_KEY, '1');
     }, 30000);
 
     return () => clearTimeout(timer);
   }, []);
 
-  if (!visible || dismissed) return null;
+  if (dismissed) return null;
 
   return (
     <div className="fixed right-0 top-1/2 -translate-y-1/2 z-50 flex items-stretch">
-      {!open && (
+      {!open && tabVisible && (
         <button
-          onClick={() => setOpen(true)}
-          className="bg-accent text-white px-2 py-6 rounded-l-lg shadow-xl hover:bg-accent/90 transition-all flex flex-col items-center gap-1 animate-fade-in writing-vertical"
+          onClick={() => {
+            setOpen(true);
+            if (!autoOpened) {
+              sessionStorage.setItem(STORAGE_KEY, '1');
+              setAutoOpened(true);
+            }
+          }}
+          className="bg-accent text-white px-3 py-8 rounded-l-xl shadow-xl hover:bg-accent/90 transition-all flex flex-col items-center gap-2"
           style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
         >
-          <Icon name="ClipboardList" size={18} className="rotate-90 mb-1" />
-          <span className="text-xs font-bold tracking-wider">ПОДОБРАТЬ</span>
+          <Icon name="ClipboardList" size={20} className="rotate-90" />
+          <span className="text-sm font-bold tracking-wide whitespace-nowrap">Подобрать оборудование</span>
         </button>
       )}
 
@@ -44,7 +52,7 @@ export default function QuizSidebar() {
               <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setOpen(false)}>
                 <Icon name="Minus" size={16} />
               </Button>
-              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setDismissed(true)}>
+              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => { setDismissed(true); setTabVisible(false); }}>
                 <Icon name="X" size={16} />
               </Button>
             </div>
