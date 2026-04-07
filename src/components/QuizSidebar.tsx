@@ -36,7 +36,7 @@ export default function QuizSidebar() {
               setAutoOpened(true);
             }
           }}
-          className="fixed right-0 bottom-32 z-50 bg-accent text-white px-3 py-8 rounded-l-xl shadow-xl hover:bg-accent/90 transition-all flex flex-col items-center gap-2"
+          className="fixed right-0 bottom-32 z-50 bg-secondary text-white px-3 py-8 rounded-l-xl shadow-xl hover:bg-secondary/90 transition-all flex flex-col items-center gap-2"
           style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
         >
           <Icon name="ClipboardList" size={22} className="rotate-90" />
@@ -47,7 +47,7 @@ export default function QuizSidebar() {
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => setOpen(false)}>
           <div
-            className="bg-background border border-border shadow-2xl rounded-2xl w-[90vw] max-w-[520px] max-h-[85vh] overflow-y-auto animate-scale-in"
+            className="bg-background border border-border shadow-2xl rounded-2xl w-[94vw] max-w-[680px] max-h-[90vh] overflow-y-auto animate-scale-in"
             onClick={e => e.stopPropagation()}
           >
             <div className="flex items-center justify-between p-5 border-b">
