@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Slider } from '@/components/ui/slider';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import Icon from '@/components/ui/icon';
@@ -225,13 +224,14 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
           {currentStep.key === 'size' ? (
             <div className="py-4 space-y-6">
               <div className="px-2">
-                <Slider
-                  value={[answers.size]}
-                  onValueChange={([val]) => setAnswers(prev => ({ ...prev, size: val }))}
+                <input
+                  type="range"
+                  value={answers.size}
+                  onChange={e => setAnswers(prev => ({ ...prev, size: Number(e.target.value) }))}
                   min={0}
                   max={4}
                   step={1}
-                  className="w-full"
+                  className="w-full h-2 rounded-full appearance-none cursor-pointer bg-muted accent-primary"
                 />
               </div>
               <div className="flex justify-between text-xs text-muted-foreground px-1">
