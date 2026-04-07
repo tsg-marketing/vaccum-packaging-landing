@@ -20,6 +20,7 @@ import AboutSection from '@/components/AboutSection';
 import QuizWidget from '@/components/QuizWidget';
 import QuizSidebar from '@/components/QuizSidebar';
 import { getUtmFromCookies } from '@/lib/utm';
+import VideoCard from '@/components/VideoCard';
 
 const Index = () => {
   const { toast } = useToast();
@@ -618,14 +619,7 @@ const Index = () => {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4">Посмотрите как работает наше оборудование</h2>
           <p className="text-muted-foreground text-center mb-10 max-w-2xl mx-auto">Видео с реальной работой вакуумных упаковщиков на производстве</p>
           <div className="max-w-3xl mx-auto">
-            <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
-              <iframe
-                src="https://rutube.ru/play/embed/3aa838c3f9ac0f034175ba042f4d88c6/"
-                className="w-full h-full"
-                allowFullScreen
-                allow="clipboard-write; autoplay"
-              />
-            </div>
+            <VideoCard embedId="968cbe87c330f29ea7bdce80355a916b" title="Вакуумная упаковочная машина" />
           </div>
         </div>
       </section>

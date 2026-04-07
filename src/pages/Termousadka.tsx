@@ -15,6 +15,7 @@ import ShrinkFAQ from '@/components/ShrinkFAQ';
 import QuizWidget from '@/components/QuizWidget';
 import QuizSidebar from '@/components/QuizSidebar';
 import { getUtmFromCookies } from '@/lib/utm';
+import VideoCard from '@/components/VideoCard';
 
 const Termousadka = () => {
   const { toast } = useToast();
@@ -417,26 +418,8 @@ const Termousadka = () => {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading text-center mb-4">Посмотрите как работает наше оборудование</h2>
           <p className="text-muted-foreground text-center mb-10 max-w-2xl mx-auto">Видео с реальной работой термоусадочного оборудования на производстве</p>
           <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            <div>
-              <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
-                <iframe
-                  src="https://rutube.ru/play/embed/cea7e294490190af4e9d0dd10a018f75/"
-                  className="w-full h-full"
-                  allowFullScreen
-                  allow="clipboard-write; autoplay"
-                />
-              </div>
-            </div>
-            <div>
-              <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
-                <iframe
-                  src="https://rutube.ru/play/embed/3aa838c3f9ac0f034175ba042f4d88c6/"
-                  className="w-full h-full"
-                  allowFullScreen
-                  allow="clipboard-write; autoplay"
-                />
-              </div>
-            </div>
+            <VideoCard embedId="cea7e294490190af4e9d0dd10a018f75" title="Термоусадочная упаковка" />
+            <VideoCard embedId="3aa838c3f9ac0f034175ba042f4d88c6" title="Термоусадочный тоннель" />
           </div>
         </div>
       </section>
