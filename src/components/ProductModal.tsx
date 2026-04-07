@@ -22,6 +22,8 @@ const formatPrice = (price: number): string => {
   return price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' руб';
 };
 
+const GUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 export default function ProductModal({ product, onClose, onInquiry }: ProductModalProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
@@ -29,7 +31,7 @@ export default function ProductModal({ product, onClose, onInquiry }: ProductMod
 
   const images = product.image_url ? [product.image_url] : [];
   const specs = product.specifications
-    ? Object.entries(product.specifications).filter(([key]) => key !== 'Картинки товара')
+    ? Object.entries(product.specifications).filter(([key, value]) => key !== 'Картинки товара' && !GUID_REGEX.test(key) && !GUID_REGEX.test(value))
     : [];
 
   return (

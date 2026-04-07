@@ -270,7 +270,7 @@ const Termousadka = () => {
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading leading-tight">
                 Термоусадочное оборудование до 3 600 упаковок в час
               </h1>
-              <ul className="text-base sm:text-lg text-white/85 leading-relaxed space-y-3">
+              <ul className="text-lg sm:text-xl md:text-2xl text-white/85 leading-relaxed space-y-3">
                 <li className="flex items-start gap-2">
                   <Icon name="Check" size={20} className="text-accent mt-1 shrink-0" />
                   <span>Оборудование под любые размеры и формы от европейских, азиатских и российских производителей</span>
@@ -296,7 +296,7 @@ const Termousadka = () => {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-white/30 text-white hover:bg-white/10 text-lg px-8 py-6"
+                  className="border-white/30 border-2 text-white hover:bg-white/20 bg-white/10 text-lg font-bold px-8 py-6"
                   onClick={() => {
                     document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
                   }}
@@ -315,17 +315,7 @@ const Termousadka = () => {
             </div>
           </div>
         </div>
-        <div className="bg-white/10 backdrop-blur-sm border-t border-white/10">
-          <div className="container mx-auto px-4 py-4">
-            <div className="flex flex-wrap justify-center gap-3">
-              {industryBadges.map((badge) => (
-                <Badge key={badge} variant="secondary" className="bg-white/15 text-white border-white/20 text-sm px-4 py-1.5">
-                  {badge}
-                </Badge>
-              ))}
-            </div>
-          </div>
-        </div>
+
       </section>
 
       <section
@@ -336,7 +326,7 @@ const Termousadka = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-4">
-              Преимущества термоусадочного оборудования
+              Преимущества термоусадочного оборудования от Техно-Сиб
             </h2>
           </div>
           <div className={`grid sm:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-700 ${advantagesAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
@@ -746,7 +736,6 @@ const Termousadka = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
             <div>
-              <img src="https://cdn.poehali.dev/files/34a7b0b3-ab44-4d30-b123-e01bb56afd38.jpg" alt="Техносиб" className="h-11 mb-4 brightness-0 invert" />
               <p className="text-white/70 text-sm">Поставка упаковочного оборудования и расходных материалов для пищевой и непищевой промышленности</p>
             </div>
             <div>
@@ -769,7 +758,7 @@ const Termousadka = () => {
             </div>
           </div>
           <div className="border-t border-white/20 mt-8 pt-8 text-center text-white/50 text-sm">
-            &copy; 2025 Техносиб. Все права защищены.
+            &copy; 2026 Техносиб. Все права защищены.
           </div>
         </div>
       </footer>

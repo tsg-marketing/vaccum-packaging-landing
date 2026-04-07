@@ -24,12 +24,43 @@ const formatPrice = (price: number): string => {
   return price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' руб';
 };
 
+const GUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+const CATEGORY_SPECS: Record<number, string[]> = {
+  343: ['Производительность упаковок', 'Максимальный размер упаковки', 'Мощность'],
+  341: ['Максимальный размер упаковки', 'Производительность упаковок', 'Максимальная ширина упаковочного материала', 'Тип используемого упаковочного материала'],
+  342: ['Производительность упаковок', 'Максимальные габариты упаковываемой продукции (ДхШхВ)', 'Размеры рабочей части термоножа', 'Максимальная ширина пленки'],
+  344: ['Производительность упаковок', 'Размеры проходного окна камеры (ШхВ)', 'Максимальные габариты упаковываемой продукции (ДхШхВ)', 'Максимальный размер для упаковки (φ×H)'],
+  340: ['Габариты туннеля (ДхШхВ)', 'Габариты товара (ШхВ)', 'Скорость конвейера', 'Общая нагрузка на конвейер'],
+  295: ['Ёмкость бака для воды', 'Температурный диапазон', 'Мощность нагрева'],
+  345: ['Ширина верхней пленки', 'Ширина нижней пленки', 'Производительность насоса формирования лотка', 'Производительность насоса вакуумирования лотка', 'Рекомендованная толщина плёнки (мкм)'],
+};
+
+const getSpecsForProduct = (product: Product, categoryId: number) => {
+  const allSpecs = Object.entries(product.specifications || {});
+  const filtered = allSpecs.filter(([key, value]) => {
+    if (['Бренд', 'Название бренда', 'Видео (ссылка)'].includes(key)) return false;
+    if (GUID_REGEX.test(key) || GUID_REGEX.test(value)) return false;
+    return true;
+  });
+
+  const allowedKeys = CATEGORY_SPECS[categoryId];
+  if (!allowedKeys) return filtered.slice(0, 4);
+
+  const ordered: [string, string][] = [];
+  for (const specName of allowedKeys) {
+    const found = filtered.find(([key]) => key.toLowerCase() === specName.toLowerCase());
+    if (found) ordered.push(found);
+  }
+  return ordered.length > 0 ? ordered : filtered.slice(0, 4);
+};
+
 const CATEGORIES = [
   { id: 343, name: 'Для штучной упаковки' },
   { id: 341, name: 'Для групповой упаковки' },
   { id: 342, name: 'Для длинномерной продукции' },
   { id: 344, name: 'Sleeve-этикетки' },
-  { id: 340, name: 'Прочее оборудование' },
+  { id: 340, name: 'Термоусадочные тоннели' },
   { id: 295, name: 'Термоусадочные танки' },
   { id: 345, name: 'Термоформеры' },
 ];
@@ -292,9 +323,7 @@ export default function ShrinkCatalog({ onInquiry }: ShrinkCatalogProps) {
                         <h3 className="font-semibold text-lg mb-3 line-clamp-2">{product.name}</h3>
                         {product.specifications && Object.keys(product.specifications).length > 0 && (
                           <div className="mb-3 space-y-1.5">
-                            {Object.entries(product.specifications)
-                              .filter(([key]) => !['Бренд', 'Название бренда', 'Видео (ссылка)'].includes(key))
-                              .slice(0, 4)
+                            {getSpecsForProduct(product, activeCategory)
                               .map(([key, value]) => (
                                 <div key={key} className="text-sm text-muted-foreground flex items-start gap-1">
                                   <Icon name="Dot" size={16} className="flex-shrink-0 mt-0.5" />

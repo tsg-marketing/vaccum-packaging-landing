@@ -466,12 +466,12 @@ const ShrinkFAQ = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap gap-2 justify-center">
+      <div className="flex flex-col gap-2 max-w-md mx-auto">
         {faqData.map((cat, idx) => (
           <button
             key={idx}
             onClick={() => setActiveCategory(idx)}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+            className={`inline-flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all text-left ${
               activeCategory === idx
                 ? 'bg-primary text-primary-foreground shadow-md'
                 : 'bg-muted hover:bg-muted/80 text-muted-foreground'

@@ -30,6 +30,8 @@ const formatPrice = (price: number): string => {
   return price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' руб';
 };
 
+const GUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 export default function SimpleCatalog({ categories, cacheKey, onInquiry }: SimpleCatalogProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -193,7 +195,7 @@ export default function SimpleCatalog({ categories, cacheKey, onInquiry }: Simpl
                 {product.specifications && Object.keys(product.specifications).length > 0 && (
                   <div className="mb-3 space-y-1.5">
                     {Object.entries(product.specifications)
-                      .filter(([key]) => !['Бренд', 'Название бренда', 'Видео (ссылка)'].includes(key))
+                      .filter(([key, value]) => !['Бренд', 'Название бренда', 'Видео (ссылка)'].includes(key) && !GUID_REGEX.test(key) && !GUID_REGEX.test(value))
                       .slice(0, 4)
                       .map(([key, value]) => (
                         <div key={key} className="text-sm text-muted-foreground flex items-start gap-1">
