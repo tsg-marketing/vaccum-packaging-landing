@@ -9,7 +9,7 @@ import { useToast } from '@/hooks/use-toast';
 
 interface QuizAnswers {
   product: string;
-  size: number;
+  size: string;
   volume: string;
   packType: string;
   hasEquipment: string;
@@ -20,8 +20,6 @@ interface QuizWidgetProps {
   variant?: 'inline' | 'modal' | 'sidebar';
   onClose?: () => void;
 }
-
-const SIZE_LABELS = ['Мелкий', 'Небольшой', 'Средний', 'Крупный', 'Крупногабаритный'];
 
 const STEPS = [
   {
@@ -38,7 +36,13 @@ const STEPS = [
   {
     key: 'size' as const,
     question: 'Какой размер продукта?',
-    type: 'slider',
+    options: [
+      { value: 'small', label: 'Мелкий', icon: 'CircleDot', desc: 'Конфета, батончик, пакетик специй — до 15×10×5 см' },
+      { value: 'medium-small', label: 'Небольшой', icon: 'Circle', desc: 'Кусок сыра, стейк, нарезка в лотке — 15–25×10–20 см' },
+      { value: 'medium', label: 'Средний', icon: 'Square', desc: 'Целая курица, блок сыра, коробка конфет — 25–40×15–30 см' },
+      { value: 'large', label: 'Крупный', icon: 'RectangleHorizontal', desc: 'Целая рыба, колбасный батон, коробка обуви — 40–60×20–40 см' },
+      { value: 'xlarge', label: 'Крупногабаритный', icon: 'Maximize', desc: 'Половина туши, матрас, паллетная упаковка — более 60 см' },
+    ],
   },
   {
     key: 'volume' as const,
@@ -87,7 +91,7 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<QuizAnswers>({
     product: '',
-    size: 2,
+    size: '',
     volume: '',
     packType: '',
     hasEquipment: '',
@@ -121,6 +125,11 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
       clothes: 'Одежда',
       electronics: 'Электроника',
       other: 'Другое',
+      small: 'Мелкий (до 15×10×5 см)',
+      'medium-small': 'Небольшой (15–25×10–20 см)',
+      medium: 'Средний (25–40×15–30 см)',
+      large: 'Крупный (40–60×20–40 см)',
+      xlarge: 'Крупногабаритный (более 60 см)',
       'up-to-100': 'До 100',
       '100-500': '100–500',
       '500-2000': '500–2000',
@@ -139,7 +148,7 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
     return [
       `[КВИЗ] Подбор оборудования`,
       `Упаковка: ${labels[answers.product] || answers.product}`,
-      `Размер: ${SIZE_LABELS[answers.size]}`,
+      `Размер: ${labels[answers.size] || answers.size}`,
       `В смену: ${labels[answers.volume] || answers.volume}`,
       `Тип: ${labels[answers.packType] || answers.packType}`,
       `Оборудование: ${labels[answers.hasEquipment] || answers.hasEquipment}`,
@@ -179,6 +188,7 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
   const currentStep = STEPS[step];
   const isFormStep = step >= STEPS.length;
   const isCompact = variant === 'sidebar';
+  const hasDesc = currentStep?.options?.some(o => 'desc' in o);
 
   if (submitted) {
     return (
@@ -196,21 +206,12 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
   }
 
   return (
-    <div className={isCompact ? '' : ''}>
+    <div>
       <div className="mb-4">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm text-muted-foreground">
             Шаг {step + 1} из {TOTAL_STEPS}
           </span>
-          {step > 0 && (
-            <button
-              onClick={() => setStep(prev => prev - 1)}
-              className="text-sm text-primary hover:underline flex items-center gap-1"
-            >
-              <Icon name="ArrowLeft" size={14} />
-              Назад
-            </button>
-          )}
         </div>
         <Progress value={progress} className="h-2" />
       </div>
@@ -221,63 +222,50 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
             {currentStep.question}
           </h3>
 
-          {currentStep.key === 'size' ? (
-            <div className="py-4 space-y-6">
-              <div className="px-2">
-                <input
-                  type="range"
-                  value={answers.size}
-                  onChange={e => setAnswers(prev => ({ ...prev, size: Number(e.target.value) }))}
-                  min={0}
-                  max={4}
-                  step={1}
-                  className="w-full h-2 rounded-full appearance-none cursor-pointer bg-muted accent-primary"
-                />
-              </div>
-              <div className="flex justify-between text-xs text-muted-foreground px-1">
-                {SIZE_LABELS.map((label, i) => (
-                  <span
-                    key={label}
-                    className={`${i === answers.size ? 'text-primary font-bold text-sm' : ''} transition-all`}
-                  >
-                    {label}
-                  </span>
-                ))}
-              </div>
-              <Button
-                className="w-full bg-primary hover:bg-primary/90 py-5 text-base font-bold"
-                onClick={() => setStep(prev => prev + 1)}
-              >
-                Далее
-                <Icon name="ArrowRight" size={18} className="ml-2" />
-              </Button>
-            </div>
-          ) : (
-            <div className={`grid gap-3 ${
-              isCompact
+          <div className={`grid gap-3 ${
+            hasDesc
+              ? 'grid-cols-1'
+              : isCompact
                 ? 'grid-cols-1'
                 : (currentStep.options && currentStep.options.length <= 3)
                   ? 'grid-cols-1 sm:grid-cols-3'
                   : 'grid-cols-2 sm:grid-cols-3'
-            }`}>
-              {currentStep.options?.map(opt => (
-                <Card
-                  key={opt.value}
-                  className={`cursor-pointer transition-all hover:shadow-md hover:border-primary/50 ${
-                    answers[currentStep.key] === opt.value
-                      ? 'border-primary shadow-md bg-primary/5'
-                      : 'border-border'
-                  }`}
-                  onClick={() => selectOption(currentStep.key, opt.value)}
-                >
-                  <CardContent className={`flex items-center gap-3 ${isCompact ? 'p-3' : 'p-4'}`}>
-                    <div className={`${isCompact ? 'w-10 h-10' : 'w-12 h-12'} rounded-lg bg-primary/10 flex items-center justify-center shrink-0`}>
-                      <Icon name={opt.icon} size={isCompact ? 20 : 24} className="text-primary" />
-                    </div>
+          }`}>
+            {currentStep.options?.map(opt => (
+              <Card
+                key={opt.value}
+                className={`cursor-pointer transition-all hover:shadow-md hover:border-primary/50 ${
+                  answers[currentStep.key] === opt.value
+                    ? 'border-primary shadow-md bg-primary/5'
+                    : 'border-border'
+                }`}
+                onClick={() => selectOption(currentStep.key, opt.value)}
+              >
+                <CardContent className={`flex items-center gap-3 ${isCompact ? 'p-3' : 'p-4'}`}>
+                  <div className={`${isCompact ? 'w-10 h-10' : 'w-12 h-12'} rounded-lg bg-primary/10 flex items-center justify-center shrink-0`}>
+                    <Icon name={opt.icon} size={isCompact ? 20 : 24} className="text-primary" />
+                  </div>
+                  <div className="min-w-0">
                     <span className={`font-medium ${isCompact ? 'text-sm' : ''}`}>{opt.label}</span>
-                  </CardContent>
-                </Card>
-              ))}
+                    {'desc' in opt && opt.desc && (
+                      <p className="text-xs text-muted-foreground mt-0.5">{opt.desc}</p>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {step > 0 && (
+            <div className="mt-4">
+              <Button
+                variant="ghost"
+                className="text-muted-foreground hover:text-foreground"
+                onClick={() => setStep(prev => prev - 1)}
+              >
+                <Icon name="ArrowLeft" size={16} className="mr-1" />
+                Назад
+              </Button>
             </div>
           )}
         </div>
@@ -322,13 +310,24 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
                 </span>
               </label>
             </div>
-            <Button
-              type="submit"
-              className="w-full bg-accent hover:bg-accent/90 py-6 text-lg font-bold shadow-lg transform hover:scale-105 transition-all"
-            >
-              <Icon name="Send" size={20} className="mr-2" />
-              Получить подбор оборудования
-            </Button>
+            <div className="flex gap-3 items-center">
+              <Button
+                variant="ghost"
+                type="button"
+                className="text-muted-foreground hover:text-foreground"
+                onClick={() => setStep(prev => prev - 1)}
+              >
+                <Icon name="ArrowLeft" size={16} className="mr-1" />
+                Назад
+              </Button>
+              <Button
+                type="submit"
+                className="flex-1 bg-accent hover:bg-accent/90 py-6 text-lg font-bold shadow-lg transform hover:scale-105 transition-all"
+              >
+                <Icon name="Send" size={20} className="mr-2" />
+                Получить подбор оборудования
+              </Button>
+            </div>
           </form>
         </div>
       )}
