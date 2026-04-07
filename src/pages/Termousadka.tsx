@@ -267,15 +267,23 @@ const Termousadka = () => {
         <div className="container mx-auto px-4 py-12 md:py-20">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="text-white space-y-6 animate-fade-in-up">
-              <Badge className="bg-accent/20 text-accent border-accent/30 text-sm px-4 py-1">
-                Термоусадочное оборудование
-              </Badge>
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading leading-tight">
-                Термоусадочное оборудование
+                Термоусадочное оборудование до 3 600 упаковок в час
               </h1>
-              <p className="text-lg sm:text-xl text-white/80 leading-relaxed">
-                Подбор «оборудование + плёнка» &bull; Тест на ваших образцах в Новосибирске и Москве &bull; Настройка режимов под ваш продукт
-              </p>
+              <ul className="text-base sm:text-lg text-white/85 leading-relaxed space-y-3">
+                <li className="flex items-start gap-2">
+                  <Icon name="Check" size={20} className="text-accent mt-1 shrink-0" />
+                  <span>Оборудование под любые размеры и формы от европейских, азиатских и российских производителей</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Icon name="Check" size={20} className="text-accent mt-1 shrink-0" />
+                  <span>Для штучной и групповой упаковки. Термоусадочные танки и термоформеры</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Icon name="Check" size={20} className="text-accent mt-1 shrink-0" />
+                  <span>Ровный шов без налипания пленки</span>
+                </li>
+              </ul>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   size="lg"
@@ -300,7 +308,7 @@ const Termousadka = () => {
             </div>
             <div className="relative animate-scale-in">
               <img
-                src="https://cdn.poehali.dev/projects/7f0941a7-b646-4462-83cf-d72a4486c6fc/files/1dcea45c-cf74-44cd-9835-b09a75b07ab2.jpg"
+                src="https://cdn.poehali.dev/files/2eff1564-1e44-49bf-b3b2-da1d458d1ea0.png"
                 alt="Термоусадочное оборудование"
                 className="rounded-2xl shadow-2xl w-full object-cover"
               />
