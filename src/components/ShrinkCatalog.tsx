@@ -143,13 +143,15 @@ export default function ShrinkCatalog({ onInquiry }: ShrinkCatalogProps) {
   }, [activeCategory]);
 
   useEffect(() => {
-    const CACHE_KEY = 'shrinkProductsCache_v3';
-    const CACHE_TIMESTAMP_KEY = 'shrinkProductsCacheTimestamp_v3';
+    const CACHE_KEY = 'shrinkProductsCache_v4';
+    const CACHE_TIMESTAMP_KEY = 'shrinkProductsCacheTimestamp_v4';
     const CACHE_DURATION = 6 * 60 * 60 * 1000;
     localStorage.removeItem('shrinkProductsCache');
     localStorage.removeItem('shrinkProductsCacheTimestamp');
     localStorage.removeItem('shrinkProductsCache_v2');
     localStorage.removeItem('shrinkProductsCacheTimestamp_v2');
+    localStorage.removeItem('shrinkProductsCache_v3');
+    localStorage.removeItem('shrinkProductsCacheTimestamp_v3');
 
     const fetchProducts = async (useCache = true) => {
       if (useCache) {
