@@ -234,6 +234,7 @@ const Termousadka = () => {
             <a href="tel:+74951471362" className="text-lg font-bold text-primary hover:text-accent transition-colors flex items-center gap-2" onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'сlick_phone'); } }}>
               <Icon name="Phone" size={20} />+7 (495) 147-13-62
             </a>
+            <a href="/" className="text-sm hover:text-primary transition-colors">Вакуумное оборудование</a>
             <a href="#advantages" className="text-sm hover:text-primary transition-colors">Преимущества</a>
             <a href="#catalog" className="text-sm hover:text-primary transition-colors">Каталог</a>
             <a href="#application" className="text-sm hover:text-primary transition-colors">Применение</a>
@@ -255,6 +256,7 @@ const Termousadka = () => {
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-border bg-white animate-fade-in">
             <nav className="container mx-auto px-4 py-4 flex flex-col gap-3">
+              <a href="/" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Вакуумное оборудование</a>
               <a href="#advantages" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Преимущества</a>
               <a href="#catalog" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Каталог</a>
               <a href="#application" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Применение</a>

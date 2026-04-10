@@ -434,7 +434,7 @@ const Index = () => {
               <Icon name="Phone" size={20} />
               +7 (495) 147-13-62
             </a>
-            <a href="#equipment" className="text-sm hover:text-primary transition-colors">Оборудование</a>
+            <a href="/termousadka" className="text-sm hover:text-primary transition-colors">Термоусадка</a>
             <a href="#advantages" className="text-sm hover:text-primary transition-colors">Преимущества</a>
             <a href="#catalog" className="text-sm hover:text-primary transition-colors">Каталог</a>
             <a href="#application" className="text-sm hover:text-primary transition-colors">Применение</a>
@@ -459,7 +459,7 @@ const Index = () => {
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-border bg-white animate-fade-in">
             <nav className="container mx-auto px-4 py-4 flex flex-col gap-3">
-              <a href="#equipment" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Оборудование</a>
+              <a href="/termousadka" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Термоусадка</a>
               <a href="#advantages" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Преимущества</a>
               <a href="#catalog" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Каталог</a>
               <a href="#application" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Применение</a>
