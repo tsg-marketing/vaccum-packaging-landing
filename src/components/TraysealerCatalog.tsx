@@ -200,11 +200,13 @@ export default function TraysealerCatalog({ onInquiry }: TraysealerCatalogProps)
   }, [activeCategory]);
 
   useEffect(() => {
-    const CACHE_KEY = 'traysealerProductsCache_v2';
-    const CACHE_TIMESTAMP_KEY = 'traysealerProductsCacheTimestamp_v2';
+    const CACHE_KEY = 'traysealerProductsCache_v3';
+    const CACHE_TIMESTAMP_KEY = 'traysealerProductsCacheTimestamp_v3';
     const CACHE_DURATION = 6 * 60 * 60 * 1000;
     localStorage.removeItem('traysealerProductsCache_v1');
     localStorage.removeItem('traysealerProductsCacheTimestamp_v1');
+    localStorage.removeItem('traysealerProductsCache_v2');
+    localStorage.removeItem('traysealerProductsCacheTimestamp_v2');
 
     const fetchProducts = async (useCache = true) => {
       if (useCache) {

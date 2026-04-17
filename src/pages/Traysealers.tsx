@@ -9,9 +9,7 @@ import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
 import { ContactModal } from '@/components/ContactModal';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import Messengers from '@/components/Messengers';
 import TraysealerCatalog from '@/components/TraysealerCatalog';
-import QuizSidebar from '@/components/QuizSidebar';
 import { getUtmFromCookies } from '@/lib/utm';
 
 const Traysealers = () => {
@@ -572,8 +570,6 @@ const Traysealers = () => {
       </footer>
 
       <ContactModal open={modalOpen} onOpenChange={setModalOpen} />
-      <Messengers />
-      <QuizSidebar />
     </div>
   );
 };
