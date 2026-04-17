@@ -271,6 +271,53 @@ const Traysealers = () => {
         </div>
       </section>
 
+      <section id="showroom" className="py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-4">
+              Посмотрите оборудование в нашем Демо-Зале
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Приезжайте посмотреть, как работают запайщики лотков, вживую
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                    <Icon name="MapPin" size={24} className="text-primary" />
+                  </div>
+                  <CardTitle className="text-2xl font-heading">Москва</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground text-base mb-4">
+                  ш. Энтузиастов, д. 56, стр. 32, офис 115
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button
+                    variant="outline"
+                    className="flex-1"
+                    onClick={() => window.open('https://yandex.ru/maps/?text=Москва, шоссе Энтузиастов 56 строение 32', '_blank')}
+                  >
+                    <Icon name="Map" size={18} className="mr-2" />
+                    На карте
+                  </Button>
+                  <Button
+                    className="flex-1 bg-accent hover:bg-accent/90"
+                    onClick={() => setModalOpen(true)}
+                  >
+                    <Icon name="Calendar" size={18} className="mr-2" />
+                    Записаться
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       <section
         id="service"
         ref={serviceAnim.ref as React.RefObject<HTMLElement>}
