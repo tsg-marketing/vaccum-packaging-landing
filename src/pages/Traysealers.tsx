@@ -40,7 +40,6 @@ const Traysealers = () => {
   }, []);
 
   const advantagesAnim = useScrollAnimation();
-  const catalogAnim = useScrollAnimation();
   const serviceAnim = useScrollAnimation();
   const aboutAnim = useScrollAnimation();
   const contactAnim = useScrollAnimation();
@@ -255,7 +254,6 @@ const Traysealers = () => {
 
       <section
         id="catalog"
-        ref={catalogAnim.ref as React.RefObject<HTMLElement>}
         className="py-16 md:py-24 bg-muted/30"
       >
         <div className="container mx-auto px-4">
@@ -267,7 +265,7 @@ const Traysealers = () => {
               Выберите модель по типу управления и задаче
             </p>
           </div>
-          <div className={`transition-all duration-700 ${catalogAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
+          <div>
             <TraysealerCatalog onInquiry={handleCatalogInquiry} />
           </div>
         </div>
