@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Get categories 307",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "bodyMatcher": "partial",
+      "expectedBody": {"parent": {"id": 307}}
+    }
+  ]
+}

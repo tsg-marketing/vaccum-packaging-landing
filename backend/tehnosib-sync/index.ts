@@ -44,8 +44,13 @@ function parseXML(xmlString: string): Product[] {
     'термо', 'термоупак', 'термоусад', 'усадочн',
     'l-сварщик', 'l сварщик', 'сварщик', 'туннель'
   ];
+
+  const traysealerKeywords = [
+    'запайщик', 'запайщики', 'запайка лотк', 'traysealer', 'tray sealer',
+    'trave sealer', 'запай лотк'
+  ];
   
-  const allKeywords = [...vacuumKeywords, ...thermalKeywords];
+  const allKeywords = [...vacuumKeywords, ...thermalKeywords, ...traysealerKeywords];
   
   // Извлекаем товары
   const offerRegex = /<offer[^>]*>([\s\S]*?)<\/offer>/g;
