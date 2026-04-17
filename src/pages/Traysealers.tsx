@@ -350,6 +350,74 @@ const Traysealers = () => {
         </div>
       </section>
 
+      <section id="warranty-delivery" className="py-16 md:py-24 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading mb-4">
+              Гарантия и доставка
+            </h2>
+            <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
+              Всё, что нужно знать об условиях получения оборудования
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+            <Card className="bg-muted/60 border-0 shadow-sm">
+              <CardContent className="p-6 sm:p-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-foreground flex items-center justify-center shrink-0">
+                    <Icon name="ShieldCheck" size={24} className="text-background" />
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-bold font-heading">Гарантия</h3>
+                </div>
+                <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
+                  Гарантийный срок на оборудование составляет <strong className="text-foreground">12 месяцев</strong> с момента передачи товара покупателю.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-accent/5 border-0 shadow-sm">
+              <CardContent className="p-6 sm:p-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center shrink-0">
+                    <Icon name="Truck" size={24} className="text-white" />
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-bold font-heading">Доставка</h3>
+                </div>
+                <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-5">
+                  Мы доставляем оборудование <strong className="text-foreground">по всей России</strong> через транспортные компании.
+                </p>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <Icon name="CheckCircle2" size={20} className="text-accent mt-0.5 shrink-0" />
+                    <span className="text-sm sm:text-base text-muted-foreground">
+                      По желанию клиента — <strong className="text-foreground">БЕСПЛАТНАЯ доставка</strong> до терминала любой транспортной компании в пределах г. Новосибирск.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Icon name="Building2" size={20} className="text-accent mt-0.5 shrink-0" />
+                    <span className="text-sm sm:text-base text-muted-foreground">
+                      Перевозчики: <strong className="text-foreground">«Деловые линии», «ПЭК», «СДЭК»</strong>
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Icon name="Clock" size={20} className="text-accent mt-0.5 shrink-0" />
+                    <span className="text-sm sm:text-base text-muted-foreground">
+                      Сроки поставки зависят от места назначения и выбора перевозчика.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Icon name="CreditCard" size={20} className="text-accent mt-0.5 shrink-0" />
+                    <span className="text-sm sm:text-base text-muted-foreground">
+                      Оплата доставки осуществляется заказчиком при получении по тарифам перевозчика.
+                    </span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       <section
         id="service"
         ref={serviceAnim.ref as React.RefObject<HTMLElement>}
