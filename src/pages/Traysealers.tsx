@@ -128,7 +128,6 @@ const Traysealers = () => {
                 <div className="bg-white border border-border shadow-lg rounded-lg py-2 min-w-[240px]">
                   <a href="/" className="block px-4 py-2 text-sm hover:bg-muted transition-colors">Вакуумное оборудование</a>
                   <a href="/termousadka" className="block px-4 py-2 text-sm hover:bg-muted transition-colors">Термоусадка</a>
-                  <a href="/traysealers" className="block px-4 py-2 text-sm hover:bg-muted transition-colors font-semibold text-primary">Запайщики лотков</a>
                 </div>
               </div>
             </div>
@@ -158,7 +157,6 @@ const Traysealers = () => {
                 <p className="text-xs font-semibold text-muted-foreground uppercase mb-2">Оборудование</p>
                 <a href="/" className="block text-sm hover:text-primary transition-colors py-1.5 pl-3" onClick={() => setMobileMenuOpen(false)}>Вакуумное оборудование</a>
                 <a href="/termousadka" className="block text-sm hover:text-primary transition-colors py-1.5 pl-3" onClick={() => setMobileMenuOpen(false)}>Термоусадка</a>
-                <a href="/traysealers" className="block text-sm text-primary font-semibold py-1.5 pl-3" onClick={() => setMobileMenuOpen(false)}>Запайщики лотков</a>
               </div>
               <a href="#advantages" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Преимущества</a>
               <a href="#catalog" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Каталог</a>
