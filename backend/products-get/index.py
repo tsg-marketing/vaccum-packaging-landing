@@ -43,7 +43,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             category_list = [int(c.strip()) for c in categories.split(',')]
             
             placeholders = ','.join(['%s'] * len(category_list))
-            query = f"SELECT id, external_id, name, price, image_url, category_id, specifications, description FROM products WHERE category_id IN ({placeholders}) ORDER BY name"
+            query = f"SELECT id, external_id, name, price, image_url, category_id, specifications, description, images FROM products WHERE category_id IN ({placeholders}) ORDER BY name"
             
             cur.execute(query, category_list)
             products = cur.fetchall()
@@ -58,7 +58,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     'image_url': product['image_url'],
                     'category_id': product['category_id'],
                     'specifications': product['specifications'] if product['specifications'] else {},
-                    'description': product.get('description') or ''
+                    'description': product.get('description') or '',
+                    'images': product.get('images') if product.get('images') else ([product['image_url']] if product['image_url'] else [])
                 })
             
             return {

@@ -234,7 +234,19 @@ const Termousadka = () => {
             <a href="tel:+74951471362" className="text-lg font-bold text-primary hover:text-accent transition-colors flex items-center gap-2" onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'сlick_phone'); } }}>
               <Icon name="Phone" size={20} />+7 (495) 147-13-62
             </a>
-            <a href="/" className="text-sm hover:text-primary transition-colors">Вакуумное оборудование</a>
+            <div className="relative group">
+              <button className="text-sm hover:text-primary transition-colors flex items-center gap-1">
+                Оборудование
+                <Icon name="ChevronDown" size={14} className="group-hover:rotate-180 transition-transform" />
+              </button>
+              <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                <div className="bg-white border border-border shadow-lg rounded-lg py-2 min-w-[240px]">
+                  <a href="/" className="block px-4 py-2 text-sm hover:bg-muted transition-colors">Вакуумное оборудование</a>
+                  <a href="/termousadka" className="block px-4 py-2 text-sm hover:bg-muted transition-colors font-semibold text-primary">Термоусадка</a>
+                  <a href="/traysealers" className="block px-4 py-2 text-sm hover:bg-muted transition-colors">Запайщики лотков</a>
+                </div>
+              </div>
+            </div>
             <a href="#advantages" className="text-sm hover:text-primary transition-colors">Преимущества</a>
             <a href="#catalog" className="text-sm hover:text-primary transition-colors">Каталог</a>
             <a href="#application" className="text-sm hover:text-primary transition-colors">Применение</a>
@@ -256,7 +268,12 @@ const Termousadka = () => {
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-border bg-white animate-fade-in">
             <nav className="container mx-auto px-4 py-4 flex flex-col gap-3">
-              <a href="/" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Вакуумное оборудование</a>
+              <div className="py-2 border-b border-border">
+                <p className="text-xs font-semibold text-muted-foreground uppercase mb-2">Оборудование</p>
+                <a href="/" className="block text-sm hover:text-primary transition-colors py-1.5 pl-3" onClick={() => setMobileMenuOpen(false)}>Вакуумное оборудование</a>
+                <a href="/termousadka" className="block text-sm text-primary font-semibold py-1.5 pl-3" onClick={() => setMobileMenuOpen(false)}>Термоусадка</a>
+                <a href="/traysealers" className="block text-sm hover:text-primary transition-colors py-1.5 pl-3" onClick={() => setMobileMenuOpen(false)}>Запайщики лотков</a>
+              </div>
               <a href="#advantages" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Преимущества</a>
               <a href="#catalog" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Каталог</a>
               <a href="#application" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Применение</a>

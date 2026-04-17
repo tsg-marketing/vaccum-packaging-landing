@@ -11,6 +11,7 @@ interface Product {
   category_id: number;
   specifications: Record<string, string>;
   description?: string;
+  images?: string[];
 }
 
 interface ProductModalProps {
@@ -57,7 +58,12 @@ export default function ProductModal({ product, onClose, onInquiry }: ProductMod
   const images = useMemo(() => {
     if (!product) return [];
     const imgs: string[] = [];
-    if (product.image_url) imgs.push(product.image_url);
+    if (product.images && product.images.length > 0) {
+      product.images.forEach(src => {
+        if (src && !imgs.includes(src)) imgs.push(src);
+      });
+    }
+    if (imgs.length === 0 && product.image_url) imgs.push(product.image_url);
     if (product.description) {
       const descImgs = extractImagesFromHtml(product.description);
       descImgs.forEach(src => {

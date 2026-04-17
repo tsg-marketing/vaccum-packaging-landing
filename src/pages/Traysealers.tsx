@@ -122,8 +122,19 @@ const Traysealers = () => {
             >
               <Icon name="Phone" size={20} />+7 (495) 147-13-62
             </a>
-            <a href="/" className="text-sm hover:text-primary transition-colors">Вакуумное оборудование</a>
-            <a href="/termousadka" className="text-sm hover:text-primary transition-colors">Термоусадка</a>
+            <div className="relative group">
+              <button className="text-sm hover:text-primary transition-colors flex items-center gap-1">
+                Оборудование
+                <Icon name="ChevronDown" size={14} className="group-hover:rotate-180 transition-transform" />
+              </button>
+              <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                <div className="bg-white border border-border shadow-lg rounded-lg py-2 min-w-[240px]">
+                  <a href="/" className="block px-4 py-2 text-sm hover:bg-muted transition-colors">Вакуумное оборудование</a>
+                  <a href="/termousadka" className="block px-4 py-2 text-sm hover:bg-muted transition-colors">Термоусадка</a>
+                  <a href="/traysealers" className="block px-4 py-2 text-sm hover:bg-muted transition-colors font-semibold text-primary">Запайщики лотков</a>
+                </div>
+              </div>
+            </div>
             <a href="#advantages" className="text-sm hover:text-primary transition-colors">Преимущества</a>
             <a href="#catalog" className="text-sm hover:text-primary transition-colors">Каталог</a>
             <a href="#service" className="text-sm hover:text-primary transition-colors">Сервис</a>
@@ -146,8 +157,12 @@ const Traysealers = () => {
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-border bg-white animate-fade-in">
             <nav className="container mx-auto px-4 py-4 flex flex-col gap-3">
-              <a href="/" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Вакуумное оборудование</a>
-              <a href="/termousadka" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Термоусадка</a>
+              <div className="py-2 border-b border-border">
+                <p className="text-xs font-semibold text-muted-foreground uppercase mb-2">Оборудование</p>
+                <a href="/" className="block text-sm hover:text-primary transition-colors py-1.5 pl-3" onClick={() => setMobileMenuOpen(false)}>Вакуумное оборудование</a>
+                <a href="/termousadka" className="block text-sm hover:text-primary transition-colors py-1.5 pl-3" onClick={() => setMobileMenuOpen(false)}>Термоусадка</a>
+                <a href="/traysealers" className="block text-sm text-primary font-semibold py-1.5 pl-3" onClick={() => setMobileMenuOpen(false)}>Запайщики лотков</a>
+              </div>
               <a href="#advantages" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Преимущества</a>
               <a href="#catalog" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Каталог</a>
               <a href="#service" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Сервис</a>
@@ -162,7 +177,7 @@ const Traysealers = () => {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="text-white space-y-6 animate-fade-in-up">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading leading-tight">
-                Запайщики лотков до 3 600 упаковок в час
+                Запайщики лотков до <span className="whitespace-nowrap">3&nbsp;600</span> упаковок в час
               </h1>
               <ul className="text-lg sm:text-xl md:text-2xl text-white/85 leading-relaxed space-y-3">
                 <li className="flex items-start gap-2">
@@ -202,8 +217,8 @@ const Traysealers = () => {
             </div>
             <div className="relative animate-scale-in">
               <img
-                src="https://cdn.poehali.dev/files/2eff1564-1e44-49bf-b3b2-da1d458d1ea0.png"
-                alt="Запайщики лотков"
+                src="https://cdn.poehali.dev/files/2c117cb4-9982-45bf-8444-b1c037f9439c.jpg"
+                alt="Запайщик лотков HLV-400T"
                 className="rounded-2xl shadow-2xl w-full object-cover"
               />
             </div>

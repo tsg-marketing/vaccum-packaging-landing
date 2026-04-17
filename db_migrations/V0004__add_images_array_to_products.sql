@@ -1,0 +1,1 @@
+ALTER TABLE t_p31313063_vaccum_packaging_lan.products ADD COLUMN IF NOT EXISTS images jsonb DEFAULT '[]'::jsonb;
