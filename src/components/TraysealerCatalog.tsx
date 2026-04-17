@@ -225,23 +225,46 @@ export default function TraysealerCatalog({ onInquiry }: TraysealerCatalogProps)
         }
       }
 
-      try {
-        const response = await fetch(
-          `https://functions.poehali.dev/2d5f9278-9fd7-4ee8-86c0-e8b7c096608c?categories=${CATEGORY_IDS_STR}`
-        );
-        if (!response.ok) throw new Error('Не удалось загрузить товары');
-        const data = await response.json();
-        const list: Product[] = data.products || [];
+      const url = `https://functions.poehali.dev/2d5f9278-9fd7-4ee8-86c0-e8b7c096608c?categories=${CATEGORY_IDS_STR}`;
+      const tryFetch = async (attempt: number): Promise<Product[] | null> => {
+        try {
+          const response = await fetch(url, { cache: 'no-store' });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const data = await response.json();
+          return (data.products || []) as Product[];
+        } catch (err) {
+          console.warn(`Попытка ${attempt} не удалась:`, err);
+          if (attempt < 3) {
+            await new Promise((r) => setTimeout(r, 800 * attempt));
+            return tryFetch(attempt + 1);
+          }
+          return null;
+        }
+      };
+
+      const list = await tryFetch(1);
+      if (list) {
         setProducts(list);
-        localStorage.setItem(CACHE_KEY, JSON.stringify(list));
-        localStorage.setItem(CACHE_TIMESTAMP_KEY, Date.now().toString());
-        return list;
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Ошибка загрузки');
-      } finally {
-        setLoading(false);
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify(list));
+          localStorage.setItem(CACHE_TIMESTAMP_KEY, Date.now().toString());
+        } catch (e) {
+          console.warn('Cache save failed:', e);
+        }
+      } else {
+        const stale = localStorage.getItem(CACHE_KEY);
+        if (stale) {
+          try {
+            setProducts(JSON.parse(stale));
+          } catch (e) {
+            console.warn('Stale cache parse failed:', e);
+          }
+        } else {
+          setError('Не удалось загрузить товары. Проверьте подключение к интернету.');
+        }
       }
-      return [] as Product[];
+      setLoading(false);
+      return list || [];
     };
 
     fetchProducts(true);
