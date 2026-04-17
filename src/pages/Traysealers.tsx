@@ -314,6 +314,38 @@ const Traysealers = () => {
                 </div>
               </CardContent>
             </Card>
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                    <Icon name="MapPin" size={24} className="text-primary" />
+                  </div>
+                  <CardTitle className="text-2xl font-heading">Новосибирск</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground text-base mb-4">
+                  ул. Электрозаводская, 2 к1
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button
+                    variant="outline"
+                    className="flex-1"
+                    onClick={() => window.open('https://yandex.ru/maps/?text=Новосибирск, улица Электрозаводская 2 к1', '_blank')}
+                  >
+                    <Icon name="Map" size={18} className="mr-2" />
+                    На карте
+                  </Button>
+                  <Button
+                    className="flex-1 bg-accent hover:bg-accent/90"
+                    onClick={() => setModalOpen(true)}
+                  >
+                    <Icon name="Calendar" size={18} className="mr-2" />
+                    Записаться
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
