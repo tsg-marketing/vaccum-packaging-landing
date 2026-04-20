@@ -8,7 +8,6 @@ import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
 import { ContactModal } from '@/components/ContactModal';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import Messengers from '@/components/Messengers';
 import ShrinkCatalog from '@/components/ShrinkCatalog';
 import SimpleCatalog from '@/components/SimpleCatalog';
 import ShrinkFAQ from '@/components/ShrinkFAQ';
@@ -825,7 +824,6 @@ const Termousadka = () => {
       </footer>
 
       <ContactModal open={modalOpen} onOpenChange={setModalOpen} />
-      <Messengers />
       <QuizSidebar />
     </div>
   );
