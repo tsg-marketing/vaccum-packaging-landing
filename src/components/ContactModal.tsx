@@ -48,6 +48,8 @@ export const ContactModal = ({ open, onOpenChange, title = 'Получить к�
       message: combined,
       comment: combined,
       url: source.url,
+      productType: '-',
+      modeltype: '-',
       ...getUtmFromCookies(),
     };
 

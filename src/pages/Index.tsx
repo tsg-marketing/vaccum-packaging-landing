@@ -80,8 +80,8 @@ const Index = () => {
       comment: combined,
       message: combined,
       url: sourcePage,
-      productType: '',
-      modeltype: '',
+      productType: formData.productType || '-',
+      modeltype: formData.modeltype || '-',
       ...getUtmFromCookies(),
     };
 
