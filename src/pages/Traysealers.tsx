@@ -28,6 +28,7 @@ const Traysealers = () => {
   });
   const [modalOpen, setModalOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<string>('');
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -224,10 +225,15 @@ const Traysealers = () => {
     }
 
     const sourcePage = 'https://vacuum.t-sib.ru/traysealers/';
-    const commentWithSource = `[Источник: Запайщики лотков — ${sourcePage}]${formData.comment ? '\n' + formData.comment : ''}`;
+    const sourceLine = `[Источник: Запайщики лотков — ${sourcePage}]`;
+    const productLine = selectedProduct ? `[Товар: ${selectedProduct}]` : '';
+    const parts = [sourceLine, productLine, formData.comment].filter(Boolean);
+    const combined = parts.join('\n');
     const submitData = {
       ...formData,
-      comment: commentWithSource,
+      comment: combined,
+      message: combined,
+      product: selectedProduct || formData.modeltype || '',
       url: sourcePage,
       source_page: sourcePage,
       page_title: 'Запайщики лотков (трейсилеры)',
@@ -248,6 +254,7 @@ const Traysealers = () => {
   };
 
   const handleCatalogInquiry = (productName: string) => {
+    setSelectedProduct(productName);
     setFormData(prev => ({ ...prev, comment: `Интересует: ${productName}` }));
     setModalOpen(true);
   };
@@ -1000,7 +1007,14 @@ const Traysealers = () => {
         </div>
       </footer>
 
-      <ContactModal open={modalOpen} onOpenChange={setModalOpen} />
+      <ContactModal
+        open={modalOpen}
+        onOpenChange={(open) => {
+          setModalOpen(open);
+          if (!open) setSelectedProduct('');
+        }}
+        productName={selectedProduct}
+      />
       <QuizSidebarTraysealer />
     </div>
   );

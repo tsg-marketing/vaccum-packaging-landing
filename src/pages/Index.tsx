@@ -27,6 +27,7 @@ const Index = () => {
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', company: '', productType: '', modeltype: '', comment: '', url: '' });
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [modalOpen, setModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<string>('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
 
@@ -68,7 +69,21 @@ const Index = () => {
       (window as any).ym(105605669, 'reachGoal', 'fos_sent');
     }
 
-    const submitData = { ...formData, url: window.location.href, ...getUtmFromCookies() };
+    const sourcePage = 'https://vacuum.t-sib.ru/';
+    const sourceLine = `[Источник: Вакуумное оборудование — ${sourcePage}]`;
+    const productLine = selectedProduct ? `[Товар: ${selectedProduct}]` : '';
+    const parts = [sourceLine, productLine, formData.comment].filter(Boolean);
+    const combined = parts.join('\n');
+    const submitData = {
+      ...formData,
+      comment: combined,
+      message: combined,
+      product: selectedProduct || formData.modeltype || '',
+      url: sourcePage,
+      source_page: sourcePage,
+      page_title: 'Вакуумное оборудование',
+      ...getUtmFromCookies(),
+    };
 
     fetch('/api/b24-send-lead.php', {
       method: 'POST',
@@ -589,6 +604,7 @@ const Index = () => {
             Выберите подходящее вакуумно-упаковочное оборудование для вашего производства
           </p>
           <ProductCatalog onInquiry={(productName) => {
+            setSelectedProduct(productName);
             setModalOpen(true);
           }} />
         </div>
@@ -1037,7 +1053,14 @@ const Index = () => {
         </div>
       </footer>
 
-      <ContactModal open={modalOpen} onOpenChange={setModalOpen} />
+      <ContactModal
+        open={modalOpen}
+        onOpenChange={(open) => {
+          setModalOpen(open);
+          if (!open) setSelectedProduct('');
+        }}
+        productName={selectedProduct}
+      />
       <PopupOffer isOpen={popupOpen} onOpenChange={setPopupOpen} />
       {/* <Messengers /> */}
       <QuizSidebar />

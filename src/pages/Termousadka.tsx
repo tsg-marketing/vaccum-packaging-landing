@@ -21,6 +21,7 @@ const Termousadka = () => {
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', url: '' });
   const [modalOpen, setModalOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<string>('');
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -65,9 +66,14 @@ const Termousadka = () => {
     }
 
     const sourcePage = 'https://vacuum.t-sib.ru/termousadka/';
+    const sourceLine = `[Источник: Термоусадочное оборудование — ${sourcePage}]`;
+    const productLine = selectedProduct ? `[Товар: ${selectedProduct}]` : '';
+    const combined = [sourceLine, productLine].filter(Boolean).join('\n');
     const submitData = {
       ...formData,
-      comment: `[Источник: Термоусадочное оборудование — ${sourcePage}]`,
+      comment: combined,
+      message: combined,
+      product: selectedProduct || '',
       url: sourcePage,
       source_page: sourcePage,
       page_title: 'Термоусадочное оборудование',
@@ -397,6 +403,7 @@ const Termousadka = () => {
           </div>
           <div>
             <ShrinkCatalog onInquiry={(productName) => {
+              setSelectedProduct(productName);
               setModalOpen(true);
             }} />
           </div>
@@ -831,7 +838,14 @@ const Termousadka = () => {
         </div>
       </footer>
 
-      <ContactModal open={modalOpen} onOpenChange={setModalOpen} />
+      <ContactModal
+        open={modalOpen}
+        onOpenChange={(open) => {
+          setModalOpen(open);
+          if (!open) setSelectedProduct('');
+        }}
+        productName={selectedProduct}
+      />
       <QuizSidebar />
     </div>
   );

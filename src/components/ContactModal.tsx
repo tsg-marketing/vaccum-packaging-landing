@@ -13,9 +13,10 @@ interface ContactModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   title?: string;
+  productName?: string;
 }
 
-export const ContactModal = ({ open, onOpenChange, title = 'Получить коммерческое предложение' }: ContactModalProps) => {
+export const ContactModal = ({ open, onOpenChange, title = 'Получить коммерческое предложение', productName }: ContactModalProps) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({ name: '', phone: '', message: '', url: '' });
 
@@ -39,9 +40,14 @@ export const ContactModal = ({ open, onOpenChange, title = 'Получить к�
 
     const source = getSourcePage();
     const sourceLine = buildSourceLine();
+    const productLine = productName ? `[Товар: ${productName}]` : '';
+    const parts = [sourceLine, productLine, formData.message].filter(Boolean);
+    const combined = parts.join('\n');
     const submitData = {
       ...formData,
-      message: formData.message ? `${sourceLine}\n${formData.message}` : sourceLine,
+      message: combined,
+      comment: combined,
+      product: productName || '',
       url: source.url,
       source_page: source.url,
       page_title: source.title,
@@ -71,6 +77,12 @@ export const ContactModal = ({ open, onOpenChange, title = 'Получить к�
             Заполните форму, и наш менеджер свяжется с вами в течение 15 минут
           </DialogDescription>
         </DialogHeader>
+        {productName && (
+          <div className="rounded-md bg-primary/5 border border-primary/20 px-3 py-2 text-sm">
+            <span className="text-muted-foreground">Интересует: </span>
+            <span className="font-semibold">{productName}</span>
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
           <div>
             <Label htmlFor="name">Имя *</Label>
