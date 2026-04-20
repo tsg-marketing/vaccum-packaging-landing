@@ -75,6 +75,7 @@ const Termousadka = () => {
       comment: combined,
       message: combined,
       url: sourcePage,
+      UF_CRM_1775454267: 'ДА',
       ...getUtmFromCookies(),
     };
 

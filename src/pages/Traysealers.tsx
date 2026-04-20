@@ -237,6 +237,7 @@ const Traysealers = () => {
       url: sourcePage,
       productType: formData.productType || '-',
       modeltype: formData.modeltype || '-',
+      UF_CRM_1775454267: 'ДА',
       ...getUtmFromCookies(),
     };
 

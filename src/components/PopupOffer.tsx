@@ -67,6 +67,7 @@ export default function PopupOffer({ isOpen: controlledIsOpen, onOpenChange }: P
       url: source.url,
       source_page: source.url,
       page_title: source.title,
+      UF_CRM_1775454267: 'ДА',
       ...getUtmFromCookies(),
     };
     

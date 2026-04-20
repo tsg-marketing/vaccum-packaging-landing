@@ -50,6 +50,7 @@ export const ContactModal = ({ open, onOpenChange, title = 'Получить к�
       url: source.url,
       productType: '-',
       modeltype: '-',
+      UF_CRM_1775454267: 'ДА',
       ...getUtmFromCookies(),
     };
 
