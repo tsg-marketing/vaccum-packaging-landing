@@ -10,6 +10,8 @@ import { useToast } from '@/hooks/use-toast';
 import { ContactModal } from '@/components/ContactModal';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import TraysealerCatalog from '@/components/TraysealerCatalog';
+import QuizSidebarTraysealer from '@/components/QuizSidebarTraysealer';
+import QuizTraysealerWidget from '@/components/QuizTraysealerWidget';
 import { getUtmFromCookies } from '@/lib/utm';
 
 const Traysealers = () => {
@@ -702,6 +704,26 @@ const Traysealers = () => {
         </div>
       </section>
 
+      <section id="quiz" className="py-16 md:py-24 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-4">
+              Подберите трейсилер за 1 минуту
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Ответьте на 4 коротких вопроса — подготовим персональную подборку моделей и коммерческое предложение
+            </p>
+          </div>
+          <div className="max-w-3xl mx-auto">
+            <Card className="shadow-xl border-border/50">
+              <CardContent className="p-6 md:p-8">
+                <QuizTraysealerWidget variant="inline" />
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       <section
         ref={aboutAnim.ref as React.RefObject<HTMLElement>}
         className="py-16 md:py-24 bg-muted/30"
@@ -970,6 +992,7 @@ const Traysealers = () => {
       </footer>
 
       <ContactModal open={modalOpen} onOpenChange={setModalOpen} />
+      <QuizSidebarTraysealer />
     </div>
   );
 };
