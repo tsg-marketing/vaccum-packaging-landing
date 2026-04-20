@@ -86,7 +86,7 @@
 (function () {
   try {
     var params = new URLSearchParams(window.location.search);
-    var redirect = params.get('_spa') || sessionStorage.getItem('spa_redirect');
+    var redirect = sessionStorage.getItem('spa_redirect') || params.get('spa_route');
     if (redirect) {
       sessionStorage.removeItem('spa_redirect');
       window.history.replaceState(null, '', redirect);
