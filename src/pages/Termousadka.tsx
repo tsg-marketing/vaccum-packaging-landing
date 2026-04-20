@@ -66,17 +66,25 @@ const Termousadka = () => {
     }
 
     const sourcePage = 'https://vacuum.t-sib.ru/termousadka/';
+    const productValue = selectedProduct || '';
     const sourceLine = `[Источник: Термоусадочное оборудование — ${sourcePage}]`;
-    const productLine = selectedProduct ? `[Товар: ${selectedProduct}]` : '';
+    const productLine = productValue ? `[Товар: ${productValue}]` : '';
     const combined = [sourceLine, productLine].filter(Boolean).join('\n');
     const submitData = {
       ...formData,
       comment: combined,
       message: combined,
-      product: selectedProduct || '',
+      comments: combined,
+      product: productValue,
+      product_name: productValue,
+      productName: productValue,
+      model: productValue,
+      modeltype: productValue,
+      productType: productValue,
       url: sourcePage,
       source_page: sourcePage,
       page_title: 'Термоусадочное оборудование',
+      lead_title: productValue ? `Термоусадка: ${productValue}` : 'Термоусадка',
       ...getUtmFromCookies(),
     };
 

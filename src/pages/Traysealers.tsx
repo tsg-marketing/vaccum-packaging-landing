@@ -225,18 +225,26 @@ const Traysealers = () => {
     }
 
     const sourcePage = 'https://vacuum.t-sib.ru/traysealers/';
+    const productValue = selectedProduct || formData.modeltype || '';
     const sourceLine = `[Источник: Запайщики лотков — ${sourcePage}]`;
-    const productLine = selectedProduct ? `[Товар: ${selectedProduct}]` : '';
+    const productLine = productValue ? `[Товар: ${productValue}]` : '';
     const parts = [sourceLine, productLine, formData.comment].filter(Boolean);
     const combined = parts.join('\n');
     const submitData = {
       ...formData,
       comment: combined,
       message: combined,
-      product: selectedProduct || formData.modeltype || '',
+      comments: combined,
+      product: productValue,
+      product_name: productValue,
+      productName: productValue,
+      model: productValue,
+      modeltype: productValue || formData.modeltype || '',
+      productType: productValue || formData.productType || '',
       url: sourcePage,
       source_page: sourcePage,
       page_title: 'Запайщики лотков (трейсилеры)',
+      lead_title: productValue ? `Запайщики лотков: ${productValue}` : 'Запайщики лотков',
       ...getUtmFromCookies(),
     };
 

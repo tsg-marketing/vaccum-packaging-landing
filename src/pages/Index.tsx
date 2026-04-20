@@ -70,18 +70,26 @@ const Index = () => {
     }
 
     const sourcePage = 'https://vacuum.t-sib.ru/';
+    const productValue = selectedProduct || formData.modeltype || '';
     const sourceLine = `[Источник: Вакуумное оборудование — ${sourcePage}]`;
-    const productLine = selectedProduct ? `[Товар: ${selectedProduct}]` : '';
+    const productLine = productValue ? `[Товар: ${productValue}]` : '';
     const parts = [sourceLine, productLine, formData.comment].filter(Boolean);
     const combined = parts.join('\n');
     const submitData = {
       ...formData,
       comment: combined,
       message: combined,
-      product: selectedProduct || formData.modeltype || '',
+      comments: combined,
+      product: productValue,
+      product_name: productValue,
+      productName: productValue,
+      model: productValue,
+      modeltype: productValue || formData.modeltype || '',
+      productType: productValue || formData.productType || '',
       url: sourcePage,
       source_page: sourcePage,
       page_title: 'Вакуумное оборудование',
+      lead_title: productValue ? `Вакуумное оборудование: ${productValue}` : 'Вакуумное оборудование',
       ...getUtmFromCookies(),
     };
 
