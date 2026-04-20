@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Загрузка...</title>
+    <script>
+      // SPA-fallback: сохраняем оригинальный путь и редиректим на index.html,
+      // чтобы React Router корректно отработал маршрут.
+      (function () {
+        var l = window.location;
+        var redirect = l.pathname + l.search + l.hash;
+        sessionStorage.setItem('spa_redirect', redirect);
+        l.replace(l.origin + '/?_spa=' + encodeURIComponent(redirect));
+      })();
+    </script>
+</head>
+<body>
+    <p>Загрузка...</p>
+</body>
+</html>

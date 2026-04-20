@@ -81,6 +81,19 @@
   }
 })();
 </script>
+<script>
+// SPA-fallback: восстанавливаем путь после редиректа с 404.html
+(function () {
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var redirect = params.get('_spa') || sessionStorage.getItem('spa_redirect');
+    if (redirect) {
+      sessionStorage.removeItem('spa_redirect');
+      window.history.replaceState(null, '', redirect);
+    }
+  } catch (e) {}
+})();
+</script>
 <div id="root"></div>
 <script type="module" src="/src/main.tsx?v=2026041701"></script>
 
