@@ -41,9 +41,84 @@ const Traysealers = () => {
 
   const advantagesAnim = useScrollAnimation();
   const applicationAnim = useScrollAnimation();
+  const signsAnim = useScrollAnimation();
   const serviceAnim = useScrollAnimation();
   const aboutAnim = useScrollAnimation();
   const contactAnim = useScrollAnimation();
+
+  const signs = [
+    {
+      emoji: '\u{1F527}',
+      title: 'Вы до сих пор упаковываете вручную или используете бытовой вакууматор',
+      items: [
+        'Ручная запайка — потеря 3–5 часов в смену',
+        'Неровные швы, негерметичные лотки',
+        'Торговые сети возвращают партии из-за нарушения герметичности',
+        'Срок годности продукта сокращается',
+        'Решение: базовый полуавтоматический трейсилер окупается за 2–3 месяца',
+      ],
+    },
+    {
+      emoji: '\u{1F4C8}',
+      title: 'Текущий аппарат не справляется с объёмами',
+      items: [
+        'Заказов больше, аппарат запаивает по 1–2 лотка за цикл',
+        'Очереди на линии упаковки тормозят отгрузку',
+        'Теряете клиентов из-за срывов сроков поставки',
+        'Решение: переход на более производительную модель (до 15–20 циклов/мин)',
+      ],
+    },
+    {
+      emoji: '\u{1F529}',
+      title: 'Частые поломки и простои',
+      items: [
+        'Матрица изнашивается, пресс не обеспечивает герметичность',
+        'Запасные части приходится ждать неделями',
+        'Стоимость ремонтов за год приближается к цене нового аппарата',
+        'Решение: замена на современный трейсилер с гарантией и сервисной поддержкой',
+      ],
+    },
+    {
+      emoji: '\u{274C}',
+      title: 'Высокий процент брака упаковки',
+      items: [
+        'Плёнка не приваривается по всему контуру',
+        'Лотки деформируются при запайке',
+        'Возвраты 10–15% продукции из-за разгерметизации',
+        'Решение: современные модели с точным контролем температуры и давления снижают брак до 1–2%',
+      ],
+    },
+    {
+      emoji: '\u{1F39E}',
+      title: 'Нужна модифицированная газовая среда (MAP)',
+      items: [
+        'Продукт требует увеличения срока годности без консервантов',
+        'Текущий аппарат не поддерживает газацию (MAP/GAP)',
+        'Клиенты (HoReCa, сети) требуют упаковку в МГС',
+        'Решение: трейсилеры с функцией MAP продлевают срок годности в 2–5 раз',
+      ],
+    },
+    {
+      emoji: '\u{1F3EA}',
+      title: 'Вы выходите в торговые сети или на маркетплейсы',
+      items: [
+        'Жёсткие требования к внешнему виду и герметичности упаковки',
+        'Wildberries, Ozon, X5 требуют стандартизированный лоток с запайкой',
+        'Ручная упаковка не проходит приёмку ритейлера',
+        'Решение: трейсилер обеспечивает стабильное качество, соответствующее стандартам ритейла',
+      ],
+    },
+    {
+      emoji: '\u{1F680}',
+      title: 'Вы запускаете новый продукт или линейку',
+      items: [
+        'Новый продукт требует другого формата лотка (круглый, овальный, глубокий)',
+        'Нужна скин-упаковка или вакуумная запайка',
+        'Существующее оборудование не подходит по размерам/функциям',
+        'Решение: подбор трейсилера с быстросменными матрицами точно под ваши лотки',
+      ],
+    },
+  ];
 
   const applications = [
     {
@@ -218,6 +293,7 @@ const Traysealers = () => {
             <a href="#advantages" className="text-sm hover:text-primary transition-colors">Преимущества</a>
             <a href="#catalog" className="text-sm hover:text-primary transition-colors">Каталог</a>
             <a href="#application" className="text-sm hover:text-primary transition-colors">Применение</a>
+            <a href="#signs" className="text-sm hover:text-primary transition-colors">Когда пора</a>
             <a href="#service" className="text-sm hover:text-primary transition-colors">Сервис</a>
             <a href="#contact" className="text-sm hover:text-primary transition-colors">Контакты</a>
           </nav>
@@ -246,6 +322,7 @@ const Traysealers = () => {
               <a href="#advantages" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Преимущества</a>
               <a href="#catalog" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Каталог</a>
               <a href="#application" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Применение</a>
+              <a href="#signs" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Когда пора</a>
               <a href="#service" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Сервис</a>
               <a href="#contact" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Контакты</a>
             </nav>
@@ -385,6 +462,66 @@ const Traysealers = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="signs"
+        ref={signsAnim.ref as React.RefObject<HTMLElement>}
+        className="py-16 md:py-24 bg-muted/30"
+      >
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-4">
+              7 признаков, что вам нужен новый трейсилер
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Узнали хотя бы 2 пункта? Пора действовать.
+            </p>
+          </div>
+          <div className={`grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10 transition-all duration-700 ${signsAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
+            {signs.map((sign, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow border-border/50">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-3">
+                    <span className="text-3xl">{sign.emoji}</span>
+                    <CardTitle className="text-xl sm:text-2xl font-heading">
+                      <span className="text-primary font-bold mr-2">{index + 1}.</span>
+                      {sign.title}
+                    </CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    {sign.items.map((item, i) => (
+                      <li key={i} className={`flex items-start gap-2 text-base sm:text-lg ${i === sign.items.length - 1 ? 'text-primary font-semibold' : 'text-muted-foreground'}`}>
+                        <Icon name={i === sign.items.length - 1 ? 'CheckCircle' : 'AlertCircle'} size={18} className={`mt-0.5 shrink-0 ${i === sign.items.length - 1 ? 'text-primary' : 'text-accent'}`} />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="mt-12">
+            <Card className="bg-gradient-to-r from-primary to-primary/80 text-white border-0 shadow-xl">
+              <CardContent className="p-8 text-center">
+                <h3 className="text-2xl font-bold font-heading mb-3">Узнали свою ситуацию?</h3>
+                <p className="text-white/80 mb-6 text-lg">
+                  Оставьте заявку — подберём оптимальный трейсилер под ваши задачи и бюджет за 1 рабочий день.
+                </p>
+                <Button
+                  size="lg"
+                  className="bg-accent hover:bg-accent/90 text-lg font-bold px-8 py-6 shadow-lg transform hover:scale-105 transition-all"
+                  onClick={() => setModalOpen(true)}
+                >
+                  <Icon name="Send" size={20} className="mr-2" />
+                  Получить персональный подбор
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
