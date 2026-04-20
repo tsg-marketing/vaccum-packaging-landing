@@ -47,17 +47,7 @@ export const ContactModal = ({ open, onOpenChange, title = 'Получить к�
       ...formData,
       message: combined,
       comment: combined,
-      comments: combined,
-      product: productName || '',
-      product_name: productName || '',
-      productName: productName || '',
-      model: productName || '',
-      modeltype: productName || '',
-      productType: productName || '',
       url: source.url,
-      source_page: source.url,
-      page_title: source.title,
-      lead_title: productName ? `${source.label}: ${productName}` : source.label,
       ...getUtmFromCookies(),
     };
 

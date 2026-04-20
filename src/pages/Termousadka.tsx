@@ -74,17 +74,7 @@ const Termousadka = () => {
       ...formData,
       comment: combined,
       message: combined,
-      comments: combined,
-      product: productValue,
-      product_name: productValue,
-      productName: productValue,
-      model: productValue,
-      modeltype: productValue,
-      productType: productValue,
       url: sourcePage,
-      source_page: sourcePage,
-      page_title: 'Термоусадочное оборудование',
-      lead_title: productValue ? `Термоусадка: ${productValue}` : 'Термоусадка',
       ...getUtmFromCookies(),
     };
 
