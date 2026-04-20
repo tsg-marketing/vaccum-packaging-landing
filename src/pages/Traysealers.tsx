@@ -40,9 +40,93 @@ const Traysealers = () => {
   }, []);
 
   const advantagesAnim = useScrollAnimation();
+  const applicationAnim = useScrollAnimation();
   const serviceAnim = useScrollAnimation();
   const aboutAnim = useScrollAnimation();
   const contactAnim = useScrollAnimation();
+
+  const applications = [
+    {
+      emoji: '\u{1F969}',
+      title: 'Мясо и птица',
+      items: [
+        'Запайка лотков с охлаждённым мясом и полуфабрикатами',
+        'Упаковка в модифицированной газовой среде (MAP) для продления срока годности',
+        'Скин-упаковка стейков и премиальных отрубов',
+        'Герметичная защита от протечек и контаминации',
+      ],
+    },
+    {
+      emoji: '\u{1F41F}',
+      title: 'Рыба и морепродукты',
+      items: [
+        'Запайка лотков с охлаждённой и слабосолёной рыбой',
+        'MAP-упаковка для увеличения срока хранения до 10–14 дней',
+        'Вакуумная запайка пресервов',
+        'Защита от запаха и перекрёстного загрязнения',
+      ],
+    },
+    {
+      emoji: '\u{1F9C0}',
+      title: 'Молочная продукция и сыры',
+      items: [
+        'Запайка нарезки сыров в лотках',
+        'MAP-упаковка творога, сметаны, мягких сыров',
+        'Порционная упаковка для HoReCa',
+        'Презентабельный витринный вид',
+      ],
+    },
+    {
+      emoji: '\u{1F957}',
+      title: 'Готовая еда и кулинария',
+      items: [
+        'Запайка порционных блюд (салаты, гарниры, супы)',
+        'Упаковка обедов для корпоративного питания и доставки',
+        'Возможность разогрева прямо в лотке (термостойкие лотки)',
+        'Маркировка «Честный знак» прямо на плёнке',
+      ],
+    },
+    {
+      emoji: '\u{1F353}',
+      title: 'Фрукты, овощи и зелень',
+      items: [
+        'Запайка лотков с ягодами, нарезанными фруктами',
+        'Микроперфорированная плёнка для «дышащей» упаковки',
+        'Защита от механических повреждений при транспортировке',
+        'Увеличение shelf life свежей зелени с MAP',
+      ],
+    },
+    {
+      emoji: '\u{1F35E}',
+      title: 'Кондитерские и хлебобулочные изделия',
+      items: [
+        'Запайка лотков с пирожными, тортами, десертами',
+        'Защита от заветривания и пересыхания',
+        'Эстетичная подача для кафе, кондитерских, сетей',
+        'Порционная упаковка для вендинговых аппаратов',
+      ],
+    },
+    {
+      emoji: '\u{1F48A}',
+      title: 'Медицина и фармацевтика',
+      items: [
+        'Запайка наборов медицинских инструментов в лотках',
+        'Стерильная герметичная упаковка',
+        'Соответствие стандартам GMP и ISO',
+        'Контроль первого вскрытия',
+      ],
+    },
+    {
+      emoji: '\u{2699}',
+      title: 'Промышленные и технические изделия',
+      items: [
+        'Запайка лотков с метизами, крепежом, мелкими деталями',
+        'Комплектация наборов (ремкомплекты, расходники)',
+        'Защита от коррозии и влаги',
+        'Удобная идентификация и хранение на складе',
+      ],
+    },
+  ];
 
   const formatPhone = (value: string) => {
     const digits = value.replace(/\D/g, '');
@@ -133,6 +217,7 @@ const Traysealers = () => {
             </div>
             <a href="#advantages" className="text-sm hover:text-primary transition-colors">Преимущества</a>
             <a href="#catalog" className="text-sm hover:text-primary transition-colors">Каталог</a>
+            <a href="#application" className="text-sm hover:text-primary transition-colors">Применение</a>
             <a href="#service" className="text-sm hover:text-primary transition-colors">Сервис</a>
             <a href="#contact" className="text-sm hover:text-primary transition-colors">Контакты</a>
           </nav>
@@ -160,6 +245,7 @@ const Traysealers = () => {
               </div>
               <a href="#advantages" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Преимущества</a>
               <a href="#catalog" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Каталог</a>
+              <a href="#application" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Применение</a>
               <a href="#service" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Сервис</a>
               <a href="#contact" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Контакты</a>
             </nav>
@@ -265,6 +351,40 @@ const Traysealers = () => {
           </div>
           <div>
             <TraysealerCatalog onInquiry={handleCatalogInquiry} />
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="application"
+        ref={applicationAnim.ref as React.RefObject<HTMLElement>}
+        className="py-16 md:py-24"
+      >
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-4">
+              Где применяются трейсилеры?
+            </h2>
+          </div>
+          <div className={`grid sm:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-700 ${applicationAnim.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
+            {applications.map((app, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow border-border/50">
+                <CardHeader className="pb-3">
+                  <div className="text-4xl mb-2">{app.emoji}</div>
+                  <CardTitle className="text-xl sm:text-2xl font-heading">{app.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    {app.items.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-base sm:text-lg text-muted-foreground">
+                        <Icon name="Check" size={16} className="text-primary mt-0.5 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
