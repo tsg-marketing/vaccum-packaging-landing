@@ -7,6 +7,7 @@ import { Progress } from '@/components/ui/progress';
 import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
 import { getUtmFromCookies } from '@/lib/utm';
+import { getSourcePage } from '@/lib/sourcePage';
 
 interface QuizAnswers {
   product: string;
@@ -146,8 +147,10 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
       '700k+': 'От 700 тыс.',
     };
 
+    const source = getSourcePage();
     return [
       `[КВИЗ] Подбор оборудования`,
+      `Источник: ${source.label} — ${source.url}`,
       `Упаковка: ${labels[answers.product] || answers.product}`,
       `Размер: ${labels[answers.size] || answers.size}`,
       `В смену: ${labels[answers.volume] || answers.volume}`,
@@ -166,12 +169,15 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
       w.ym(105605669, 'reachGoal', 'quiz_sent');
     }
 
+    const source = getSourcePage();
     const payload = {
       name: form.name,
       phone: form.phone,
       email: form.email || '',
       comment: buildComment(),
-      url: window.location.href,
+      url: source.url,
+      source_page: source.url,
+      page_title: source.title,
       ...getUtmFromCookies(),
     };
 

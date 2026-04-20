@@ -5,6 +5,8 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import Icon from './ui/icon';
 import { useToast } from '@/hooks/use-toast';
+import { getSourcePage, buildSourceLine } from '@/lib/sourcePage';
+import { getUtmFromCookies } from '@/lib/utm';
 
 interface PopupOfferProps {
   isOpen?: boolean;
@@ -57,7 +59,16 @@ export default function PopupOffer({ isOpen: controlledIsOpen, onOpenChange }: P
       description: "Менеджер свяжется с вами в ближайшее время",
     });
 
-    const submitData = { ...formData, url: window.location.href };
+    const source = getSourcePage();
+    const sourceLine = buildSourceLine();
+    const submitData = {
+      ...formData,
+      message: `${sourceLine}\n${formData.message}`,
+      url: source.url,
+      source_page: source.url,
+      page_title: source.title,
+      ...getUtmFromCookies(),
+    };
     
     fetch('/api/b24-send-lead.php', {
       method: 'POST',

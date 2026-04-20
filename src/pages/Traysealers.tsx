@@ -223,7 +223,16 @@ const Traysealers = () => {
       (window as any).ym(105605669, 'reachGoal', 'fos_sent');
     }
 
-    const submitData = { ...formData, url: window.location.href, ...getUtmFromCookies() };
+    const sourcePage = 'https://vacuum.t-sib.ru/traysealers/';
+    const commentWithSource = `[Источник: Запайщики лотков — ${sourcePage}]${formData.comment ? '\n' + formData.comment : ''}`;
+    const submitData = {
+      ...formData,
+      comment: commentWithSource,
+      url: sourcePage,
+      source_page: sourcePage,
+      page_title: 'Запайщики лотков (трейсилеры)',
+      ...getUtmFromCookies(),
+    };
 
     fetch('/api/b24-send-lead.php', {
       method: 'POST',

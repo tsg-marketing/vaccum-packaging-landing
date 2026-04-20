@@ -64,7 +64,15 @@ const Termousadka = () => {
       (window as any).ym(105605669, 'reachGoal', 'fos_sent');
     }
 
-    const submitData = { ...formData, url: window.location.href, ...getUtmFromCookies() };
+    const sourcePage = 'https://vacuum.t-sib.ru/termousadka/';
+    const submitData = {
+      ...formData,
+      comment: `[Источник: Термоусадочное оборудование — ${sourcePage}]`,
+      url: sourcePage,
+      source_page: sourcePage,
+      page_title: 'Термоусадочное оборудование',
+      ...getUtmFromCookies(),
+    };
 
     fetch('/api/b24-send-lead.php', {
       method: 'POST',
