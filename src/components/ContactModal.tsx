@@ -39,9 +39,9 @@ export const ContactModal = ({ open, onOpenChange, title = 'Получить к�
     }
 
     const source = getSourcePage();
-    const sourceLine = buildSourceLine();
-    const productLine = productName ? `[Товар: ${productName}]` : '';
-    const parts = [sourceLine, productLine, formData.message].filter(Boolean);
+    const productLine = productName ? `Интересует товар - ${productName}` : '';
+    const sourceLine = `Страница: ${source.label} — ${source.url}`;
+    const parts = [productLine, sourceLine, formData.message].filter(Boolean);
     const combined = parts.join('\n');
     const submitData = {
       ...formData,

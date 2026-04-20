@@ -226,9 +226,9 @@ const Traysealers = () => {
 
     const sourcePage = 'https://vacuum.t-sib.ru/traysealers/';
     const productValue = selectedProduct || formData.modeltype || '';
-    const sourceLine = `[Источник: Запайщики лотков — ${sourcePage}]`;
-    const productLine = productValue ? `[Товар: ${productValue}]` : '';
-    const parts = [sourceLine, productLine, formData.comment].filter(Boolean);
+    const productLine = productValue ? `Интересует товар - ${productValue}` : '';
+    const sourceLine = `Страница: Запайщики лотков — ${sourcePage}`;
+    const parts = [productLine, sourceLine, formData.comment].filter(Boolean);
     const combined = parts.join('\n');
     const submitData = {
       ...formData,

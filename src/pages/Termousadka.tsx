@@ -67,9 +67,9 @@ const Termousadka = () => {
 
     const sourcePage = 'https://vacuum.t-sib.ru/termousadka/';
     const productValue = selectedProduct || '';
-    const sourceLine = `[Источник: Термоусадочное оборудование — ${sourcePage}]`;
-    const productLine = productValue ? `[Товар: ${productValue}]` : '';
-    const combined = [sourceLine, productLine].filter(Boolean).join('\n');
+    const productLine = productValue ? `Интересует товар - ${productValue}` : '';
+    const sourceLine = `Страница: Термоусадочное оборудование — ${sourcePage}`;
+    const combined = [productLine, sourceLine].filter(Boolean).join('\n');
     const submitData = {
       ...formData,
       comment: combined,
