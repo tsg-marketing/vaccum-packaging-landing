@@ -27,8 +27,8 @@ const formatPrice = (price: number): string => {
 const CATEGORIES = [
   { id: 290, name: 'Вакуум-упаковочное' },
   { id: 291, name: 'Бескамерные' },
-  { id: 292, name: 'Однокамерные' },
-  { id: 294, name: 'Двухкамерные' }
+  { id: 294, name: 'Однокамерные' },
+  { id: 292, name: 'Двухкамерные' }
 ];
 
 export default function ProductCatalog({ onInquiry }: ProductCatalogProps) {
