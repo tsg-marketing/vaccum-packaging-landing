@@ -266,7 +266,7 @@ const Termousadka = () => {
             <a href="#contact" className="text-sm hover:text-primary transition-colors">Контакты</a>
           </nav>
           <div className="flex items-center gap-2">
-            <Button className="bg-accent hover:bg-accent/90 text-base sm:text-lg font-bold px-5 py-5 sm:px-6 sm:py-6 shadow-lg transform hover:scale-105 transition-all" onClick={() => setModalOpen(true)}>
+            <Button className="bg-accent hover:bg-accent/90 text-base sm:text-lg font-bold px-5 py-5 sm:px-6 sm:py-6 shadow-lg transform hover:scale-105 transition-all" onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'fos_sent'); } setModalOpen(true); }}>
               <Icon name="Phone" size={20} className="mr-1 sm:mr-2" />
               <span className="hidden sm:inline">Заказать звонок</span>
               <span className="sm:hidden">Звонок</span>
@@ -320,7 +320,7 @@ const Termousadka = () => {
                 <Button
                   size="lg"
                   className="bg-accent hover:bg-accent/90 text-lg font-bold px-8 py-6 shadow-lg transform hover:scale-105 transition-all"
-                  onClick={() => setModalOpen(true)}
+                  onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'fos_sent'); } setModalOpen(true); }}
                 >
                   <Icon name="Phone" size={20} className="mr-2" />
                   Получить КП
@@ -329,6 +329,7 @@ const Termousadka = () => {
                   size="lg"
                   className="bg-white/20 backdrop-blur border-2 border-white/30 text-white hover:bg-white/30 text-lg font-bold px-8 py-6"
                   onClick={() => {
+                    if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'fos_sent'); }
                     document.getElementById('quiz')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
@@ -340,6 +341,7 @@ const Termousadka = () => {
                   variant="outline"
                   className="border-white/30 border-2 text-white hover:bg-white/20 bg-white/10 text-lg font-bold px-8 py-6"
                   onClick={() => {
+                    if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'fos_sent'); }
                     document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
@@ -503,7 +505,7 @@ const Termousadka = () => {
                 <Button
                   size="lg"
                   className="bg-accent hover:bg-accent/90 text-lg font-bold px-8 py-6 shadow-lg transform hover:scale-105 transition-all"
-                  onClick={() => setModalOpen(true)}
+                  onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'fos_sent'); } setModalOpen(true); }}
                 >
                   <Icon name="Send" size={20} className="mr-2" />
                   Получить персональный подбор
@@ -815,7 +817,7 @@ const Termousadka = () => {
             <div>
               <h3 className="font-bold mb-4">Контакты</h3>
               <div className="space-y-2 text-white/70 text-sm">
-                <a href="tel:+74951471362" className="flex items-center gap-2 hover:text-white transition-colors">
+                <a href="tel:+74951471362" className="flex items-center gap-2 hover:text-white transition-colors" onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'сlick_phone'); } }}>
                   <Icon name="Phone" size={16} />+7 (495) 147-13-62
                 </a>
                 <a href="mailto:vacuum@t-sib.ru" className="flex items-center gap-2 hover:text-white transition-colors">
