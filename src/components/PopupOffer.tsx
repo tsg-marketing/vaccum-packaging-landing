@@ -52,6 +52,7 @@ export default function PopupOffer({ isOpen: controlledIsOpen, onOpenChange }: P
     e.preventDefault();
     if (typeof window !== 'undefined' && (window as any).ym) {
       (window as any).ym(105605669, 'reachGoal', 'popup_sent');
+      (window as any).ym(105605669, 'reachGoal', 'fos_sent');
     }
     
     toast({

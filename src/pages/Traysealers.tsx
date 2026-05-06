@@ -319,7 +319,7 @@ const Traysealers = () => {
           <div className="flex items-center gap-2">
             <Button
               className="bg-accent hover:bg-accent/90 text-base sm:text-lg font-bold px-5 py-5 sm:px-6 sm:py-6 shadow-lg transform hover:scale-105 transition-all"
-              onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'fos_sent'); } setModalOpen(true); }}
+              onClick={() => setModalOpen(true)}
             >
               <Icon name="Phone" size={20} className="mr-1 sm:mr-2" />
               <span className="hidden sm:inline">Заказать звонок</span>
@@ -374,7 +374,7 @@ const Traysealers = () => {
                 <Button
                   size="lg"
                   className="bg-accent hover:bg-accent/90 text-lg font-bold px-8 py-6 shadow-lg transform hover:scale-105 transition-all"
-                  onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'fos_sent'); } setModalOpen(true); }}
+                  onClick={() => setModalOpen(true)}
                 >
                   <Icon name="Phone" size={20} className="mr-2" />
                   Получить КП
@@ -384,7 +384,6 @@ const Traysealers = () => {
                   variant="outline"
                   className="border-white/30 border-2 text-white hover:bg-white/20 bg-white/10 text-lg font-bold px-8 py-6"
                   onClick={() => {
-                    if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'fos_sent'); }
                     document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
@@ -535,7 +534,7 @@ const Traysealers = () => {
                 <Button
                   size="lg"
                   className="bg-accent hover:bg-accent/90 text-lg font-bold px-8 py-6 shadow-lg transform hover:scale-105 transition-all"
-                  onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'fos_sent'); } setModalOpen(true); }}
+                  onClick={() => setModalOpen(true)}
                 >
                   <Icon name="Send" size={20} className="mr-2" />
                   Получить персональный подбор
@@ -574,14 +573,14 @@ const Traysealers = () => {
                   <Button
                     variant="outline"
                     className="flex-1"
-                    onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'fos_sent'); } window.open('https://yandex.ru/maps/?text=Москва, шоссе Энтузиастов 56 строение 32', '_blank'); }}
+                    onClick={() => window.open('https://yandex.ru/maps/?text=Москва, шоссе Энтузиастов 56 строение 32', '_blank')}
                   >
                     <Icon name="Map" size={18} className="mr-2" />
                     На карте
                   </Button>
                   <Button
                     className="flex-1 bg-accent hover:bg-accent/90"
-                    onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'fos_sent'); } setModalOpen(true); }}
+                    onClick={() => setModalOpen(true)}
                   >
                     <Icon name="Calendar" size={18} className="mr-2" />
                     Записаться
@@ -606,14 +605,14 @@ const Traysealers = () => {
                   <Button
                     variant="outline"
                     className="flex-1"
-                    onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'fos_sent'); } window.open('https://yandex.ru/maps/?text=Новосибирск, улица Электрозаводская 2 к1', '_blank'); }}
+                    onClick={() => window.open('https://yandex.ru/maps/?text=Новосибирск, улица Электрозаводская 2 к1', '_blank')}
                   >
                     <Icon name="Map" size={18} className="mr-2" />
                     На карте
                   </Button>
                   <Button
                     className="flex-1 bg-accent hover:bg-accent/90"
-                    onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'fos_sent'); } setModalOpen(true); }}
+                    onClick={() => setModalOpen(true)}
                   >
                     <Icon name="Calendar" size={18} className="mr-2" />
                     Записаться
@@ -953,7 +952,7 @@ const Traysealers = () => {
               <ul className="space-y-2 text-sm">
                 <li>
                   <button
-                    onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'fos_sent'); } setModalOpen(true); }}
+                    onClick={() => setModalOpen(true)}
                     className="text-white/70 hover:text-white transition-colors text-left"
                   >
                     Подобрать оборудование
