@@ -394,7 +394,7 @@ const Traysealers = () => {
             </div>
             <div className="relative animate-scale-in">
               <img
-                src="https://cdn.poehali.dev/files/2c117cb4-9982-45bf-8444-b1c037f9439c.jpg"
+                src="https://cdn.poehali.dev/projects/7f0941a7-b646-4462-83cf-d72a4486c6fc/bucket/8130b6af-c559-48ae-9b19-04d134f719e7.png"
                 alt="Запайщик лотков HLV-400T"
                 className="rounded-2xl shadow-2xl w-full object-cover"
               />
