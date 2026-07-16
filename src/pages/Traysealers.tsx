@@ -1002,8 +1002,11 @@ const Traysealers = () => {
               </div>
             </div>
           </div>
-          <div className="border-t border-white/20 pt-6 text-center text-sm text-white/60">
+          <div className="border-t border-white/20 pt-6 text-center text-sm text-white/60 space-y-2">
             <p>© 2026 Техносиб. Все права защищены.</p>
+            <p className="text-xs">
+              Общество с ограниченной ответственностью «Техно-Сиб Групп». Юридический адрес: 630005, г. Новосибирск, ул. Крылова, д. 36, этаж 8, офис 81. ИНН 5406804844, ОГРН 1205400012146, КПП 540601001.
+            </p>
           </div>
         </div>
       </footer>

@@ -831,8 +831,11 @@ const Termousadka = () => {
               </div>
             </div>
           </div>
-          <div className="border-t border-white/20 mt-8 pt-8 text-center text-white/50 text-sm">
-            &copy; 2026 Техносиб. Все права защищены.
+          <div className="border-t border-white/20 mt-8 pt-8 text-center text-white/50 text-sm space-y-2">
+            <p>&copy; 2026 Техносиб. Все права защищены.</p>
+            <p className="text-xs">
+              Общество с ограниченной ответственностью «Техно-Сиб Групп». Юридический адрес: 630005, г. Новосибирск, ул. Крылова, д. 36, этаж 8, офис 81. ИНН 5406804844, ОГРН 1205400012146, КПП 540601001.
+            </p>
           </div>
         </div>
       </footer>
