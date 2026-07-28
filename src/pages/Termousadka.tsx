@@ -14,6 +14,7 @@ import ShrinkFAQ from '@/components/ShrinkFAQ';
 import QuizWidget from '@/components/QuizWidget';
 import QuizSidebar from '@/components/QuizSidebar';
 import { getUtmFromCookies } from '@/lib/utm';
+import { getYaClientId } from '@/lib/yaClientId';
 import VideoCard from '@/components/VideoCard';
 
 const Termousadka = () => {
@@ -59,23 +60,26 @@ const Termousadka = () => {
     return `+${digits.slice(0, 1)} (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7, 9)}-${digits.slice(9, 11)}`;
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (typeof window !== 'undefined' && (window as any).ym) {
       (window as any).ym(105605669, 'reachGoal', 'fos_sent');
     }
 
+    const yaClientId = await getYaClientId();
     const sourcePage = 'https://vacuum.t-sib.ru/termousadka/';
     const productValue = selectedProduct || '';
     const productLine = productValue ? `Интересует товар - ${productValue}` : '';
     const sourceLine = `Страница: Термоусадочное оборудование — ${sourcePage}`;
-    const combined = [productLine, sourceLine].filter(Boolean).join('\n');
+    const clientIdLine = yaClientId ? `ClientID: ${yaClientId}` : '';
+    const combined = [productLine, sourceLine, clientIdLine].filter(Boolean).join('\n');
     const submitData = {
       ...formData,
       comment: combined,
       message: combined,
       url: sourcePage,
       UF_CRM_1775454267: 'ДА',
+      yaClientId,
       ...getUtmFromCookies(),
     };
 

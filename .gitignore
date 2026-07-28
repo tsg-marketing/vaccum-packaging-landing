@@ -26,3 +26,6 @@ builds
 
 # Tehnosib data files
 tehnosib_products.json
+
+# warmup/handoff артефакты
+tmp/

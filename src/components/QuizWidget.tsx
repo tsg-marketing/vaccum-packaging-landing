@@ -7,6 +7,7 @@ import { Progress } from '@/components/ui/progress';
 import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
 import { getUtmFromCookies } from '@/lib/utm';
+import { getYaClientId } from '@/lib/yaClientId';
 import { getSourcePage } from '@/lib/sourcePage';
 
 interface QuizAnswers {
@@ -160,7 +161,7 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
     ].join('\n');
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const w = window as unknown as Record<string, (...args: unknown[]) => void>;
@@ -169,16 +170,19 @@ export default function QuizWidget({ variant = 'inline', onClose }: QuizWidgetPr
       w.ym(105605669, 'reachGoal', 'quiz_sent');
     }
 
+    const yaClientId = await getYaClientId();
     const source = getSourcePage();
+    const clientIdLine = yaClientId ? `\nClientID: ${yaClientId}` : '';
     const payload = {
       name: form.name,
       phone: form.phone,
       email: form.email || '',
-      comment: buildComment(),
+      comment: `${buildComment()}${clientIdLine}`,
       url: source.url,
       source_page: source.url,
       page_title: source.title,
       UF_CRM_1775454267: 'ДА',
+      yaClientId,
       ...getUtmFromCookies(),
     };
 

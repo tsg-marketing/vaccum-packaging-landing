@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import Icon from '@/components/ui/icon';
 import { getUtmFromCookies } from '@/lib/utm';
+import { getYaClientId } from '@/lib/yaClientId';
 import { getSourcePage, buildSourceLine } from '@/lib/sourcePage';
 
 interface ContactModalProps {
@@ -32,16 +33,18 @@ export const ContactModal = ({ open, onOpenChange, title = 'Получить к�
     return `+${digits.slice(0, 1)} (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7, 9)}-${digits.slice(9, 11)}`;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (typeof window !== 'undefined' && (window as any).ym) {
       (window as any).ym(105605669, 'reachGoal', 'fos_sent');
     }
 
+    const yaClientId = await getYaClientId();
     const source = getSourcePage();
     const productLine = productName ? `Интересует товар - ${productName}` : '';
     const sourceLine = `Страница: ${source.label} — ${source.url}`;
-    const parts = [productLine, sourceLine, formData.message].filter(Boolean);
+    const clientIdLine = yaClientId ? `ClientID: ${yaClientId}` : '';
+    const parts = [productLine, sourceLine, formData.message, clientIdLine].filter(Boolean);
     const combined = parts.join('\n');
     const submitData = {
       ...formData,
@@ -51,6 +54,7 @@ export const ContactModal = ({ open, onOpenChange, title = 'Получить к�
       productType: '-',
       modeltype: '-',
       UF_CRM_1775454267: 'ДА',
+      yaClientId,
       ...getUtmFromCookies(),
     };
 

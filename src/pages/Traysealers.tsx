@@ -13,6 +13,7 @@ import TraysealerCatalog from '@/components/TraysealerCatalog';
 import QuizSidebarTraysealer from '@/components/QuizSidebarTraysealer';
 import QuizTraysealerWidget from '@/components/QuizTraysealerWidget';
 import { getUtmFromCookies } from '@/lib/utm';
+import { getYaClientId } from '@/lib/yaClientId';
 
 const Traysealers = () => {
   const { toast } = useToast();
@@ -218,17 +219,19 @@ const Traysealers = () => {
     return `+${digits.slice(0, 1)} (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7, 9)}-${digits.slice(9, 11)}`;
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (typeof window !== 'undefined' && (window as any).ym) {
       (window as any).ym(105605669, 'reachGoal', 'fos_sent');
     }
 
+    const yaClientId = await getYaClientId();
     const sourcePage = 'https://vacuum.t-sib.ru/traysealers/';
     const productValue = selectedProduct || formData.modeltype || '';
     const productLine = productValue ? `Интересует товар - ${productValue}` : '';
     const sourceLine = `Страница: Запайщики лотков — ${sourcePage}`;
-    const parts = [productLine, sourceLine, formData.comment].filter(Boolean);
+    const clientIdLine = yaClientId ? `ClientID: ${yaClientId}` : '';
+    const parts = [productLine, sourceLine, formData.comment, clientIdLine].filter(Boolean);
     const combined = parts.join('\n');
     const submitData = {
       ...formData,
@@ -238,6 +241,7 @@ const Traysealers = () => {
       productType: formData.productType || '-',
       modeltype: formData.modeltype || '-',
       UF_CRM_1775454267: 'ДА',
+      yaClientId,
       ...getUtmFromCookies(),
     };
 

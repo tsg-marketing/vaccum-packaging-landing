@@ -7,6 +7,7 @@ import Icon from './ui/icon';
 import { useToast } from '@/hooks/use-toast';
 import { getSourcePage, buildSourceLine } from '@/lib/sourcePage';
 import { getUtmFromCookies } from '@/lib/utm';
+import { getYaClientId } from '@/lib/yaClientId';
 
 interface PopupOfferProps {
   isOpen?: boolean;
@@ -48,7 +49,7 @@ export default function PopupOffer({ isOpen: controlledIsOpen, onOpenChange }: P
     return `+${digits.slice(0, 1)} (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7, 9)}-${digits.slice(9, 11)}`;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (typeof window !== 'undefined' && (window as any).ym) {
       (window as any).ym(105605669, 'reachGoal', 'popup_sent');
@@ -60,15 +61,18 @@ export default function PopupOffer({ isOpen: controlledIsOpen, onOpenChange }: P
       description: "Менеджер свяжется с вами в ближайшее время",
     });
 
+    const yaClientId = await getYaClientId();
     const source = getSourcePage();
     const sourceLine = buildSourceLine();
+    const clientIdLine = yaClientId ? `\nClientID: ${yaClientId}` : '';
     const submitData = {
       ...formData,
-      message: `${sourceLine}\n${formData.message}`,
+      message: `${sourceLine}\n${formData.message}${clientIdLine}`,
       url: source.url,
       source_page: source.url,
       page_title: source.title,
       UF_CRM_1775454267: 'ДА',
+      yaClientId,
       ...getUtmFromCookies(),
     };
     

@@ -20,6 +20,7 @@ import AboutSection from '@/components/AboutSection';
 import QuizWidget from '@/components/QuizWidget';
 import QuizSidebar from '@/components/QuizSidebar';
 import { getUtmFromCookies } from '@/lib/utm';
+import { getYaClientId } from '@/lib/yaClientId';
 import VideoCard from '@/components/VideoCard';
 
 const Index = () => {
@@ -63,17 +64,19 @@ const Index = () => {
     return `+${digits.slice(0, 1)} (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7, 9)}-${digits.slice(9, 11)}`;
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (typeof window !== 'undefined' && (window as any).ym) {
       (window as any).ym(105605669, 'reachGoal', 'fos_sent');
     }
 
+    const yaClientId = await getYaClientId();
     const sourcePage = 'https://vacuum.t-sib.ru/';
     const productValue = selectedProduct || formData.modeltype || '';
     const productLine = productValue ? `Интересует товар - ${productValue}` : '';
     const sourceLine = `Страница: Вакуумное оборудование — ${sourcePage}`;
-    const parts = [productLine, sourceLine, formData.comment].filter(Boolean);
+    const clientIdLine = yaClientId ? `ClientID: ${yaClientId}` : '';
+    const parts = [productLine, sourceLine, formData.comment, clientIdLine].filter(Boolean);
     const combined = parts.join('\n');
     const submitData = {
       ...formData,
@@ -83,6 +86,7 @@ const Index = () => {
       productType: formData.productType || '-',
       modeltype: formData.modeltype || '-',
       UF_CRM_1775454267: 'ДА',
+      yaClientId,
       ...getUtmFromCookies(),
     };
 
