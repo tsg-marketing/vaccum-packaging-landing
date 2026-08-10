@@ -23,6 +23,7 @@ const App = () => (
           <Route path="/termousadka" element={<Termousadka />} />
           <Route path="/traysealers" element={<Traysealers />} />
           <Route path="/tz-termousadka-x7k2" element={<TzTermousadka />} />
+          <Route path="/tz-x7k2/:slug" element={<TzTermousadka />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

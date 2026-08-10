@@ -13,4 +13,6 @@ Allow: /
 User-agent: *
 Allow: /
 Disallow: /tz-termousadka-x7k2
+Disallow: /tz-x7k2/
 Disallow: /tz-termousadka.txt
+Disallow: /tz-traysealers.txt
