@@ -75,6 +75,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                             name_elem = offer.find('name')
                             price_elem = offer.find('price')
                             description_elem = offer.find('description')
+                            url_elem = offer.find('url')
+                            product_url = url_elem.text.strip() if url_elem is not None and url_elem.text else None
                             pictures = [p.text for p in offer.findall('picture') if p.text]
                             
                             if name_elem is not None:
@@ -96,7 +98,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                                 
                                 specs_json = json.dumps(specifications, ensure_ascii=False) if specifications else None
                                 
-                                products_data.append((external_id, name, price, image_url, category_id, specs_json, description, images_json))
+                                products_data.append((external_id, name, price, image_url, category_id, specs_json, description, images_json, product_url))
             
             seen = set()
             unique_products = []
@@ -113,7 +115,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     execute_values(
                         cur,
                         """
-                        INSERT INTO products (external_id, name, price, image_url, category_id, specifications, description, images, updated_at)
+                        INSERT INTO products (external_id, name, price, image_url, category_id, specifications, description, images, product_url, updated_at)
                         VALUES %s
                         ON CONFLICT (external_id) 
                         DO UPDATE SET 
@@ -124,10 +126,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                             specifications = EXCLUDED.specifications,
                             description = EXCLUDED.description,
                             images = EXCLUDED.images,
+                            product_url = EXCLUDED.product_url,
                             updated_at = CURRENT_TIMESTAMP
                         """,
                         batch,
-                        template="(%s, %s, %s, %s, %s, %s::jsonb, %s, %s::jsonb, CURRENT_TIMESTAMP)"
+                        template="(%s, %s, %s, %s, %s, %s::jsonb, %s, %s::jsonb, %s, CURRENT_TIMESTAMP)"
                     )
             
             cur.execute(

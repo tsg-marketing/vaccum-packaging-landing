@@ -44,7 +44,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     try:
         cur.execute(
             """
-            SELECT id, external_id, name, price, image_url, category_id, specifications, description
+            SELECT id, external_id, name, price, image_url, category_id, specifications, description, product_url
             FROM products
             WHERE category_id = 306
               AND description IS NOT NULL AND description != ''
@@ -74,7 +74,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     for p in products:
         offer_id = str(p['external_id'] or p['id'])
         offer = ET.SubElement(offers, 'offer', id=offer_id, available='true')
-        ET.SubElement(offer, 'url').text = f"https://t-sib.ru/catalog/product/{offer_id}/"
+        product_url = p.get('product_url') or f"https://t-sib.ru/catalog/"
+        ET.SubElement(offer, 'url').text = product_url
         ET.SubElement(offer, 'price').text = str(int(float(p['price'])))
         ET.SubElement(offer, 'currencyId').text = 'RUR'
         ET.SubElement(offer, 'categoryId').text = '306'
