@@ -15,18 +15,18 @@ export default function Messengers() {
         <div className="messengers-list-wrapper">
           <ul className="messengers-list">
             <li className="messengers-item">
-              <a href="https://wa.me/74951471362" target="_blank" rel="noopener noreferrer" title="WhatsApp">
+              <a href="https://wa.me/78005004054" target="_blank" rel="noopener noreferrer" title="WhatsApp">
                 <Icon name="MessageCircle" size={32} className="text-green-500" />
               </a>
             </li>
             <li className="messengers-item">
-              <a href="https://t.me/+74951471362" target="_blank" rel="noopener noreferrer" title="Telegram">
+              <a href="https://t.me/+78005004054" target="_blank" rel="noopener noreferrer" title="Telegram">
                 <Icon name="Send" size={32} className="text-blue-500" />
               </a>
             </li>
             <li className="messengers-item">
               <a 
-                href="tel:+74951471362" 
+                href="tel:88005004054" 
                 title="Позвонить"
                 onClick={() => {
                   if (typeof window !== 'undefined' && (window as any).ym) {

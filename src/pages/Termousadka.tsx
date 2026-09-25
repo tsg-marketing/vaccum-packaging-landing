@@ -247,8 +247,8 @@ const Termousadka = () => {
             <img src="https://cdn.poehali.dev/files/34a7b0b3-ab44-4d30-b123-e01bb56afd38.jpg" alt="Техносиб" className="h-11" />
           </a>
           <nav className="hidden md:flex items-center gap-6">
-            <a href="tel:+74951471362" className="text-lg font-bold text-primary hover:text-accent transition-colors flex items-center gap-2" onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'сlick_phone'); } }}>
-              <Icon name="Phone" size={20} />+7 (495) 147-13-62
+            <a href="tel:88005004054" className="text-lg font-bold text-primary hover:text-accent transition-colors flex items-center gap-2" onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'сlick_phone'); } }}>
+              <Icon name="Phone" size={20} />8-800-500-4-054
             </a>
             <div className="relative group">
               <button className="text-sm hover:text-primary transition-colors flex items-center gap-1">
@@ -819,8 +819,8 @@ const Termousadka = () => {
             <div>
               <h3 className="font-bold mb-4">Контакты</h3>
               <div className="space-y-2 text-white/70 text-sm">
-                <a href="tel:+74951471362" className="flex items-center gap-2 hover:text-white transition-colors" onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'сlick_phone'); } }}>
-                  <Icon name="Phone" size={16} />+7 (495) 147-13-62
+                <a href="tel:88005004054" className="flex items-center gap-2 hover:text-white transition-colors" onClick={() => { if (typeof window !== 'undefined' && (window as any).ym) { (window as any).ym(105605669, 'reachGoal', 'сlick_phone'); } }}>
+                  <Icon name="Phone" size={16} />8-800-500-4-054
                 </a>
                 <a href="mailto:vacuum@t-sib.ru" className="flex items-center gap-2 hover:text-white transition-colors">
                   <Icon name="Mail" size={16} />vacuum@t-sib.ru

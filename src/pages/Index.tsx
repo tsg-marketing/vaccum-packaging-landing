@@ -443,7 +443,7 @@ const Index = () => {
           <div className="font-bold text-xl text-primary"><img src="https://cdn.poehali.dev/files/34a7b0b3-ab44-4d30-b123-e01bb56afd38.jpg" alt="Техносиб" className="h-11" /></div>
           <nav className="hidden md:flex items-center gap-6">
             <a 
-              href="tel:+74951471362" 
+              href="tel:88005004054" 
               className="text-lg font-bold text-primary hover:text-accent transition-colors flex items-center gap-2"
               onClick={() => {
                 if (typeof window !== 'undefined' && (window as any).ym) {
@@ -452,7 +452,7 @@ const Index = () => {
               }}
             >
               <Icon name="Phone" size={20} />
-              +7 (495) 147-13-62
+              8-800-500-4-054
             </a>
             <div className="relative group">
               <button className="text-sm hover:text-primary transition-colors flex items-center gap-1">
@@ -1012,7 +1012,7 @@ const Index = () => {
                 <div className="flex items-center gap-2">
                   <Icon name="Phone" size={16} />
                   <a 
-                    href="tel:+74951471362" 
+                    href="tel:88005004054" 
                     className="text-white/70 hover:text-white transition-colors"
                     onClick={() => {
                       if (typeof window !== 'undefined' && (window as any).ym) {
@@ -1020,7 +1020,7 @@ const Index = () => {
                       }
                     }}
                   >
-                    +7 (495) 147-13-62
+                    8-800-500-4-054
                   </a>
                 </div>
                 <div className="flex items-center gap-2">
